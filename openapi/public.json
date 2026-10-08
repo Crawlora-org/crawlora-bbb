@@ -1,0 +1,1550 @@
+{
+  "basePath": "/api/v1",
+  "definitions": {
+    "app.Response": {
+      "description": "The Response struct is used for wrapping the API response with a code, message, and data.",
+      "properties": {
+        "code": {
+          "description": "Code is the HTTP status code or a custom code used to indicate the result of the request\n@example 200",
+          "type": "integer"
+        },
+        "data": {
+          "description": "Data is the response data (can be any object or null)\n@example {\"id\": 1, \"name\": \"John Doe\"}"
+        },
+        "msg": {
+          "description": "Msg is the message that describes the result of the request\n@example \"Request successful\""
+        }
+      },
+      "type": "object"
+    },
+    "bbb.BusinessHoursDay": {
+      "properties": {
+        "day": {
+          "example": "Monday",
+          "type": "string"
+        },
+        "hours": {
+          "example": "8:00 AM - 5:00 PM",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbb.BusinessResponse": {
+      "properties": {
+        "accredited": {
+          "type": "boolean"
+        },
+        "accredited_since": {
+          "example": "1/16/2024",
+          "type": "string"
+        },
+        "additional_phone_numbers": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "additional_websites": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "address": {
+          "type": "string"
+        },
+        "alternate_names": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "bbb_file_opened": {
+          "type": "string"
+        },
+        "business_incorporated": {
+          "type": "string"
+        },
+        "business_management": {
+          "type": "string"
+        },
+        "business_started": {
+          "type": "string"
+        },
+        "categories": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "category": {
+          "example": "Plumber",
+          "type": "string"
+        },
+        "entity_type": {
+          "example": "Limited Liability Company (LLC)",
+          "type": "string"
+        },
+        "hours": {
+          "description": "Hours is genuinely conditional per-location -- confirmed both absent\n(embedded state JSON \"operatingHours\":null on some profiles) and\npresent as a full 7-day table on others. An empty list here is a\nreal result, not a parser failure.",
+          "items": {
+            "$ref": "#/definitions/bbb.BusinessHoursDay"
+          },
+          "type": "array"
+        },
+        "image_url": {
+          "type": "string"
+        },
+        "latest_reviews": {
+          "items": {
+            "$ref": "#/definitions/bbb.ReviewPreview"
+          },
+          "type": "array"
+        },
+        "licensing_note": {
+          "type": "string"
+        },
+        "local_bbb": {
+          "type": "string"
+        },
+        "local_bbb_url": {
+          "type": "string"
+        },
+        "more_info_url": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "products_and_services": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "rating": {
+          "example": "A+",
+          "type": "string"
+        },
+        "rating_reasons": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "social_media": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "source_url": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "website": {
+          "type": "string"
+        },
+        "years_in_business": {
+          "example": "3",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbb.BusinessSearchResult": {
+      "properties": {
+        "accredited": {
+          "type": "boolean"
+        },
+        "address": {
+          "type": "string"
+        },
+        "categories": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "hq_profile_url": {
+          "type": "string"
+        },
+        "image_url": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "quote_url": {
+          "type": "string"
+        },
+        "rating": {
+          "example": "A+",
+          "type": "string"
+        },
+        "service_areas": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbb.CategoryResponse": {
+      "properties": {
+        "page": {
+          "example": 1,
+          "type": "integer"
+        },
+        "results": {
+          "items": {
+            "$ref": "#/definitions/bbb.BusinessSearchResult"
+          },
+          "type": "array"
+        },
+        "source_url": {
+          "type": "string"
+        },
+        "total_results": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "bbb.Complaint": {
+      "properties": {
+        "business_responses": {
+          "items": {
+            "$ref": "#/definitions/bbb.ComplaintMessage"
+          },
+          "type": "array"
+        },
+        "customer_answers": {
+          "items": {
+            "$ref": "#/definitions/bbb.ComplaintMessage"
+          },
+          "type": "array"
+        },
+        "date": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "status": {
+          "description": "Status is one of BBB's fixed complaint-status values: Resolved,\nUnresolved, Answered, Unanswered, Unpursuable. Passed through as\nrendered rather than validated, since it is an upstream-controlled\nresponse value, not a request parameter.",
+          "example": "Resolved",
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "type": {
+          "example": "Service or Repair Issues",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbb.ComplaintMessage": {
+      "properties": {
+        "date": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbb.ComplaintsResponse": {
+      "properties": {
+        "business_name": {
+          "type": "string"
+        },
+        "closed_last_12_months": {
+          "example": 2,
+          "type": "integer"
+        },
+        "complaints": {
+          "items": {
+            "$ref": "#/definitions/bbb.Complaint"
+          },
+          "type": "array"
+        },
+        "complaints_list_incomplete": {
+          "description": "ComplaintsListIncomplete is true when TotalComplaints is non-zero\nbut BBB's itemized complaint list came back empty anyway. Confirmed\nlive on at least one high-volume multi-location business (770 total\ncomplaints, page rendered \"There are no matching results. Improve\nyour results by removing some applied search filters.\" with no\nfilters actually applied by this client) -- an upstream filter/\npagination quirk, not a parser failure. TotalComplaints/\nClosedLast12Months remain authoritative; Complaints will be empty\neven though real records exist upstream.",
+          "type": "boolean"
+        },
+        "period_text": {
+          "example": "in the last 3 years.",
+          "type": "string"
+        },
+        "source_url": {
+          "type": "string"
+        },
+        "submit_complaint_url": {
+          "type": "string"
+        },
+        "total_complaints": {
+          "example": 8,
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "bbb.MoreInfoResponse": {
+      "properties": {
+        "business_name": {
+          "type": "string"
+        },
+        "rating": {
+          "example": "C",
+          "type": "string"
+        },
+        "rating_reasons": {
+          "description": "RatingReasons is the full per-factor reasons list from /more-info,\nnot the shallow single-bullet list bbb-business returns.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "service_areas": {
+          "description": "ServiceAreas is the full list of counties/cities/regions this\nbusiness serves, confirmed untruncated live. Genuinely\nbusiness-conditional -- confirmed absent entirely on at least one\nbusiness (no #service-area section rendered at all), so an empty\nlist here is a real possible result, not a parser failure.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "source_url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbb.RelatedCategory": {
+      "properties": {
+        "name": {
+          "example": "Plumber",
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbb.ReviewItem": {
+      "properties": {
+        "author": {
+          "example": "Susan M",
+          "type": "string"
+        },
+        "date": {
+          "example": "2026-06-02",
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "rating": {
+          "example": 1,
+          "type": "integer"
+        },
+        "responses": {
+          "items": {
+            "$ref": "#/definitions/bbb.ReviewResponse"
+          },
+          "type": "array"
+        },
+        "text": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbb.ReviewPreview": {
+      "properties": {
+        "author": {
+          "type": "string"
+        },
+        "quote": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbb.ReviewResponse": {
+      "properties": {
+        "date": {
+          "example": "2026-06-09",
+          "type": "string"
+        },
+        "is_business": {
+          "type": "boolean"
+        },
+        "text": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbb.ReviewsResponse": {
+      "properties": {
+        "average_rating": {
+          "example": 4.73,
+          "type": "number"
+        },
+        "page": {
+          "example": 1,
+          "type": "integer"
+        },
+        "reviews": {
+          "items": {
+            "$ref": "#/definitions/bbb.ReviewItem"
+          },
+          "type": "array"
+        },
+        "source_url": {
+          "type": "string"
+        },
+        "total_pages": {
+          "example": 16,
+          "type": "integer"
+        },
+        "total_reviews": {
+          "example": 155,
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "bbb.SearchResponse": {
+      "properties": {
+        "location": {
+          "example": "Austin, TX",
+          "type": "string"
+        },
+        "page": {
+          "example": 1,
+          "type": "integer"
+        },
+        "query": {
+          "example": "plumber",
+          "type": "string"
+        },
+        "related_categories": {
+          "items": {
+            "$ref": "#/definitions/bbb.RelatedCategory"
+          },
+          "type": "array"
+        },
+        "results": {
+          "items": {
+            "$ref": "#/definitions/bbb.BusinessSearchResult"
+          },
+          "type": "array"
+        },
+        "source_url": {
+          "type": "string"
+        },
+        "total_results": {
+          "example": 2514,
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "bbb.businessResponseDoc": {
+      "properties": {
+        "code": {
+          "example": 200,
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/bbb.BusinessResponse"
+        },
+        "msg": {
+          "example": "OK",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbb.categoryResponseDoc": {
+      "properties": {
+        "code": {
+          "example": 200,
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/bbb.CategoryResponse"
+        },
+        "msg": {
+          "example": "OK",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbb.complaintsResponseDoc": {
+      "properties": {
+        "code": {
+          "example": 200,
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/bbb.ComplaintsResponse"
+        },
+        "msg": {
+          "example": "OK",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbb.moreInfoResponseDoc": {
+      "properties": {
+        "code": {
+          "example": 200,
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/bbb.MoreInfoResponse"
+        },
+        "msg": {
+          "example": "OK",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbb.reviewsResponseDoc": {
+      "properties": {
+        "code": {
+          "example": 200,
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/bbb.ReviewsResponse"
+        },
+        "msg": {
+          "example": "OK",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbb.searchResponseDoc": {
+      "properties": {
+        "code": {
+          "example": 200,
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/bbb.SearchResponse"
+        },
+        "msg": {
+          "example": "OK",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbbscamtracker.DetailResponse": {
+      "properties": {
+        "business_name": {
+          "example": "AltRX",
+          "type": "string"
+        },
+        "date_reported": {
+          "example": "August 19, 2026",
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "dollars_lost": {
+          "example": "$149",
+          "type": "string"
+        },
+        "id": {
+          "example": "1397968",
+          "type": "string"
+        },
+        "scam_type": {
+          "example": "Online Purchase",
+          "type": "string"
+        },
+        "scammer_email": {
+          "example": "Unknown Email",
+          "type": "string"
+        },
+        "scammer_location": {
+          "example": "GA",
+          "type": "string"
+        },
+        "scammer_phone": {
+          "example": "Unknown Phone Number",
+          "type": "string"
+        },
+        "scammer_url": {
+          "example": "Unknown URL",
+          "type": "string"
+        },
+        "source_url": {
+          "type": "string"
+        },
+        "targeted_location": {
+          "example": "Chesapeake, VA, USA - 23322",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbbscamtracker.ScamResult": {
+      "properties": {
+        "business_name_used": {
+          "example": "AltRX",
+          "type": "string"
+        },
+        "category": {
+          "example": "Online Purchase",
+          "type": "string"
+        },
+        "date_reported": {
+          "example": "August 19, 2026",
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "dollars_lost": {
+          "example": "$149",
+          "type": "string"
+        },
+        "id": {
+          "example": "1397968",
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "victim_location": {
+          "example": "Chesapeake, VA, USA - 23322",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbbscamtracker.ScamTypeShare": {
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "pct": {
+          "type": "number"
+        },
+        "type": {
+          "example": "Online Purchase",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbbscamtracker.SearchResponse": {
+      "properties": {
+        "date_from": {
+          "example": "2026-01-01",
+          "type": "string"
+        },
+        "date_to": {
+          "example": "2026-01-31",
+          "type": "string"
+        },
+        "max_dollars_lost": {
+          "example": 1000000,
+          "type": "integer"
+        },
+        "min_dollars_lost": {
+          "example": 500000,
+          "type": "integer"
+        },
+        "page": {
+          "example": 1,
+          "type": "integer"
+        },
+        "query": {
+          "example": "amazon",
+          "type": "string"
+        },
+        "results": {
+          "items": {
+            "$ref": "#/definitions/bbbscamtracker.ScamResult"
+          },
+          "type": "array"
+        },
+        "scam_type": {
+          "example": "Phishing",
+          "type": "string"
+        },
+        "scammer_state": {
+          "example": "NY",
+          "type": "string"
+        },
+        "source_url": {
+          "type": "string"
+        },
+        "state": {
+          "example": "TX",
+          "type": "string"
+        },
+        "total_results": {
+          "example": 747374,
+          "type": "integer"
+        },
+        "total_results_lower_bound": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "bbbscamtracker.StateStat": {
+      "properties": {
+        "code": {
+          "example": "TX",
+          "type": "string"
+        },
+        "country": {
+          "example": "USA",
+          "type": "string"
+        },
+        "losses": {
+          "type": "integer"
+        },
+        "losses_per_capita": {
+          "type": "number"
+        },
+        "median_loss": {
+          "type": "integer"
+        },
+        "name": {
+          "example": "Texas",
+          "type": "string"
+        },
+        "pct_reporting_loss": {
+          "type": "number"
+        },
+        "population": {
+          "type": "integer"
+        },
+        "reports": {
+          "type": "integer"
+        },
+        "reports_per_capita": {
+          "type": "number"
+        },
+        "reports_with_loss": {
+          "type": "integer"
+        },
+        "scam_type_breakdown": {
+          "items": {
+            "$ref": "#/definitions/bbbscamtracker.ScamTypeShare"
+          },
+          "type": "array"
+        },
+        "top_scam_type": {
+          "type": "string"
+        },
+        "yoy_change_pct": {
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "bbbscamtracker.StateStatsResponse": {
+      "properties": {
+        "aggregated_at": {
+          "example": "2026-08-20T03:00:22.405Z",
+          "type": "string"
+        },
+        "period": {
+          "example": "90",
+          "type": "string"
+        },
+        "states": {
+          "items": {
+            "$ref": "#/definitions/bbbscamtracker.StateStat"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "bbbscamtracker.detailResponseDoc": {
+      "properties": {
+        "code": {
+          "example": 200,
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/bbbscamtracker.DetailResponse"
+        },
+        "msg": {
+          "example": "OK",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbbscamtracker.searchResponseDoc": {
+      "properties": {
+        "code": {
+          "example": 200,
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/bbbscamtracker.SearchResponse"
+        },
+        "msg": {
+          "example": "OK",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbbscamtracker.stateStatsResponseDoc": {
+      "properties": {
+        "code": {
+          "example": 200,
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/bbbscamtracker.StateStatsResponse"
+        },
+        "msg": {
+          "example": "OK",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "host": "api.crawlora.net",
+  "info": {
+    "contact": {
+      "email": "support@crawlora.net",
+      "name": "API Support",
+      "url": "https://crawlora.net"
+    },
+    "description": "Crawlora is a hosted web-data and SERP API: call documented REST endpoints and get normalized JSON instead of HTML to parse — across search/SERP, maps and local, e-commerce, app stores, social, media and finance. One API key; Crawlora runs the proxy rotation, headless browsers and parsing behind the scenes. Billed pay-on-success: charged only on a successful 2xx response, 1-10 credits per call, with a free tier of 2,000 credits per month and no card. A hosted MCP server (mcp.crawlora.net/mcp) exposes the same catalog as agent tools. Search endpoints accept `q` as a universal alias for whichever search-term parameter they document (`query`, `term`, `keyword`, or Amazon's `k`), so one parameter name works across the whole catalog; an explicitly supplied documented name always wins.",
+    "license": {
+      "name": "Crawlora Terms of Service",
+      "url": "https://crawlora.net/terms"
+    },
+    "termsOfService": "https://crawlora.net/terms",
+    "title": "Crawlora API",
+    "version": "1.2",
+    "x-logo": {
+      "altText": "Crawlora",
+      "backgroundColor": "#FFFFFF",
+      "url": "https://raw.githubusercontent.com/Crawlora-org/crawlora-mcp/main/assets/logo-400x400.png"
+    }
+  },
+  "paths": {
+    "/bbb/business": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Returns a normalized bbb.org business profile: BBB rating letter grade and reasons, accreditation status and since-date, years in business, BBB file/incorporation dates, entity type, contact info, business categories, social media, and a short latest-reviews preview. Credential-free public Better Business Bureau data.",
+        "operationId": "bbb-business",
+        "parameters": [
+          {
+            "description": "BBB business profile URL, from a bbb-search result's url or hq_profile_url",
+            "in": "query",
+            "name": "url",
+            "required": true,
+            "type": "string",
+            "x-example": "https://www.bbb.org/us/tx/austin/profile/plumber/calixto-plumbing-0825-1000223803"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/bbb.businessResponseDoc"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Get a Better Business Bureau business profile",
+        "tags": [
+          "bbb"
+        ]
+      }
+    },
+    "/bbb/business/complaints": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Returns a business's BBB complaint history: total complaint count, complaints closed in the last 12 months, and per-complaint detail (date, type, status, narrative text, and any business response / customer answer thread). A business with no filed complaints returns total_complaints 0 and an empty complaints list -- this is a normal result, not an error. Credential-free public Better Business Bureau data.",
+        "operationId": "bbb-business-complaints",
+        "parameters": [
+          {
+            "description": "BBB business profile URL, from a bbb-search result's url or hq_profile_url",
+            "in": "query",
+            "name": "url",
+            "required": true,
+            "type": "string",
+            "x-example": "https://www.bbb.org/us/tx/austin/profile/plumber/calixto-plumbing-0825-1000223803"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/bbb.complaintsResponseDoc"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Get a Better Business Bureau business's complaint history",
+        "tags": [
+          "bbb"
+        ]
+      }
+    },
+    "/bbb/business/more-info": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Returns a business's full per-factor \"Reasons for Rating\" list and full service-area list, from the separate BBB business profile /more-info sub-page. The bbb-business endpoint's own rating_reasons field is read from the main profile page and typically holds only one generic boilerplate bullet regardless of actual rating; this endpoint fetches the richer, business-specific list instead. Service area is business-conditional -- some businesses render no service-area section at all, in which case service_areas is empty. Credential-free public Better Business Bureau data.",
+        "operationId": "bbb-business-more-info",
+        "parameters": [
+          {
+            "description": "BBB business profile URL, from a bbb-search result's url or hq_profile_url",
+            "in": "query",
+            "name": "url",
+            "required": true,
+            "type": "string",
+            "x-example": "https://www.bbb.org/us/tx/austin/profile/plumber/calixto-plumbing-0825-1000223803"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/bbb.moreInfoResponseDoc"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Get a Better Business Bureau business's full rating reasons and service area",
+        "tags": [
+          "bbb"
+        ]
+      }
+    },
+    "/bbb/business/reviews": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Returns a business's full customer-review list (author, star rating, date, text, and any business response thread), paginated 10 per page, plus the average star rating and total review count. Credential-free public Better Business Bureau data. Unlike the other bbb-business-* endpoints, this one is fetched with browser impersonation rather than plain direct HTTP -- see the family's maintenance note for why.",
+        "operationId": "bbb-business-reviews",
+        "parameters": [
+          {
+            "description": "BBB business profile URL, from a bbb-search result's url or hq_profile_url",
+            "in": "query",
+            "name": "url",
+            "required": true,
+            "type": "string",
+            "x-example": "https://www.bbb.org/us/tx/austin/profile/plumber/calixto-plumbing-0825-1000223803"
+          },
+          {
+            "description": "Result page (10 per page), default 1",
+            "in": "query",
+            "name": "page",
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/bbb.reviewsResponseDoc"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Get a Better Business Bureau business's customer reviews",
+        "tags": [
+          "bbb"
+        ]
+      }
+    },
+    "/bbb/category": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Browses bbb.org businesses by category and location directly, without a free-text search query. Returns the same normalized business-result shape as bbb-search. Credential-free public Better Business Bureau data.",
+        "operationId": "bbb-category",
+        "parameters": [
+          {
+            "description": "BBB category browse URL, from a bbb-search result's related_categories",
+            "in": "query",
+            "name": "url",
+            "required": true,
+            "type": "string",
+            "x-example": "https://www.bbb.org/us/tx/austin/category/plumber"
+          },
+          {
+            "description": "Result page, default 1",
+            "in": "query",
+            "name": "page",
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/bbb.categoryResponseDoc"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Browse a Better Business Bureau category",
+        "tags": [
+          "bbb"
+        ]
+      }
+    },
+    "/bbb/scamtracker/search": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Searches bbb.org Scam Tracker's consumer-reported-scam database by free-text query, scam category, targeted-victim state/province, reported-scammer state/province, report-date range, and/or dollar-loss range, paginated 10 results/page. Omit every filter to browse the most-recent-first feed. Credential-free public Better Business Bureau data. This is a separate BBB dataset from the bbb-search/bbb-business/bbb-business-complaints business-rating family -- consumer-reported scam incidents, not business ratings.",
+        "operationId": "bbb-scamtracker-search",
+        "parameters": [
+          {
+            "description": "Free-text search (phone number, website, email, business name, scam ID, description). Omit to browse the most-recent feed",
+            "in": "query",
+            "name": "query",
+            "type": "string",
+            "x-example": "amazon"
+          },
+          {
+            "description": "Scam category filter",
+            "enum": [
+              "Advance Fee Loan",
+              "Bank/Credit Card Company Imposter",
+              "Business Email Compromise",
+              "Charity",
+              "Counterfeit Product",
+              "COVID-19",
+              "Credit Cards",
+              "Credit Repair/Debt Relief",
+              "CryptoCurrency",
+              "Debt Collections",
+              "Employment",
+              "Fake Check/Money Order",
+              "Fake Invoice/Supplier Bill",
+              "Family/Friend Emergency",
+              "Foreign Money Exchange",
+              "Government Agency Imposter",
+              "Government Grant",
+              "Healthcare/Medicaid/Medicare",
+              "Home Improvement",
+              "Identity Theft",
+              "Investment",
+              "Moving",
+              "Online Purchase",
+              "Other",
+              "Phishing",
+              "Rental",
+              "Retail Business",
+              "Romance",
+              "Scholarship",
+              "Sweepstakes/Lottery/Prizes",
+              "Tax Collection",
+              "Tech Support",
+              "Travel/Vacation/Timeshare",
+              "Utility",
+              "Vanity Award",
+              "Worthless Problem-solving Service",
+              "Yellow Pages/Directories"
+            ],
+            "in": "query",
+            "name": "scam_type",
+            "type": "string"
+          },
+          {
+            "description": "Optional 2-letter targeted-victim state/province code (US state or Canadian province)",
+            "in": "query",
+            "name": "state",
+            "type": "string",
+            "x-example": "TX"
+          },
+          {
+            "description": "Optional 2-letter reported-scammer state/province code (US state or Canadian province) -- where the scammer is reported to be, not the victim",
+            "in": "query",
+            "name": "scammer_state",
+            "type": "string",
+            "x-example": "NY"
+          },
+          {
+            "description": "Optional report-date range start (YYYY-MM-DD), inclusive. Must be set together with date_to",
+            "in": "query",
+            "name": "date_from",
+            "type": "string",
+            "x-example": "2026-01-01"
+          },
+          {
+            "description": "Optional report-date range end (YYYY-MM-DD), inclusive. Must be set together with date_from",
+            "in": "query",
+            "name": "date_to",
+            "type": "string",
+            "x-example": "2026-01-31"
+          },
+          {
+            "description": "Optional minimum reported dollar loss. Must be set together with max_dollars_lost",
+            "in": "query",
+            "name": "min_dollars_lost",
+            "type": "integer",
+            "x-example": 500000
+          },
+          {
+            "description": "Optional maximum reported dollar loss. Must be set together with min_dollars_lost",
+            "in": "query",
+            "name": "max_dollars_lost",
+            "type": "integer",
+            "x-example": 1000000
+          },
+          {
+            "description": "Result page (10 per page), default 1",
+            "in": "query",
+            "name": "page",
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/bbbscamtracker.searchResponseDoc"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Search Better Business Bureau Scam Tracker reports",
+        "tags": [
+          "bbb"
+        ]
+      }
+    },
+    "/bbb/scamtracker/state-stats": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Returns aggregate scam-report stats per US state and Canadian province for a given time window: report counts, dollar losses, per-capita rates, year-over-year change, and top scam-type breakdown. This calls the same JSON API the BBB Scam Tracker heatmap dashboard's own frontend uses -- not an HTML scrape. Credential-free public Better Business Bureau data.",
+        "operationId": "bbb-scamtracker-state-stats",
+        "parameters": [
+          {
+            "description": "Aggregation window, default 90",
+            "enum": [
+              "30",
+              "90",
+              "365",
+              "all"
+            ],
+            "in": "query",
+            "name": "period",
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/bbbscamtracker.stateStatsResponseDoc"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Get Better Business Bureau Scam Tracker state/province aggregate stats",
+        "tags": [
+          "bbb"
+        ]
+      }
+    },
+    "/bbb/scamtracker/{id}": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Returns one normalized BBB Scam Tracker consumer scam report: description, dollars lost, targeted person's location, scammer location/email/phone/URL (when known), scam type, business name used, and date reported. Credential-free public Better Business Bureau data.",
+        "operationId": "bbb-scamtracker-detail",
+        "parameters": [
+          {
+            "description": "BBB Scam Tracker report id, from a bbb-scamtracker-search result's id or url",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "x-example": "1397968"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/bbbscamtracker.detailResponseDoc"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Get a Better Business Bureau Scam Tracker report",
+        "tags": [
+          "bbb"
+        ]
+      }
+    },
+    "/bbb/search": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Searches bbb.org for businesses by name or category near a location. Returns each business's BBB rating letter grade, accreditation status, categories, service areas, contact info, and profile URL. Credential-free public Better Business Bureau data.",
+        "operationId": "bbb-search",
+        "parameters": [
+          {
+            "description": "Business name or category/service keyword",
+            "in": "query",
+            "name": "query",
+            "required": true,
+            "type": "string",
+            "x-example": "plumber"
+          },
+          {
+            "description": "City and state (e.g. 'Austin, TX') or a ZIP code",
+            "in": "query",
+            "name": "location",
+            "required": true,
+            "type": "string",
+            "x-example": "Austin, TX"
+          },
+          {
+            "description": "Result page, default 1",
+            "in": "query",
+            "name": "page",
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/bbb.searchResponseDoc"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Search Better Business Bureau businesses",
+        "tags": [
+          "bbb"
+        ]
+      }
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "in": "header",
+      "name": "x-api-key",
+      "type": "apiKey"
+    }
+  },
+  "swagger": "2.0",
+  "tags": [
+    {
+      "name": "bbb"
+    }
+  ]
+}
