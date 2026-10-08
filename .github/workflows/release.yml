@@ -4,6 +4,12 @@ on:
   push:
     tags: ["v*"]
   workflow_dispatch:
+    inputs:
+      validate_npm_trusted_publishing:
+        description: Stage a non-public prerelease to verify npm OIDC publishing.
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: read
@@ -70,6 +76,33 @@ jobs:
               raise SystemExit("tag/package manifest mismatch: " + ", ".join(failed))
           print(f"value={version}", file=open(os.environ["GITHUB_OUTPUT"], "a"))
           PY
+
+  validate-npm-trusted-publisher:
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.validate_npm_trusted_publishing }}
+    needs: [validate, verify-release-version]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          scope: '@crawlora-org'
+      - name: Install npm trusted-publishing-capable CLI
+        run: |
+          npm install --global npm@11.21.0
+          test "$(npm --version)" = "11.21.0"
+      - name: Stage a non-public OIDC validation version
+        working-directory: javascript
+        env:
+          BASE_VERSION: ${{ needs.verify-release-version.outputs.version }}
+          RUN_NUMBER: ${{ github.run_number }}
+        run: |
+          npm version "${BASE_VERSION}-oidc-validation.${RUN_NUMBER}" --no-git-tag-version --ignore-scripts
+          npm stage publish --access public --tag oidc-validation
 
   publish-npm:
     needs: [validate, verify-release-version]
