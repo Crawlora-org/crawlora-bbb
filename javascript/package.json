@@ -1,8 +1,8 @@
 {
   "name": "@crawlora-org/bbb",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Typed JavaScript client for the Crawlora Better Business Bureau API",
-  "homepage": "https://github.com/Crawlora-org/crawlora-bbb#readme",
+  "homepage": "https://crawlora.net/?utm_source=npm&utm_medium=referral&utm_campaign=platform-clients&utm_content=bbb-javascript-homepage",
   "bugs": { "url": "https://github.com/Crawlora-org/crawlora-bbb/issues" },
   "keywords": ["crawlora", "api-client", "web-scraping", "bbb", "typescript"],
   "type": "module",

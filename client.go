@@ -1,4 +1,5 @@
 // Package bbb is a focused Go client for Crawlora's Better Business Bureau endpoints.
+// API documentation: https://crawlora.net/docs?utm_source=pkg.go.dev&utm_medium=referral&utm_campaign=platform-clients&utm_content=bbb-go-api-docs
 package bbb
 
 import (
@@ -16,7 +17,7 @@ import (
 
 const (
 	DefaultBaseURL = "https://api.crawlora.net/api/v1"
-	Version        = "0.1.0"
+	Version        = "0.1.1"
 )
 
 // Params maps the exact OpenAPI parameter names expected by this platform client.
@@ -80,7 +81,7 @@ func (c *Client) Call(ctx context.Context, operationID string, params Params) (a
 	if err != nil {
 		return nil, err
 	}
-	request.Header.Set("User-Agent", "crawlora-bbb-go/0.1.0")
+	request.Header.Set("User-Agent", "crawlora-bbb-go/0.1.1")
 	for _, security := range operation.Security {
 		if security == "ApiKeyAuth" && c.APIKey != "" {
 			request.Header.Set("x-api-key", c.APIKey)
