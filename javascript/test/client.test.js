@@ -13,8 +13,8 @@ test("exports only this platform and exposes direct and grouped methods", async 
   const client = new BBBClient({ apiKey: "test-key", fetch: async () => json({ ok: true }) });
   assert.equal(operationCount, Object.keys(operations).length);
   assert.deepEqual(Object.keys(groups), ["bbb"]);
-  assert.equal(typeof client["business"], "function");
-  assert.equal(typeof client["bbb"]["business"], "function");
+  assert.equal(typeof client["article"], "function");
+  assert.equal(typeof client["bbb"]["article"], "function");
 });
 
 test("serializes required query/path values, adds API key and platform User-Agent", async () => {
@@ -23,10 +23,10 @@ test("serializes required query/path values, adds API key and platform User-Agen
     seen = { url: String(url), headers: init.headers };
     return json({ ok: true });
   } });
-  await client.request("bbb-business", {"url": "sample"});
-  assert.match(seen.url, /\/bbb\/business/);
+  await client.request("bbb-article", {"url": "sample"});
+  assert.match(seen.url, /\/bbb\/article/);
   assert.equal(seen.headers["x-api-key"], "secret");
-  assert.equal(seen.headers["user-agent"], "crawlora-bbb-js/0.1.4");
+  assert.equal(seen.headers["user-agent"], "crawlora-bbb-js/0.2.0");
 });
 
 test("allows caller User-Agent override and response text mode", async () => {
@@ -35,7 +35,7 @@ test("allows caller User-Agent override and response text mode", async () => {
     seen = init.headers;
     return new Response("caption text", { headers: { "content-type": "text/plain" } });
   } });
-  const result = await client.request("bbb-business", {"url": "sample"}, { responseType: "text" });
+  const result = await client.request("bbb-article", {"url": "sample"}, { responseType: "text" });
   assert.equal(seen["user-agent"], "custom-agent");
   assert.equal(result, "caption text");
 
@@ -43,7 +43,7 @@ test("allows caller User-Agent override and response text mode", async () => {
   const autoClient = new BBBClient({ fetch: async () => new Response(rawFeed, {
     headers: { "content-type": "text/plain" }
   }) });
-  assert.equal(await autoClient.request("bbb-business", {"url": "sample"}), rawFeed);
+  assert.equal(await autoClient.request("bbb-article", {"url": "sample"}), rawFeed);
 });
 
 test("maps API errors and retries server failures", async () => {
@@ -52,13 +52,13 @@ test("maps API errors and retries server failures", async () => {
     calls++;
     return calls === 1 ? json({ msg: "try again" }, 503) : json({ ok: true });
   } });
-  assert.deepEqual(await client.request("bbb-business", {"url": "sample"}), { ok: true });
+  assert.deepEqual(await client.request("bbb-article", {"url": "sample"}), { ok: true });
   assert.equal(calls, 2);
 
   const bad = new BBBClient({ fetch: async () => json({ msg: "bad input" }, 400) });
-  await assert.rejects(bad.request("bbb-business", {"url": "sample"}), CrawloraClientError);
+  await assert.rejects(bad.request("bbb-article", {"url": "sample"}), CrawloraClientError);
   const down = new BBBClient({ fetch: async () => json({ msg: "down" }, 503) });
-  await assert.rejects(down.request("bbb-business", {"url": "sample"}), CrawloraServerError);
+  await assert.rejects(down.request("bbb-article", {"url": "sample"}), CrawloraServerError);
 });
 
 test("reports timeout and caller cancellation as network errors", async () => {
@@ -66,11 +66,11 @@ test("reports timeout and caller cancellation as network errors", async () => {
     signal.addEventListener("abort", () => reject(new Error("aborted")), { once: true });
   });
   const timed = new BBBClient({ timeout: 5, fetch: hanging });
-  await assert.rejects(timed.request("bbb-business", {"url": "sample"}), CrawloraNetworkError);
+  await assert.rejects(timed.request("bbb-article", {"url": "sample"}), CrawloraNetworkError);
 
   const controller = new AbortController();
   const aborted = new BBBClient({ fetch: hanging });
-  const pending = aborted.request("bbb-business", {"url": "sample"}, { signal: controller.signal });
+  const pending = aborted.request("bbb-article", {"url": "sample"}, { signal: controller.signal });
   controller.abort();
   await assert.rejects(pending, CrawloraNetworkError);
 });

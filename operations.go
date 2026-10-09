@@ -26,19 +26,26 @@ type operationDefinition struct {
 }
 
 var operations = map[string]operationDefinition{
+	"bbb-article":                 operationDefinition{Method: "GET", Path: "/bbb/article", PathParams: nil, QueryParams: []parameterDefinition{parameterDefinition{Name: "url", In: "query", Type: "string", Required: true}}, Produces: []string{"application/json"}, Security: []string{"ApiKeyAuth"}},
 	"bbb-business":                operationDefinition{Method: "GET", Path: "/bbb/business", PathParams: nil, QueryParams: []parameterDefinition{parameterDefinition{Name: "url", In: "query", Type: "string", Required: true}}, Produces: []string{"application/json"}, Security: []string{"ApiKeyAuth"}},
 	"bbb-business-complaints":     operationDefinition{Method: "GET", Path: "/bbb/business/complaints", PathParams: nil, QueryParams: []parameterDefinition{parameterDefinition{Name: "url", In: "query", Type: "string", Required: true}}, Produces: []string{"application/json"}, Security: []string{"ApiKeyAuth"}},
 	"bbb-business-more-info":      operationDefinition{Method: "GET", Path: "/bbb/business/more-info", PathParams: nil, QueryParams: []parameterDefinition{parameterDefinition{Name: "url", In: "query", Type: "string", Required: true}}, Produces: []string{"application/json"}, Security: []string{"ApiKeyAuth"}},
 	"bbb-business-reviews":        operationDefinition{Method: "GET", Path: "/bbb/business/reviews", PathParams: nil, QueryParams: []parameterDefinition{parameterDefinition{Name: "url", In: "query", Type: "string", Required: true}, parameterDefinition{Name: "page", In: "query", Type: "integer"}}, Produces: []string{"application/json"}, Security: []string{"ApiKeyAuth"}},
-	"bbb-category":                operationDefinition{Method: "GET", Path: "/bbb/category", PathParams: nil, QueryParams: []parameterDefinition{parameterDefinition{Name: "url", In: "query", Type: "string", Required: true}, parameterDefinition{Name: "page", In: "query", Type: "integer"}}, Produces: []string{"application/json"}, Security: []string{"ApiKeyAuth"}},
+	"bbb-category":                operationDefinition{Method: "GET", Path: "/bbb/category", PathParams: nil, QueryParams: []parameterDefinition{parameterDefinition{Name: "url", In: "query", Type: "string", Required: true}, parameterDefinition{Name: "page", In: "query", Type: "integer"}, parameterDefinition{Name: "sort", In: "query", Type: "string", Enum: []string{"Relevance", "Distance", "Rating", "AToZ", "ZToA"}}, parameterDefinition{Name: "distance", In: "query", Type: "string", Enum: []string{"5", "10", "25", "50", "100"}}, parameterDefinition{Name: "rating", In: "query", Type: "array", CollectionFormat: "multi", Enum: []string{"A", "B", "C", "D", "F"}}, parameterDefinition{Name: "category_id", In: "query", Type: "array", CollectionFormat: "multi"}, parameterDefinition{Name: "state", In: "query", Type: "array", CollectionFormat: "multi"}, parameterDefinition{Name: "accredited", In: "query", Type: "boolean"}, parameterDefinition{Name: "get_quote", In: "query", Type: "boolean"}, parameterDefinition{Name: "service_area", In: "query", Type: "boolean"}}, Produces: []string{"application/json"}, Security: []string{"ApiKeyAuth"}},
+	"bbb-local-bbb":               operationDefinition{Method: "GET", Path: "/bbb/local-bbb", PathParams: nil, QueryParams: []parameterDefinition{parameterDefinition{Name: "url", In: "query", Type: "string", Required: true}}, Produces: []string{"application/json"}, Security: []string{"ApiKeyAuth"}},
+	"bbb-local-bbbs":              operationDefinition{Method: "GET", Path: "/bbb/local-bbbs", PathParams: nil, QueryParams: []parameterDefinition{parameterDefinition{Name: "country", In: "query", Type: "string", Required: true, Enum: []string{"us", "ca"}}, parameterDefinition{Name: "region", In: "query", Type: "string", Required: true}}, Produces: []string{"application/json"}, Security: []string{"ApiKeyAuth"}},
+	"bbb-news":                    operationDefinition{Method: "GET", Path: "/bbb/news", PathParams: nil, QueryParams: []parameterDefinition{parameterDefinition{Name: "url", In: "query", Type: "string", Required: true}}, Produces: []string{"application/json"}, Security: []string{"ApiKeyAuth"}},
+	"bbb-news-topics":             operationDefinition{Method: "GET", Path: "/bbb/news/topics", PathParams: nil, QueryParams: []parameterDefinition{parameterDefinition{Name: "url", In: "query", Type: "string", Required: true}}, Produces: []string{"application/json"}, Security: []string{"ApiKeyAuth"}},
+	"bbb-regions":                 operationDefinition{Method: "GET", Path: "/bbb/regions", PathParams: nil, QueryParams: nil, Produces: []string{"application/json"}, Security: []string{"ApiKeyAuth"}},
 	"bbb-scamtracker-search":      operationDefinition{Method: "GET", Path: "/bbb/scamtracker/search", PathParams: nil, QueryParams: []parameterDefinition{parameterDefinition{Name: "query", In: "query", Type: "string"}, parameterDefinition{Name: "scam_type", In: "query", Type: "string", Enum: []string{"Advance Fee Loan", "Bank/Credit Card Company Imposter", "Business Email Compromise", "Charity", "Counterfeit Product", "COVID-19", "Credit Cards", "Credit Repair/Debt Relief", "CryptoCurrency", "Debt Collections", "Employment", "Fake Check/Money Order", "Fake Invoice/Supplier Bill", "Family/Friend Emergency", "Foreign Money Exchange", "Government Agency Imposter", "Government Grant", "Healthcare/Medicaid/Medicare", "Home Improvement", "Identity Theft", "Investment", "Moving", "Online Purchase", "Other", "Phishing", "Rental", "Retail Business", "Romance", "Scholarship", "Sweepstakes/Lottery/Prizes", "Tax Collection", "Tech Support", "Travel/Vacation/Timeshare", "Utility", "Vanity Award", "Worthless Problem-solving Service", "Yellow Pages/Directories"}}, parameterDefinition{Name: "state", In: "query", Type: "string"}, parameterDefinition{Name: "scammer_state", In: "query", Type: "string"}, parameterDefinition{Name: "date_from", In: "query", Type: "string"}, parameterDefinition{Name: "date_to", In: "query", Type: "string"}, parameterDefinition{Name: "min_dollars_lost", In: "query", Type: "integer"}, parameterDefinition{Name: "max_dollars_lost", In: "query", Type: "integer"}, parameterDefinition{Name: "page", In: "query", Type: "integer"}}, Produces: []string{"application/json"}, Security: []string{"ApiKeyAuth"}},
 	"bbb-scamtracker-state-stats": operationDefinition{Method: "GET", Path: "/bbb/scamtracker/state-stats", PathParams: nil, QueryParams: []parameterDefinition{parameterDefinition{Name: "period", In: "query", Type: "string", Enum: []string{"30", "90", "365", "all"}}}, Produces: []string{"application/json"}, Security: []string{"ApiKeyAuth"}},
 	"bbb-scamtracker-detail":      operationDefinition{Method: "GET", Path: "/bbb/scamtracker/{id}", PathParams: []string{"id"}, QueryParams: nil, Produces: []string{"application/json"}, Security: []string{"ApiKeyAuth"}},
-	"bbb-search":                  operationDefinition{Method: "GET", Path: "/bbb/search", PathParams: nil, QueryParams: []parameterDefinition{parameterDefinition{Name: "query", In: "query", Type: "string", Required: true}, parameterDefinition{Name: "location", In: "query", Type: "string", Required: true}, parameterDefinition{Name: "page", In: "query", Type: "integer"}}, Produces: []string{"application/json"}, Security: []string{"ApiKeyAuth"}},
+	"bbb-search":                  operationDefinition{Method: "GET", Path: "/bbb/search", PathParams: nil, QueryParams: []parameterDefinition{parameterDefinition{Name: "query", In: "query", Type: "string", Required: true}, parameterDefinition{Name: "location", In: "query", Type: "string", Required: true}, parameterDefinition{Name: "page", In: "query", Type: "integer"}, parameterDefinition{Name: "country", In: "query", Type: "string", Enum: []string{"USA", "CAN"}}, parameterDefinition{Name: "sort", In: "query", Type: "string", Enum: []string{"Relevance", "Distance", "Rating", "AToZ", "ZToA"}}, parameterDefinition{Name: "distance", In: "query", Type: "string", Enum: []string{"5", "10", "25", "50", "100"}}, parameterDefinition{Name: "rating", In: "query", Type: "array", CollectionFormat: "multi", Enum: []string{"A", "B", "C", "D", "F"}}, parameterDefinition{Name: "category_id", In: "query", Type: "array", CollectionFormat: "multi"}, parameterDefinition{Name: "state", In: "query", Type: "array", CollectionFormat: "multi"}, parameterDefinition{Name: "accredited", In: "query", Type: "boolean"}, parameterDefinition{Name: "get_quote", In: "query", Type: "boolean"}, parameterDefinition{Name: "service_area", In: "query", Type: "boolean"}}, Produces: []string{"application/json"}, Security: []string{"ApiKeyAuth"}},
+	"bbb-search-filters":          operationDefinition{Method: "GET", Path: "/bbb/search/filters", PathParams: nil, QueryParams: []parameterDefinition{parameterDefinition{Name: "query", In: "query", Type: "string"}, parameterDefinition{Name: "location", In: "query", Type: "string"}, parameterDefinition{Name: "category_url", In: "query", Type: "string"}, parameterDefinition{Name: "country", In: "query", Type: "string", Enum: []string{"USA", "CAN"}}, parameterDefinition{Name: "page", In: "query", Type: "integer"}, parameterDefinition{Name: "sort", In: "query", Type: "string", Enum: []string{"Relevance", "Distance", "Rating", "AToZ", "ZToA"}}, parameterDefinition{Name: "distance", In: "query", Type: "string", Enum: []string{"5", "10", "25", "50", "100"}}, parameterDefinition{Name: "rating", In: "query", Type: "array", CollectionFormat: "multi", Enum: []string{"A", "B", "C", "D", "F"}}, parameterDefinition{Name: "category_id", In: "query", Type: "array", CollectionFormat: "multi"}, parameterDefinition{Name: "state", In: "query", Type: "array", CollectionFormat: "multi"}, parameterDefinition{Name: "accredited", In: "query", Type: "boolean"}, parameterDefinition{Name: "get_quote", In: "query", Type: "boolean"}, parameterDefinition{Name: "service_area", In: "query", Type: "boolean"}}, Produces: []string{"application/json"}, Security: []string{"ApiKeyAuth"}},
 }
 
 // OperationCount reports how many selected-platform operations this module exposes.
-const OperationCount = 9
+const OperationCount = 16
 
 // OperationIDs returns the selected operation IDs in stable sorted order.
 func OperationIDs() []string {
@@ -48,6 +55,11 @@ func OperationIDs() []string {
 	}
 	sort.Strings(ids)
 	return ids
+}
+
+// Article calls the bbb-article operation.
+func (c *Client) Article(ctx context.Context, params Params) (any, error) {
+	return c.Call(ctx, "bbb-article", params)
 }
 
 // Business calls the bbb-business operation.
@@ -75,6 +87,31 @@ func (c *Client) Category(ctx context.Context, params Params) (any, error) {
 	return c.Call(ctx, "bbb-category", params)
 }
 
+// LocalBbb calls the bbb-local-bbb operation.
+func (c *Client) LocalBbb(ctx context.Context, params Params) (any, error) {
+	return c.Call(ctx, "bbb-local-bbb", params)
+}
+
+// LocalBbbs calls the bbb-local-bbbs operation.
+func (c *Client) LocalBbbs(ctx context.Context, params Params) (any, error) {
+	return c.Call(ctx, "bbb-local-bbbs", params)
+}
+
+// News calls the bbb-news operation.
+func (c *Client) News(ctx context.Context, params Params) (any, error) {
+	return c.Call(ctx, "bbb-news", params)
+}
+
+// NewsTopics calls the bbb-news-topics operation.
+func (c *Client) NewsTopics(ctx context.Context, params Params) (any, error) {
+	return c.Call(ctx, "bbb-news-topics", params)
+}
+
+// Regions calls the bbb-regions operation.
+func (c *Client) Regions(ctx context.Context, params Params) (any, error) {
+	return c.Call(ctx, "bbb-regions", params)
+}
+
 // ScamtrackerSearch calls the bbb-scamtracker-search operation.
 func (c *Client) ScamtrackerSearch(ctx context.Context, params Params) (any, error) {
 	return c.Call(ctx, "bbb-scamtracker-search", params)
@@ -93,4 +130,9 @@ func (c *Client) ScamtrackerDetail(ctx context.Context, params Params) (any, err
 // Search calls the bbb-search operation.
 func (c *Client) Search(ctx context.Context, params Params) (any, error) {
 	return c.Call(ctx, "bbb-search", params)
+}
+
+// SearchFilters calls the bbb-search-filters operation.
+func (c *Client) SearchFilters(ctx context.Context, params Params) (any, error) {
+	return c.Call(ctx, "bbb-search-filters", params)
 }

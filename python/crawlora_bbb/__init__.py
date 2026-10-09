@@ -6,10 +6,10 @@ from .operations import OPERATION_COUNT, OPERATION_IDS, PLATFORM
 
 Client = BBBClient
 AsyncClient = AsyncBBBClient
-__version__ = '0.1.4'
+__version__ = '0.2.0'
 DISPLAY_NAME = 'Better Business Bureau'
 PLATFORM = 'bbb'
-CONTRACT_REVISION = 'sha256:c4cf6f235ba96193e786f97a88b354660c07e34d9ae86429136e17dacb7efd48'
+CONTRACT_REVISION = 'sha256:6b65d9f9ac4320fd98477930c62f03b698e57688833a6ddb4f1207af047c9984'
 
 __all__ = [
     "BBBClient", "AsyncBBBClient", "Client", "AsyncClient",

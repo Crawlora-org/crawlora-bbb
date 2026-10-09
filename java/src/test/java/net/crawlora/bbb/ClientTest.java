@@ -42,13 +42,13 @@ class ClientTest {
     @AfterEach void stopServer() { if (server != null) server.stop(0); }
 
     @Test void platformCatalogIsAnExactAllowlistAndExposesDirectMethod() throws Exception {
-        assertEquals(9, Client.OPERATION_IDS.size());
-        assertEquals(List.of("bbb-business", "bbb-business-complaints", "bbb-business-more-info", "bbb-business-reviews", "bbb-category", "bbb-scamtracker-detail", "bbb-scamtracker-search", "bbb-scamtracker-state-stats", "bbb-search"), Client.OPERATION_IDS);
+        assertEquals(16, Client.OPERATION_IDS.size());
+        assertEquals(List.of("bbb-article", "bbb-business", "bbb-business-complaints", "bbb-business-more-info", "bbb-business-reviews", "bbb-category", "bbb-local-bbb", "bbb-local-bbbs", "bbb-news", "bbb-news-topics", "bbb-regions", "bbb-scamtracker-detail", "bbb-scamtracker-search", "bbb-scamtracker-state-stats", "bbb-search", "bbb-search-filters"), Client.OPERATION_IDS);
         assertEquals(new java.util.TreeSet<>(Client.OPERATION_IDS), new java.util.TreeSet<>(Client.operations().keySet()));
         assertEquals(Client.OPERATION_IDS.size(), new Client("key").getOperationCount());
         try (Client client = new Client("test-key", baseUrl, Duration.ofSeconds(2))) {
             assertThrows(IllegalArgumentException.class, () -> client.request("instagram-search", Map.of()));
-            Object result = client.request("bbb-business", Map.ofEntries(Map.entry("url", "value &/one")));
+            Object result = client.request("bbb-article", Map.ofEntries(Map.entry("url", "value &/one")));
             assertInstanceOf(Map.class, result);
             assertEquals("test-key", seenKey.get());
             assertTrue(seenUri.get().startsWith("/api/v1/"));
@@ -59,7 +59,7 @@ class ClientTest {
 
     @Test void directMethodUsesTheSameOperationDispatch() throws Exception {
         try (Client client = new Client("test-key", baseUrl, Duration.ofSeconds(2))) {
-            Object result = Client.class.getMethod("business", Map.class).invoke(client, Map.ofEntries(Map.entry("url", "value &/one")));
+            Object result = Client.class.getMethod("article", Map.class).invoke(client, Map.ofEntries(Map.entry("url", "value &/one")));
             assertInstanceOf(Map.class, result);
         }
     }
@@ -68,7 +68,7 @@ class ClientTest {
         contentType = "text/plain; charset=utf-8";
         body = "line one\nline two";
         try (Client client = new Client("test-key", baseUrl, Duration.ofSeconds(2))) {
-            assertEquals("line one\nline two", client.request("bbb-business", Map.ofEntries(Map.entry("url", "sample"))));
+            assertEquals("line one\nline two", client.request("bbb-article", Map.ofEntries(Map.entry("url", "sample"))));
         }
     }
 
@@ -77,21 +77,21 @@ class ClientTest {
         body = "{\"code\":422,\"msg\":\"bad input\"}";
         try (Client client = new Client("test-key", baseUrl, Duration.ofSeconds(2))) {
             CrawloraException error = assertThrows(CrawloraException.class,
-                    () -> client.request("bbb-business", Map.ofEntries(Map.entry("url", "value &/one"))));
+                    () -> client.request("bbb-article", Map.ofEntries(Map.entry("url", "value &/one"))));
             assertEquals(422, error.statusCode());
             assertTrue(error.getMessage().contains("bad input"));
         }
         status = 200;
         delayMillis = 250;
         try (Client client = new Client("test-key", baseUrl, Duration.ofMillis(20))) {
-            assertThrows(CrawloraException.class, () -> client.request("bbb-business", Map.ofEntries(Map.entry("url", "value &/one"))));
+            assertThrows(CrawloraException.class, () -> client.request("bbb-article", Map.ofEntries(Map.entry("url", "value &/one"))));
         }
     }
 
     @Test void rejectsInvalidEnumsAndClosedClientCalls() {
-        assertThrows(IllegalArgumentException.class, () -> new Client("key", baseUrl, Duration.ofSeconds(1)).request("bbb-scamtracker-search", Map.ofEntries(Map.entry("scam_type", "__invalid_java_test_enum__"))));
+        assertThrows(IllegalArgumentException.class, () -> new Client("key", baseUrl, Duration.ofSeconds(1)).request("bbb-category", Map.ofEntries(Map.entry("url", "sample"), Map.entry("sort", "__invalid_java_test_enum__"))));
         Client client = new Client("key", baseUrl, Duration.ofSeconds(1));
         client.close();
-        assertThrows(IllegalStateException.class, () -> client.request("bbb-business", Map.ofEntries(Map.entry("url", "value &/one"))));
+        assertThrows(IllegalStateException.class, () -> client.request("bbb-article", Map.ofEntries(Map.entry("url", "value &/one"))));
     }
 }

@@ -8,7 +8,7 @@ Official Crawlora client packages for the hosted Better Business Bureau API. The
 - Python: [`crawlora-bbb`](python/README.md)
 - Go: [`github.com/Crawlora-org/crawlora-bbb`](go.mod)
 - Ruby: [`crawlora-bbb`](ruby/README.md)
-- Java: [`net.crawlora:crawlora-bbb:0.1.4`](java/README.md)
+- Java: [`net.crawlora:crawlora-bbb:0.2.0`](java/README.md)
 - PHP: [`crawlora/bbb`](php/README.md)
 
 For installation and runnable examples, use the README for your language. See the [API endpoint and parameter reference](docs/usage.md) for shared operation details.
@@ -17,7 +17,7 @@ Create an account at [crawlora.net](https://crawlora.net/signup?utm_source=githu
 
 ## API coverage
 
-The six clients provide access to 9 public API operations. See the [API reference](docs/usage.md) for supported operations, parameters, and response details.
+The six clients provide access to 16 public API operations. See the [API reference](docs/usage.md) for supported operations, parameters, and response details.
 
 ## License
 

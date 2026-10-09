@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.0 — 2026-10-09
+
+- Added operations: bbb-article, bbb-local-bbb, bbb-local-bbbs, bbb-news, bbb-news-topics, bbb-regions, bbb-search-filters.
+- Updated operation contracts: bbb-category, bbb-search.
+
 ## 0.1.4 — 2026-10-09
 
 - Keep the platform README as a language-package index without cross-language installation commands or code examples; pkg.go.dev now shows only its Go example.

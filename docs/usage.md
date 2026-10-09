@@ -2,9 +2,9 @@
 
 The `@crawlora-org/bbb` and `crawlora-bbb` packages call Crawlora's hosted API. Set `CRAWLORA_API_KEY` to a key for your Crawlora account before making requests. Service usage is billed under that account. These clients do not run a browser or scrape Better Business Bureau locally; Crawlora is independent from and not endorsed by Better Business Bureau or its owners.
 
-The package tracks the public API contract revision `sha256:c4cf6f235ba96193e786f97a88b354660c07e34d9ae86429136e17dacb7efd48` bundled with release `0.1.4`. Maintainers can preview daily contract updates with the repository's `Sync live API contract` workflow; unchanged contracts do not produce package releases.
+The package tracks the public API contract revision `sha256:6b65d9f9ac4320fd98477930c62f03b698e57688833a6ddb4f1207af047c9984` bundled with release `0.2.0`. Maintainers can preview daily contract updates with the repository's `Sync live API contract` workflow; unchanged contracts do not produce package releases.
 
-Both packages expose all 9 operations in the bundled API contract. JavaScript uses camelCase methods and Python uses snake_case methods. Methods also remain available through the `bbb` group and the generated `Client` alias.
+Both packages expose all 16 operations in the bundled API contract. JavaScript uses camelCase methods and Python uses snake_case methods. Methods also remain available through the `bbb` group and the generated `Client` alias.
 
 ## Examples
 
@@ -21,15 +21,22 @@ Required and optional parameter names below come from this package's generated O
 
 | Method | Endpoint | Parameters | Description |
 | --- | --- | --- | --- |
+| `article` / `article` | `GET /bbb/article` | `url` (query, required) | Get a BBB article |
 | `business` / `business` | `GET /bbb/business` | `url` (query, required) | Get a Better Business Bureau business profile |
 | `businessComplaints` / `business_complaints` | `GET /bbb/business/complaints` | `url` (query, required) | Get a Better Business Bureau business's complaint history |
 | `businessMoreInfo` / `business_more_info` | `GET /bbb/business/more-info` | `url` (query, required) | Get a Better Business Bureau business's full rating reasons and service area |
 | `businessReviews` / `business_reviews` | `GET /bbb/business/reviews` | `url` (query, required), `page` (query, optional) | Get a Better Business Bureau business's customer reviews |
-| `category` / `category` | `GET /bbb/category` | `url` (query, required), `page` (query, optional) | Browse a Better Business Bureau category |
+| `category` / `category` | `GET /bbb/category` | `url` (query, required), `page` (query, optional), `sort` (query, optional; values: `Relevance`, `Distance`, `Rating`, `AToZ`, `ZToA`), `distance` (query, optional; values: `5`, `10`, `25`, `50`, `100`), `rating` (query, optional; values: `A`, `B`, `C`, `D`, `F`), `category_id` (query, optional), `state` (query, optional), `accredited` (query, optional), `get_quote` (query, optional), `service_area` (query, optional) | Browse a Better Business Bureau category |
+| `localBbb` / `local_bbb` | `GET /bbb/local-bbb` | `url` (query, required) | Get a local BBB chapter profile |
+| `localBbbs` / `local_bbbs` | `GET /bbb/local-bbbs` | `country` (query, required; values: `us`, `ca`), `region` (query, required) | List local BBB chapters serving a region |
+| `news` / `news` | `GET /bbb/news` | `url` (query, required) | Get BBB newsroom stories |
+| `newsTopics` / `news_topics` | `GET /bbb/news/topics` | `url` (query, required) | List BBB newsroom topics |
+| `regions` / `regions` | `GET /bbb/regions` | — | List Better Business Bureau directory regions |
 | `scamtrackerDetail` / `scamtracker_detail` | `GET /bbb/scamtracker/{id}` | `id` (path, required) | Get a Better Business Bureau Scam Tracker report |
 | `scamtrackerSearch` / `scamtracker_search` | `GET /bbb/scamtracker/search` | `query` (query, optional), `scam_type` (query, optional; values: `Advance Fee Loan`, `Bank/Credit Card Company Imposter`, `Business Email Compromise`, `Charity`, `Counterfeit Product`, `COVID-19`, `Credit Cards`, `Credit Repair/Debt Relief`, `CryptoCurrency`, `Debt Collections`, `Employment`, `Fake Check/Money Order`, `Fake Invoice/Supplier Bill`, `Family/Friend Emergency`, `Foreign Money Exchange`, `Government Agency Imposter`, `Government Grant`, `Healthcare/Medicaid/Medicare`, `Home Improvement`, `Identity Theft`, `Investment`, `Moving`, `Online Purchase`, `Other`, `Phishing`, `Rental`, `Retail Business`, `Romance`, `Scholarship`, `Sweepstakes/Lottery/Prizes`, `Tax Collection`, `Tech Support`, `Travel/Vacation/Timeshare`, `Utility`, `Vanity Award`, `Worthless Problem-solving Service`, `Yellow Pages/Directories`), `state` (query, optional), `scammer_state` (query, optional), `date_from` (query, optional), `date_to` (query, optional), `min_dollars_lost` (query, optional), `max_dollars_lost` (query, optional), `page` (query, optional) | Search Better Business Bureau Scam Tracker reports |
 | `scamtrackerStateStats` / `scamtracker_state_stats` | `GET /bbb/scamtracker/state-stats` | `period` (query, optional; values: `30`, `90`, `365`, `all`) | Get Better Business Bureau Scam Tracker state/province aggregate stats |
-| `search` / `search` | `GET /bbb/search` | `query` (query, required), `location` (query, required), `page` (query, optional) | Search Better Business Bureau businesses |
+| `search` / `search` | `GET /bbb/search` | `query` (query, required), `location` (query, required), `page` (query, optional), `country` (query, optional; values: `USA`, `CAN`), `sort` (query, optional; values: `Relevance`, `Distance`, `Rating`, `AToZ`, `ZToA`), `distance` (query, optional; values: `5`, `10`, `25`, `50`, `100`), `rating` (query, optional; values: `A`, `B`, `C`, `D`, `F`), `category_id` (query, optional), `state` (query, optional), `accredited` (query, optional), `get_quote` (query, optional), `service_area` (query, optional) | Search Better Business Bureau businesses |
+| `searchFilters` / `search_filters` | `GET /bbb/search/filters` | `query` (query, optional), `location` (query, optional), `category_url` (query, optional), `country` (query, optional; values: `USA`, `CAN`), `page` (query, optional), `sort` (query, optional; values: `Relevance`, `Distance`, `Rating`, `AToZ`, `ZToA`), `distance` (query, optional; values: `5`, `10`, `25`, `50`, `100`), `rating` (query, optional; values: `A`, `B`, `C`, `D`, `F`), `category_id` (query, optional), `state` (query, optional), `accredited` (query, optional), `get_quote` (query, optional), `service_area` (query, optional) | Discover Better Business Bureau search filters |
 
 ## Client forms
 

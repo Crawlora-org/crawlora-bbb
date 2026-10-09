@@ -22,31 +22,45 @@ import java.util.TreeSet;
 /** Client for the Better Business Bureau endpoints hosted by Crawlora. */
 public final class Client implements AutoCloseable {
     public static final String DEFAULT_BASE_URL = "https://api.crawlora.net/api/v1";
-    public static final int OPERATION_COUNT = 9;
+    public static final int OPERATION_COUNT = 16;
     public static final List<String> OPERATION_IDS = List.of(
+            "bbb-article",
             "bbb-business",
             "bbb-business-complaints",
             "bbb-business-more-info",
             "bbb-business-reviews",
             "bbb-category",
+            "bbb-local-bbb",
+            "bbb-local-bbbs",
+            "bbb-news",
+            "bbb-news-topics",
+            "bbb-regions",
             "bbb-scamtracker-detail",
             "bbb-scamtracker-search",
             "bbb-scamtracker-state-stats",
-            "bbb-search"
+            "bbb-search",
+            "bbb-search-filters"
     );
 
     private static final Map<String, Operation> OPERATIONS;
     static {
         Map<String, Operation> operations = new LinkedHashMap<>();
+        operations.put("bbb-article", new Operation("bbb-article", "GET", "/bbb/article", Map.ofEntries(Map.entry("url", new Param("url", "query", true, "string", List.of(), "csv"))), List.of("application/json")));
         operations.put("bbb-business", new Operation("bbb-business", "GET", "/bbb/business", Map.ofEntries(Map.entry("url", new Param("url", "query", true, "string", List.of(), "csv"))), List.of("application/json")));
         operations.put("bbb-business-complaints", new Operation("bbb-business-complaints", "GET", "/bbb/business/complaints", Map.ofEntries(Map.entry("url", new Param("url", "query", true, "string", List.of(), "csv"))), List.of("application/json")));
         operations.put("bbb-business-more-info", new Operation("bbb-business-more-info", "GET", "/bbb/business/more-info", Map.ofEntries(Map.entry("url", new Param("url", "query", true, "string", List.of(), "csv"))), List.of("application/json")));
         operations.put("bbb-business-reviews", new Operation("bbb-business-reviews", "GET", "/bbb/business/reviews", Map.ofEntries(Map.entry("url", new Param("url", "query", true, "string", List.of(), "csv")), Map.entry("page", new Param("page", "query", false, "integer", List.of(), "csv"))), List.of("application/json")));
-        operations.put("bbb-category", new Operation("bbb-category", "GET", "/bbb/category", Map.ofEntries(Map.entry("url", new Param("url", "query", true, "string", List.of(), "csv")), Map.entry("page", new Param("page", "query", false, "integer", List.of(), "csv"))), List.of("application/json")));
+        operations.put("bbb-category", new Operation("bbb-category", "GET", "/bbb/category", Map.ofEntries(Map.entry("url", new Param("url", "query", true, "string", List.of(), "csv")), Map.entry("page", new Param("page", "query", false, "integer", List.of(), "csv")), Map.entry("sort", new Param("sort", "query", false, "string", List.of("Relevance", "Distance", "Rating", "AToZ", "ZToA"), "csv")), Map.entry("distance", new Param("distance", "query", false, "string", List.of("5", "10", "25", "50", "100"), "csv")), Map.entry("rating", new Param("rating", "query", false, "array", List.of("A", "B", "C", "D", "F"), "multi")), Map.entry("category_id", new Param("category_id", "query", false, "array", List.of(), "multi")), Map.entry("state", new Param("state", "query", false, "array", List.of(), "multi")), Map.entry("accredited", new Param("accredited", "query", false, "boolean", List.of(), "csv")), Map.entry("get_quote", new Param("get_quote", "query", false, "boolean", List.of(), "csv")), Map.entry("service_area", new Param("service_area", "query", false, "boolean", List.of(), "csv"))), List.of("application/json")));
+        operations.put("bbb-local-bbb", new Operation("bbb-local-bbb", "GET", "/bbb/local-bbb", Map.ofEntries(Map.entry("url", new Param("url", "query", true, "string", List.of(), "csv"))), List.of("application/json")));
+        operations.put("bbb-local-bbbs", new Operation("bbb-local-bbbs", "GET", "/bbb/local-bbbs", Map.ofEntries(Map.entry("country", new Param("country", "query", true, "string", List.of("us", "ca"), "csv")), Map.entry("region", new Param("region", "query", true, "string", List.of(), "csv"))), List.of("application/json")));
+        operations.put("bbb-news", new Operation("bbb-news", "GET", "/bbb/news", Map.ofEntries(Map.entry("url", new Param("url", "query", true, "string", List.of(), "csv"))), List.of("application/json")));
+        operations.put("bbb-news-topics", new Operation("bbb-news-topics", "GET", "/bbb/news/topics", Map.ofEntries(Map.entry("url", new Param("url", "query", true, "string", List.of(), "csv"))), List.of("application/json")));
+        operations.put("bbb-regions", new Operation("bbb-regions", "GET", "/bbb/regions", Map.of(), List.of("application/json")));
         operations.put("bbb-scamtracker-search", new Operation("bbb-scamtracker-search", "GET", "/bbb/scamtracker/search", Map.ofEntries(Map.entry("query", new Param("query", "query", false, "string", List.of(), "csv")), Map.entry("scam_type", new Param("scam_type", "query", false, "string", List.of("Advance Fee Loan", "Bank/Credit Card Company Imposter", "Business Email Compromise", "Charity", "Counterfeit Product", "COVID-19", "Credit Cards", "Credit Repair/Debt Relief", "CryptoCurrency", "Debt Collections", "Employment", "Fake Check/Money Order", "Fake Invoice/Supplier Bill", "Family/Friend Emergency", "Foreign Money Exchange", "Government Agency Imposter", "Government Grant", "Healthcare/Medicaid/Medicare", "Home Improvement", "Identity Theft", "Investment", "Moving", "Online Purchase", "Other", "Phishing", "Rental", "Retail Business", "Romance", "Scholarship", "Sweepstakes/Lottery/Prizes", "Tax Collection", "Tech Support", "Travel/Vacation/Timeshare", "Utility", "Vanity Award", "Worthless Problem-solving Service", "Yellow Pages/Directories"), "csv")), Map.entry("state", new Param("state", "query", false, "string", List.of(), "csv")), Map.entry("scammer_state", new Param("scammer_state", "query", false, "string", List.of(), "csv")), Map.entry("date_from", new Param("date_from", "query", false, "string", List.of(), "csv")), Map.entry("date_to", new Param("date_to", "query", false, "string", List.of(), "csv")), Map.entry("min_dollars_lost", new Param("min_dollars_lost", "query", false, "integer", List.of(), "csv")), Map.entry("max_dollars_lost", new Param("max_dollars_lost", "query", false, "integer", List.of(), "csv")), Map.entry("page", new Param("page", "query", false, "integer", List.of(), "csv"))), List.of("application/json")));
         operations.put("bbb-scamtracker-state-stats", new Operation("bbb-scamtracker-state-stats", "GET", "/bbb/scamtracker/state-stats", Map.ofEntries(Map.entry("period", new Param("period", "query", false, "string", List.of("30", "90", "365", "all"), "csv"))), List.of("application/json")));
         operations.put("bbb-scamtracker-detail", new Operation("bbb-scamtracker-detail", "GET", "/bbb/scamtracker/{id}", Map.ofEntries(Map.entry("id", new Param("id", "path", true, "string", List.of(), "csv"))), List.of("application/json")));
-        operations.put("bbb-search", new Operation("bbb-search", "GET", "/bbb/search", Map.ofEntries(Map.entry("query", new Param("query", "query", true, "string", List.of(), "csv")), Map.entry("location", new Param("location", "query", true, "string", List.of(), "csv")), Map.entry("page", new Param("page", "query", false, "integer", List.of(), "csv"))), List.of("application/json")));
+        operations.put("bbb-search", new Operation("bbb-search", "GET", "/bbb/search", Map.ofEntries(Map.entry("query", new Param("query", "query", true, "string", List.of(), "csv")), Map.entry("location", new Param("location", "query", true, "string", List.of(), "csv")), Map.entry("page", new Param("page", "query", false, "integer", List.of(), "csv")), Map.entry("country", new Param("country", "query", false, "string", List.of("USA", "CAN"), "csv")), Map.entry("sort", new Param("sort", "query", false, "string", List.of("Relevance", "Distance", "Rating", "AToZ", "ZToA"), "csv")), Map.entry("distance", new Param("distance", "query", false, "string", List.of("5", "10", "25", "50", "100"), "csv")), Map.entry("rating", new Param("rating", "query", false, "array", List.of("A", "B", "C", "D", "F"), "multi")), Map.entry("category_id", new Param("category_id", "query", false, "array", List.of(), "multi")), Map.entry("state", new Param("state", "query", false, "array", List.of(), "multi")), Map.entry("accredited", new Param("accredited", "query", false, "boolean", List.of(), "csv")), Map.entry("get_quote", new Param("get_quote", "query", false, "boolean", List.of(), "csv")), Map.entry("service_area", new Param("service_area", "query", false, "boolean", List.of(), "csv"))), List.of("application/json")));
+        operations.put("bbb-search-filters", new Operation("bbb-search-filters", "GET", "/bbb/search/filters", Map.ofEntries(Map.entry("query", new Param("query", "query", false, "string", List.of(), "csv")), Map.entry("location", new Param("location", "query", false, "string", List.of(), "csv")), Map.entry("category_url", new Param("category_url", "query", false, "string", List.of(), "csv")), Map.entry("country", new Param("country", "query", false, "string", List.of("USA", "CAN"), "csv")), Map.entry("page", new Param("page", "query", false, "integer", List.of(), "csv")), Map.entry("sort", new Param("sort", "query", false, "string", List.of("Relevance", "Distance", "Rating", "AToZ", "ZToA"), "csv")), Map.entry("distance", new Param("distance", "query", false, "string", List.of("5", "10", "25", "50", "100"), "csv")), Map.entry("rating", new Param("rating", "query", false, "array", List.of("A", "B", "C", "D", "F"), "multi")), Map.entry("category_id", new Param("category_id", "query", false, "array", List.of(), "multi")), Map.entry("state", new Param("state", "query", false, "array", List.of(), "multi")), Map.entry("accredited", new Param("accredited", "query", false, "boolean", List.of(), "csv")), Map.entry("get_quote", new Param("get_quote", "query", false, "boolean", List.of(), "csv")), Map.entry("service_area", new Param("service_area", "query", false, "boolean", List.of(), "csv"))), List.of("application/json")));
         OPERATIONS = Collections.unmodifiableMap(operations);
     }
 
@@ -137,15 +151,22 @@ public final class Client implements AutoCloseable {
         }
     }
 
+    public Object article(Map<String, ?> params) { return request("bbb-article", params); }
     public Object business(Map<String, ?> params) { return request("bbb-business", params); }
     public Object businessComplaints(Map<String, ?> params) { return request("bbb-business-complaints", params); }
     public Object businessMoreInfo(Map<String, ?> params) { return request("bbb-business-more-info", params); }
     public Object businessReviews(Map<String, ?> params) { return request("bbb-business-reviews", params); }
     public Object category(Map<String, ?> params) { return request("bbb-category", params); }
+    public Object localBbb(Map<String, ?> params) { return request("bbb-local-bbb", params); }
+    public Object localBbbs(Map<String, ?> params) { return request("bbb-local-bbbs", params); }
+    public Object news(Map<String, ?> params) { return request("bbb-news", params); }
+    public Object newsTopics(Map<String, ?> params) { return request("bbb-news-topics", params); }
+    public Object regions(Map<String, ?> params) { return request("bbb-regions", params); }
     public Object scamtrackerSearch(Map<String, ?> params) { return request("bbb-scamtracker-search", params); }
     public Object scamtrackerStateStats(Map<String, ?> params) { return request("bbb-scamtracker-state-stats", params); }
     public Object scamtrackerDetail(Map<String, ?> params) { return request("bbb-scamtracker-detail", params); }
     public Object search(Map<String, ?> params) { return request("bbb-search", params); }
+    public Object searchFilters(Map<String, ?> params) { return request("bbb-search-filters", params); }
 
     private static String acceptHeader(Operation operation) {
         return operation.produces().isEmpty() ? "application/json" : String.join(", ", operation.produces());

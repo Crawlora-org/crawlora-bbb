@@ -438,6 +438,66 @@
       },
       "type": "object"
     },
+    "bbb.SearchFilterValue": {
+      "properties": {
+        "label": {
+          "example": "Plumber",
+          "type": "string"
+        },
+        "value": {
+          "example": "10113-000",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbb.SearchFiltersResponse": {
+      "properties": {
+        "categories": {
+          "items": {
+            "$ref": "#/definitions/bbb.SearchFilterValue"
+          },
+          "type": "array"
+        },
+        "country": {
+          "enum": [
+            "USA",
+            "CAN"
+          ],
+          "example": "USA",
+          "type": "string"
+        },
+        "location": {
+          "example": "Austin, TX",
+          "type": "string"
+        },
+        "page": {
+          "example": 1,
+          "type": "integer"
+        },
+        "query": {
+          "example": "plumber",
+          "type": "string"
+        },
+        "sorts": {
+          "items": {
+            "$ref": "#/definitions/bbb.SearchSortOption"
+          },
+          "type": "array"
+        },
+        "states": {
+          "items": {
+            "$ref": "#/definitions/bbb.SearchFilterValue"
+          },
+          "type": "array"
+        },
+        "total_results": {
+          "example": 2544,
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
     "bbb.SearchResponse": {
       "properties": {
         "location": {
@@ -470,6 +530,30 @@
         "total_results": {
           "example": 2514,
           "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "bbb.SearchSortOption": {
+      "properties": {
+        "is_active": {
+          "example": false,
+          "type": "boolean"
+        },
+        "label": {
+          "example": "Distance",
+          "type": "string"
+        },
+        "value": {
+          "enum": [
+            "Relevance",
+            "Distance",
+            "Rating",
+            "AToZ",
+            "ZToA"
+          ],
+          "example": "Distance",
+          "type": "string"
         }
       },
       "type": "object"
@@ -554,6 +638,22 @@
       },
       "type": "object"
     },
+    "bbb.searchFiltersResponseDoc": {
+      "properties": {
+        "code": {
+          "example": 200,
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/bbb.SearchFiltersResponse"
+        },
+        "msg": {
+          "example": "OK",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "bbb.searchResponseDoc": {
       "properties": {
         "code": {
@@ -566,6 +666,486 @@
         "msg": {
           "example": "OK",
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbbdirectory.BBBEvent": {
+      "properties": {
+        "ends_at": {
+          "type": "string"
+        },
+        "starts_at": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbbdirectory.CountryRegions": {
+      "properties": {
+        "code": {
+          "example": "us",
+          "type": "string"
+        },
+        "name": {
+          "example": "United States",
+          "type": "string"
+        },
+        "regions": {
+          "items": {
+            "$ref": "#/definitions/bbbdirectory.RegionOption"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "bbbdirectory.LocalBBBChapter": {
+      "properties": {
+        "id": {
+          "example": "0825",
+          "type": "string"
+        },
+        "name": {
+          "example": "BBB Heart of Texas",
+          "type": "string"
+        },
+        "offices": {
+          "items": {
+            "$ref": "#/definitions/bbbdirectory.Office"
+          },
+          "type": "array"
+        },
+        "open_to_public": {
+          "example": true,
+          "type": "boolean"
+        },
+        "url": {
+          "example": "https://www.bbb.org/local-bbb/bbb-serving-the-heart-of-texas",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbbdirectory.LocalBBBResponse": {
+      "properties": {
+        "about": {
+          "type": "string"
+        },
+        "events": {
+          "items": {
+            "$ref": "#/definitions/bbbdirectory.BBBEvent"
+          },
+          "type": "array"
+        },
+        "id": {
+          "example": "0825",
+          "type": "string"
+        },
+        "languages": {
+          "example": [
+            "English",
+            "Spanish"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "name": {
+          "example": "BBB Heart of Texas",
+          "type": "string"
+        },
+        "offices": {
+          "items": {
+            "$ref": "#/definitions/bbbdirectory.Office"
+          },
+          "type": "array"
+        },
+        "open_to_public": {
+          "example": true,
+          "type": "boolean"
+        },
+        "service_territory": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "tagline": {
+          "type": "string"
+        },
+        "url": {
+          "example": "https://www.bbb.org/local-bbb/bbb-serving-the-heart-of-texas",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbbdirectory.LocalBBBsResponse": {
+      "properties": {
+        "chapters": {
+          "items": {
+            "$ref": "#/definitions/bbbdirectory.LocalBBBChapter"
+          },
+          "type": "array"
+        },
+        "country": {
+          "example": "us",
+          "type": "string"
+        },
+        "region": {
+          "$ref": "#/definitions/bbbdirectory.RegionOption"
+        }
+      },
+      "type": "object"
+    },
+    "bbbdirectory.Office": {
+      "properties": {
+        "address": {
+          "$ref": "#/definitions/bbbdirectory.OfficeAddress"
+        },
+        "contact": {
+          "$ref": "#/definitions/bbbdirectory.OfficeContact"
+        },
+        "formatted_address": {
+          "example": "600 Beacon Parkway West, Suite 900, Birmingham, AL 35209",
+          "type": "string"
+        },
+        "is_primary": {
+          "example": true,
+          "type": "boolean"
+        },
+        "jurisdictions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "office_hours": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "phone_hours": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "type": {
+          "example": "Primary",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbbdirectory.OfficeAddress": {
+      "properties": {
+        "city": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "county": {
+          "type": "string"
+        },
+        "line1": {
+          "type": "string"
+        },
+        "line2": {
+          "type": "string"
+        },
+        "location_name": {
+          "type": "string"
+        },
+        "postal_code": {
+          "type": "string"
+        },
+        "state_province": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbbdirectory.OfficeContact": {
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "fax_number": {
+          "type": "string"
+        },
+        "phone_number": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbbdirectory.RegionOption": {
+      "properties": {
+        "code": {
+          "example": "tx",
+          "type": "string"
+        },
+        "name": {
+          "example": "Texas",
+          "type": "string"
+        },
+        "url": {
+          "example": "https://www.bbb.org/about/find-your-local-bbb/us/tx",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbbdirectory.RegionsResponse": {
+      "properties": {
+        "countries": {
+          "items": {
+            "$ref": "#/definitions/bbbdirectory.CountryRegions"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "bbbdirectory.localBBBResponseDoc": {
+      "properties": {
+        "code": {
+          "example": 200,
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/bbbdirectory.LocalBBBResponse"
+        },
+        "msg": {
+          "example": "OK",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbbdirectory.localBBBsResponseDoc": {
+      "properties": {
+        "code": {
+          "example": 200,
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/bbbdirectory.LocalBBBsResponse"
+        },
+        "msg": {
+          "example": "OK",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbbdirectory.regionsResponseDoc": {
+      "properties": {
+        "code": {
+          "example": 200,
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/bbbdirectory.RegionsResponse"
+        },
+        "msg": {
+          "example": "OK",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbbnews.ArticleResponse": {
+      "properties": {
+        "authors": {
+          "items": {
+            "$ref": "#/definitions/bbbnews.Author"
+          },
+          "type": "array"
+        },
+        "body": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "image": {
+          "$ref": "#/definitions/bbbnews.Image"
+        },
+        "links": {
+          "items": {
+            "$ref": "#/definitions/bbbnews.Link"
+          },
+          "type": "array"
+        },
+        "modified_at": {
+          "type": "string"
+        },
+        "published_at": {
+          "type": "string"
+        },
+        "source_url": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "topics": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbbnews.Author": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbbnews.Image": {
+      "properties": {
+        "alt_text": {
+          "type": "string"
+        },
+        "caption": {
+          "type": "string"
+        },
+        "credit": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbbnews.Link": {
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbbnews.NewsItem": {
+      "properties": {
+        "event_start_date": {
+          "type": "string"
+        },
+        "event_url": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "image": {
+          "$ref": "#/definitions/bbbnews.Image"
+        },
+        "modified_date": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbbnews.NewsResponse": {
+      "properties": {
+        "country": {
+          "type": "string"
+        },
+        "items": {
+          "items": {
+            "$ref": "#/definitions/bbbnews.NewsItem"
+          },
+          "type": "array"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "page_size": {
+          "type": "integer"
+        },
+        "source_url": {
+          "type": "string"
+        },
+        "topic": {
+          "type": "string"
+        },
+        "total": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "bbbnews.Topic": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbbnews.TopicsResponse": {
+      "properties": {
+        "country": {
+          "type": "string"
+        },
+        "source_url": {
+          "type": "string"
+        },
+        "topics": {
+          "items": {
+            "$ref": "#/definitions/bbbnews.Topic"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -871,6 +1451,72 @@
     }
   },
   "paths": {
+    "/bbb/article": {
+      "get": {
+        "description": "Returns published BBB article metadata, author names, body text, and useful links from a canonical public article URL.",
+        "operationId": "bbb-article",
+        "parameters": [
+          {
+            "description": "Canonical BBB article URL",
+            "in": "query",
+            "name": "url",
+            "required": true,
+            "type": "string",
+            "x-example": "https://www.bbb.org/article/news-releases/34935-bbb-scam-alert-dont-be-fooled-by-free-gas-and-grocery-card-postcards"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/app.Response"
+                },
+                {
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/bbbnews.ArticleResponse"
+                    }
+                  },
+                  "type": "object"
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Get a BBB article",
+        "tags": [
+          "bbb"
+        ]
+      }
+    },
     "/bbb/business": {
       "get": {
         "consumes": [
@@ -1128,7 +1774,7 @@
         "consumes": [
           "application/json"
         ],
-        "description": "Browses bbb.org businesses by category and location directly, without a free-text search query. Returns the same normalized business-result shape as bbb-search. Credential-free public Better Business Bureau data.",
+        "description": "Browses bbb.org businesses by category and location directly, without a free-text search query. Returns the same normalized business-result shape as bbb-search. Optional sort and filter parameters use the same values as bbb-search; query-scoped category and state/province values come from bbb-search-filters. Credential-free public Better Business Bureau data.",
         "operationId": "bbb-category",
         "parameters": [
           {
@@ -1144,6 +1790,87 @@
             "in": "query",
             "name": "page",
             "type": "integer"
+          },
+          {
+            "description": "Sort order",
+            "enum": [
+              "Relevance",
+              "Distance",
+              "Rating",
+              "AToZ",
+              "ZToA"
+            ],
+            "in": "query",
+            "name": "sort",
+            "type": "string"
+          },
+          {
+            "description": "Maximum distance in miles; omit for all distances",
+            "enum": [
+              "5",
+              "10",
+              "25",
+              "50",
+              "100"
+            ],
+            "in": "query",
+            "name": "distance",
+            "type": "string"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "One or more BBB rating buckets",
+            "in": "query",
+            "items": {
+              "enum": [
+                "A",
+                "B",
+                "C",
+                "D",
+                "F"
+              ],
+              "type": "string"
+            },
+            "name": "rating",
+            "type": "array"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Query-scoped category ID from bbb-search-filters",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "category_id",
+            "type": "array"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Query-scoped state or province code from bbb-search-filters",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "state",
+            "type": "array"
+          },
+          {
+            "description": "Only BBB-accredited businesses",
+            "in": "query",
+            "name": "accredited",
+            "type": "boolean"
+          },
+          {
+            "description": "Only businesses offering quote requests",
+            "in": "query",
+            "name": "get_quote",
+            "type": "boolean"
+          },
+          {
+            "description": "Only businesses serving the searched area",
+            "in": "query",
+            "name": "service_area",
+            "type": "boolean"
           }
         ],
         "produces": [
@@ -1181,6 +1908,311 @@
           }
         ],
         "summary": "Browse a Better Business Bureau category",
+        "tags": [
+          "bbb"
+        ]
+      }
+    },
+    "/bbb/local-bbb": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Returns public chapter profile details including office locations and hours, service territory, supported languages, and upcoming public events. Use a canonical chapter URL from bbb-local-bbbs or a business record's local_bbb_url. Credential-free public Better Business Bureau data.",
+        "operationId": "bbb-local-bbb",
+        "parameters": [
+          {
+            "description": "Canonical BBB chapter URL from bbb-local-bbbs or a business record's local_bbb_url",
+            "in": "query",
+            "name": "url",
+            "required": true,
+            "type": "string",
+            "x-example": "https://www.bbb.org/local-bbb/bbb-serving-the-heart-of-texas"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/bbbdirectory.localBBBResponseDoc"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Get a local BBB chapter profile",
+        "tags": [
+          "bbb"
+        ]
+      }
+    },
+    "/bbb/local-bbbs": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Lists every chapter and public office shown on BBB's directory page for a region discovered by bbb-regions. Office addresses can be outside the selected service region. Credential-free public Better Business Bureau data.",
+        "operationId": "bbb-local-bbbs",
+        "parameters": [
+          {
+            "description": "Country code from bbb-regions",
+            "enum": [
+              "us",
+              "ca"
+            ],
+            "in": "query",
+            "name": "country",
+            "required": true,
+            "type": "string",
+            "x-example": "us"
+          },
+          {
+            "description": "Two-letter region code from bbb-regions",
+            "in": "query",
+            "name": "region",
+            "required": true,
+            "type": "string",
+            "x-example": "tx"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/bbbdirectory.localBBBsResponseDoc"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "List local BBB chapters serving a region",
+        "tags": [
+          "bbb"
+        ]
+      }
+    },
+    "/bbb/news": {
+      "get": {
+        "description": "Returns one page of public BBB newsroom stories from a canonical US or Canada newsroom URL. Event dates and links are preserved when present.",
+        "operationId": "bbb-news",
+        "parameters": [
+          {
+            "description": "Canonical BBB newsroom or topic page URL; include page=N for pagination",
+            "in": "query",
+            "name": "url",
+            "required": true,
+            "type": "string",
+            "x-example": "https://www.bbb.org/us/news/scams?page=2"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/app.Response"
+                },
+                {
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/bbbnews.NewsResponse"
+                    }
+                  },
+                  "type": "object"
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Get BBB newsroom stories",
+        "tags": [
+          "bbb"
+        ]
+      }
+    },
+    "/bbb/news/topics": {
+      "get": {
+        "description": "Returns the complete topic navigation shown by a US or Canada BBB newsroom page, including its active topic.",
+        "operationId": "bbb-news-topics",
+        "parameters": [
+          {
+            "description": "Canonical BBB newsroom page URL",
+            "in": "query",
+            "name": "url",
+            "required": true,
+            "type": "string",
+            "x-example": "https://www.bbb.org/us/news"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/app.Response"
+                },
+                {
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/bbbnews.TopicsResponse"
+                    }
+                  },
+                  "type": "object"
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "List BBB newsroom topics",
+        "tags": [
+          "bbb"
+        ]
+      }
+    },
+    "/bbb/regions": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Returns the complete current country and region list from BBB's public local directory. Use the returned region code with bbb-local-bbbs. Credential-free public Better Business Bureau data.",
+        "operationId": "bbb-regions",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/bbbdirectory.regionsResponseDoc"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "List Better Business Bureau directory regions",
         "tags": [
           "bbb"
         ]
@@ -1464,7 +2496,7 @@
         "consumes": [
           "application/json"
         ],
-        "description": "Searches bbb.org for businesses by name or category near a location. Returns each business's BBB rating letter grade, accreditation status, categories, service areas, contact info, and profile URL. Credential-free public Better Business Bureau data.",
+        "description": "Searches bbb.org for businesses by name or category near a location. Returns each business's BBB rating letter grade, accreditation status, categories, service areas, contact info, and profile URL. Category IDs and state/province codes are query-scoped; call bbb-search-filters to discover values for this query and location. Credential-free public Better Business Bureau data.",
         "operationId": "bbb-search",
         "parameters": [
           {
@@ -1488,6 +2520,98 @@
             "in": "query",
             "name": "page",
             "type": "integer"
+          },
+          {
+            "default": "USA",
+            "description": "BBB country code",
+            "enum": [
+              "USA",
+              "CAN"
+            ],
+            "in": "query",
+            "name": "country",
+            "type": "string"
+          },
+          {
+            "description": "Sort order",
+            "enum": [
+              "Relevance",
+              "Distance",
+              "Rating",
+              "AToZ",
+              "ZToA"
+            ],
+            "in": "query",
+            "name": "sort",
+            "type": "string"
+          },
+          {
+            "description": "Maximum distance in miles; omit for all distances",
+            "enum": [
+              "5",
+              "10",
+              "25",
+              "50",
+              "100"
+            ],
+            "in": "query",
+            "name": "distance",
+            "type": "string"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "One or more BBB rating buckets",
+            "in": "query",
+            "items": {
+              "enum": [
+                "A",
+                "B",
+                "C",
+                "D",
+                "F"
+              ],
+              "type": "string"
+            },
+            "name": "rating",
+            "type": "array"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Query-scoped category ID from bbb-search-filters",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "category_id",
+            "type": "array"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Query-scoped state or province code from bbb-search-filters",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "state",
+            "type": "array"
+          },
+          {
+            "description": "Only BBB-accredited businesses",
+            "in": "query",
+            "name": "accredited",
+            "type": "boolean"
+          },
+          {
+            "description": "Only businesses offering quote requests",
+            "in": "query",
+            "name": "get_quote",
+            "type": "boolean"
+          },
+          {
+            "description": "Only businesses serving the searched area",
+            "in": "query",
+            "name": "service_area",
+            "type": "boolean"
           }
         ],
         "produces": [
@@ -1525,6 +2649,174 @@
           }
         ],
         "summary": "Search Better Business Bureau businesses",
+        "tags": [
+          "bbb"
+        ]
+      }
+    },
+    "/bbb/search/filters": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Returns the live sort, category, and state/province values BBB currently advertises for one context. Supply query and location for text search, or category_url for the exact category-browse context; do not combine these modes. Category IDs and state/province codes are query-scoped; call this endpoint again when the search context changes. Static accepted values are country USA or CAN; sort Relevance, Distance, Rating, AToZ, or ZToA; distance 5, 10, 25, 50, or 100 miles; rating A, B, C, D, or F. Credential-free public Better Business Bureau data.",
+        "operationId": "bbb-search-filters",
+        "parameters": [
+          {
+            "description": "Business name or category/service keyword; use with location when category_url is omitted",
+            "in": "query",
+            "name": "query",
+            "type": "string",
+            "x-example": "plumber"
+          },
+          {
+            "description": "City and state/province or ZIP code; use with query when category_url is omitted",
+            "in": "query",
+            "name": "location",
+            "type": "string",
+            "x-example": "Austin, TX"
+          },
+          {
+            "description": "BBB category browse URL; use instead of query and location",
+            "in": "query",
+            "name": "category_url",
+            "type": "string",
+            "x-example": "https://www.bbb.org/us/tx/austin/category/plumber"
+          },
+          {
+            "default": "USA",
+            "description": "BBB country code",
+            "enum": [
+              "USA",
+              "CAN"
+            ],
+            "in": "query",
+            "name": "country",
+            "type": "string"
+          },
+          {
+            "description": "Result page, default 1",
+            "in": "query",
+            "name": "page",
+            "type": "integer"
+          },
+          {
+            "description": "Sort order",
+            "enum": [
+              "Relevance",
+              "Distance",
+              "Rating",
+              "AToZ",
+              "ZToA"
+            ],
+            "in": "query",
+            "name": "sort",
+            "type": "string"
+          },
+          {
+            "description": "Maximum distance in miles; omit for all distances",
+            "enum": [
+              "5",
+              "10",
+              "25",
+              "50",
+              "100"
+            ],
+            "in": "query",
+            "name": "distance",
+            "type": "string"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Selected rating values",
+            "in": "query",
+            "items": {
+              "enum": [
+                "A",
+                "B",
+                "C",
+                "D",
+                "F"
+              ],
+              "type": "string"
+            },
+            "name": "rating",
+            "type": "array"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Selected category IDs previously returned for this search context",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "category_id",
+            "type": "array"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Selected state/province codes previously returned for this search context",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "state",
+            "type": "array"
+          },
+          {
+            "description": "Only BBB-accredited businesses",
+            "in": "query",
+            "name": "accredited",
+            "type": "boolean"
+          },
+          {
+            "description": "Only businesses offering quote requests",
+            "in": "query",
+            "name": "get_quote",
+            "type": "boolean"
+          },
+          {
+            "description": "Only businesses serving the searched area",
+            "in": "query",
+            "name": "service_area",
+            "type": "boolean"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/bbb.searchFiltersResponseDoc"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Discover Better Business Bureau search filters",
         "tags": [
           "bbb"
         ]

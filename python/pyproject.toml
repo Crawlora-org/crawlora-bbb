@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "crawlora-bbb"
-version = "0.1.4"
+version = "0.2.0"
 description = "Typed Better Business Bureau client for the Crawlora hosted API"
 readme = "README.md"
 requires-python = ">=3.10"

@@ -34,6 +34,34 @@ ModelAppResponse = TypedDict('ModelAppResponse', {
     'msg': NotRequired[Any],
 }, total=False)
 
+ModelBbbSearchFiltersResponseDoc = TypedDict('ModelBbbSearchFiltersResponseDoc', {
+    'code': NotRequired[int],
+    'data': NotRequired[ModelBbbSearchFiltersResponse],
+    'msg': NotRequired[str],
+}, total=False)
+
+ModelBbbSearchFiltersResponse = TypedDict('ModelBbbSearchFiltersResponse', {
+    'categories': NotRequired[list[ModelBbbSearchFilterValue]],
+    'country': NotRequired[Literal['USA', 'CAN']],
+    'location': NotRequired[str],
+    'page': NotRequired[int],
+    'query': NotRequired[str],
+    'sorts': NotRequired[list[ModelBbbSearchSortOption]],
+    'states': NotRequired[list[ModelBbbSearchFilterValue]],
+    'total_results': NotRequired[int],
+}, total=False)
+
+ModelBbbSearchFilterValue = TypedDict('ModelBbbSearchFilterValue', {
+    'label': NotRequired[str],
+    'value': NotRequired[str],
+}, total=False)
+
+ModelBbbSearchSortOption = TypedDict('ModelBbbSearchSortOption', {
+    'is_active': NotRequired[bool],
+    'label': NotRequired[str],
+    'value': NotRequired[Literal['Relevance', 'Distance', 'Rating', 'AToZ', 'ZToA']],
+}, total=False)
+
 ModelBbbSearchResponseDoc = TypedDict('ModelBbbSearchResponseDoc', {
     'code': NotRequired[int],
     'data': NotRequired[ModelBbbSearchResponse],
@@ -156,6 +184,144 @@ ModelBbbscamtrackerScamResult = TypedDict('ModelBbbscamtrackerScamResult', {
     'id': NotRequired[str],
     'url': NotRequired[str],
     'victim_location': NotRequired[str],
+}, total=False)
+
+ModelBbbdirectoryRegionsResponseDoc = TypedDict('ModelBbbdirectoryRegionsResponseDoc', {
+    'code': NotRequired[int],
+    'data': NotRequired[ModelBbbdirectoryRegionsResponse],
+    'msg': NotRequired[str],
+}, total=False)
+
+ModelBbbdirectoryRegionsResponse = TypedDict('ModelBbbdirectoryRegionsResponse', {
+    'countries': NotRequired[list[ModelBbbdirectoryCountryRegions]],
+}, total=False)
+
+ModelBbbdirectoryCountryRegions = TypedDict('ModelBbbdirectoryCountryRegions', {
+    'code': NotRequired[str],
+    'name': NotRequired[str],
+    'regions': NotRequired[list[ModelBbbdirectoryRegionOption]],
+}, total=False)
+
+ModelBbbdirectoryRegionOption = TypedDict('ModelBbbdirectoryRegionOption', {
+    'code': NotRequired[str],
+    'name': NotRequired[str],
+    'url': NotRequired[str],
+}, total=False)
+
+ModelBbbnewsTopicsResponse = TypedDict('ModelBbbnewsTopicsResponse', {
+    'country': NotRequired[str],
+    'source_url': NotRequired[str],
+    'topics': NotRequired[list[ModelBbbnewsTopic]],
+}, total=False)
+
+ModelBbbnewsTopic = TypedDict('ModelBbbnewsTopic', {
+    'name': NotRequired[str],
+    'slug': NotRequired[str],
+    'url': NotRequired[str],
+}, total=False)
+
+ModelBbbnewsNewsResponse = TypedDict('ModelBbbnewsNewsResponse', {
+    'country': NotRequired[str],
+    'items': NotRequired[list[ModelBbbnewsNewsItem]],
+    'page': NotRequired[int],
+    'page_size': NotRequired[int],
+    'source_url': NotRequired[str],
+    'topic': NotRequired[str],
+    'total': NotRequired[int],
+}, total=False)
+
+ModelBbbnewsNewsItem = TypedDict('ModelBbbnewsNewsItem', {
+    'event_start_date': NotRequired[str],
+    'event_url': NotRequired[str],
+    'id': NotRequired[str],
+    'image': NotRequired[ModelBbbnewsImage],
+    'modified_date': NotRequired[str],
+    'summary': NotRequired[str],
+    'title': NotRequired[str],
+    'type': NotRequired[str],
+    'url': NotRequired[str],
+}, total=False)
+
+ModelBbbnewsImage = TypedDict('ModelBbbnewsImage', {
+    'alt_text': NotRequired[str],
+    'caption': NotRequired[str],
+    'credit': NotRequired[str],
+    'url': NotRequired[str],
+}, total=False)
+
+ModelBbbdirectoryLocalBbbsResponseDoc = TypedDict('ModelBbbdirectoryLocalBbbsResponseDoc', {
+    'code': NotRequired[int],
+    'data': NotRequired[ModelBbbdirectoryLocalBbbsResponse],
+    'msg': NotRequired[str],
+}, total=False)
+
+ModelBbbdirectoryLocalBbbsResponse = TypedDict('ModelBbbdirectoryLocalBbbsResponse', {
+    'chapters': NotRequired[list[ModelBbbdirectoryLocalBbbchapter]],
+    'country': NotRequired[str],
+    'region': NotRequired[ModelBbbdirectoryRegionOption],
+}, total=False)
+
+ModelBbbdirectoryLocalBbbchapter = TypedDict('ModelBbbdirectoryLocalBbbchapter', {
+    'id': NotRequired[str],
+    'name': NotRequired[str],
+    'offices': NotRequired[list[ModelBbbdirectoryOffice]],
+    'open_to_public': NotRequired[bool],
+    'url': NotRequired[str],
+}, total=False)
+
+ModelBbbdirectoryOffice = TypedDict('ModelBbbdirectoryOffice', {
+    'address': NotRequired[ModelBbbdirectoryOfficeAddress],
+    'contact': NotRequired[ModelBbbdirectoryOfficeContact],
+    'formatted_address': NotRequired[str],
+    'is_primary': NotRequired[bool],
+    'jurisdictions': NotRequired[list[str]],
+    'office_hours': NotRequired[list[str]],
+    'phone_hours': NotRequired[list[str]],
+    'type': NotRequired[str],
+}, total=False)
+
+ModelBbbdirectoryOfficeContact = TypedDict('ModelBbbdirectoryOfficeContact', {
+    'email': NotRequired[str],
+    'fax_number': NotRequired[str],
+    'phone_number': NotRequired[str],
+}, total=False)
+
+ModelBbbdirectoryOfficeAddress = TypedDict('ModelBbbdirectoryOfficeAddress', {
+    'city': NotRequired[str],
+    'country': NotRequired[str],
+    'county': NotRequired[str],
+    'line1': NotRequired[str],
+    'line2': NotRequired[str],
+    'location_name': NotRequired[str],
+    'postal_code': NotRequired[str],
+    'state_province': NotRequired[str],
+}, total=False)
+
+ModelBbbdirectoryLocalBbbresponseDoc = TypedDict('ModelBbbdirectoryLocalBbbresponseDoc', {
+    'code': NotRequired[int],
+    'data': NotRequired[ModelBbbdirectoryLocalBbbresponse],
+    'msg': NotRequired[str],
+}, total=False)
+
+ModelBbbdirectoryLocalBbbresponse = TypedDict('ModelBbbdirectoryLocalBbbresponse', {
+    'about': NotRequired[str],
+    'events': NotRequired[list[ModelBbbdirectoryBbbevent]],
+    'id': NotRequired[str],
+    'languages': NotRequired[list[str]],
+    'name': NotRequired[str],
+    'offices': NotRequired[list[ModelBbbdirectoryOffice]],
+    'open_to_public': NotRequired[bool],
+    'service_territory': NotRequired[list[str]],
+    'tagline': NotRequired[str],
+    'url': NotRequired[str],
+}, total=False)
+
+ModelBbbdirectoryBbbevent = TypedDict('ModelBbbdirectoryBbbevent', {
+    'ends_at': NotRequired[str],
+    'starts_at': NotRequired[str],
+    'summary': NotRequired[str],
+    'title': NotRequired[str],
+    'url': NotRequired[str],
 }, total=False)
 
 ModelBbbCategoryResponseDoc = TypedDict('ModelBbbCategoryResponseDoc', {
@@ -298,6 +464,39 @@ ModelBbbBusinessHoursDay = TypedDict('ModelBbbBusinessHoursDay', {
     'hours': NotRequired[str],
 }, total=False)
 
+ModelBbbnewsArticleResponse = TypedDict('ModelBbbnewsArticleResponse', {
+    'authors': NotRequired[list[ModelBbbnewsAuthor]],
+    'body': NotRequired[str],
+    'id': NotRequired[str],
+    'image': NotRequired[ModelBbbnewsImage],
+    'links': NotRequired[list[ModelBbbnewsLink]],
+    'modified_at': NotRequired[str],
+    'published_at': NotRequired[str],
+    'source_url': NotRequired[str],
+    'summary': NotRequired[str],
+    'title': NotRequired[str],
+    'topics': NotRequired[list[str]],
+    'type': NotRequired[str],
+}, total=False)
+
+ModelBbbnewsLink = TypedDict('ModelBbbnewsLink', {
+    'text': NotRequired[str],
+    'url': NotRequired[str],
+}, total=False)
+
+ModelBbbnewsAuthor = TypedDict('ModelBbbnewsAuthor', {
+    'name': NotRequired[str],
+    'url': NotRequired[str],
+}, total=False)
+
+BbbArticleResponse = Any
+BbbArticleParams = TypedDict('BbbArticleParams', {
+    '_response_type': NotRequired[ResponseType],
+    '_timeout': NotRequired[float],
+    '_headers': NotRequired[Mapping[str, str]],
+    'url': Required[str],
+}, total=False)
+
 BbbBusinessResponse = ModelBbbBusinessResponseDoc
 BbbBusinessParams = TypedDict('BbbBusinessParams', {
     '_response_type': NotRequired[ResponseType],
@@ -338,6 +537,54 @@ BbbCategoryParams = TypedDict('BbbCategoryParams', {
     '_headers': NotRequired[Mapping[str, str]],
     'url': Required[str],
     'page': NotRequired[int],
+    'sort': NotRequired[Literal['Relevance', 'Distance', 'Rating', 'AToZ', 'ZToA']],
+    'distance': NotRequired[Literal['5', '10', '25', '50', '100']],
+    'rating': NotRequired[list[Literal['A', 'B', 'C', 'D', 'F']]],
+    'category_id': NotRequired[list[str]],
+    'state': NotRequired[list[str]],
+    'accredited': NotRequired[bool],
+    'get_quote': NotRequired[bool],
+    'service_area': NotRequired[bool],
+}, total=False)
+
+BbbLocalBbbResponse = ModelBbbdirectoryLocalBbbresponseDoc
+BbbLocalBbbParams = TypedDict('BbbLocalBbbParams', {
+    '_response_type': NotRequired[ResponseType],
+    '_timeout': NotRequired[float],
+    '_headers': NotRequired[Mapping[str, str]],
+    'url': Required[str],
+}, total=False)
+
+BbbLocalBbbsResponse = ModelBbbdirectoryLocalBbbsResponseDoc
+BbbLocalBbbsParams = TypedDict('BbbLocalBbbsParams', {
+    '_response_type': NotRequired[ResponseType],
+    '_timeout': NotRequired[float],
+    '_headers': NotRequired[Mapping[str, str]],
+    'country': Required[Literal['us', 'ca']],
+    'region': Required[str],
+}, total=False)
+
+BbbNewsResponse = Any
+BbbNewsParams = TypedDict('BbbNewsParams', {
+    '_response_type': NotRequired[ResponseType],
+    '_timeout': NotRequired[float],
+    '_headers': NotRequired[Mapping[str, str]],
+    'url': Required[str],
+}, total=False)
+
+BbbNewsTopicsResponse = Any
+BbbNewsTopicsParams = TypedDict('BbbNewsTopicsParams', {
+    '_response_type': NotRequired[ResponseType],
+    '_timeout': NotRequired[float],
+    '_headers': NotRequired[Mapping[str, str]],
+    'url': Required[str],
+}, total=False)
+
+BbbRegionsResponse = ModelBbbdirectoryRegionsResponseDoc
+BbbRegionsParams = TypedDict('BbbRegionsParams', {
+    '_response_type': NotRequired[ResponseType],
+    '_timeout': NotRequired[float],
+    '_headers': NotRequired[Mapping[str, str]],
 }, total=False)
 
 BbbScamtrackerSearchResponse = ModelBbbscamtrackerSearchResponseDoc
@@ -380,9 +627,44 @@ BbbSearchParams = TypedDict('BbbSearchParams', {
     'query': Required[str],
     'location': Required[str],
     'page': NotRequired[int],
+    'country': NotRequired[Literal['USA', 'CAN']],
+    'sort': NotRequired[Literal['Relevance', 'Distance', 'Rating', 'AToZ', 'ZToA']],
+    'distance': NotRequired[Literal['5', '10', '25', '50', '100']],
+    'rating': NotRequired[list[Literal['A', 'B', 'C', 'D', 'F']]],
+    'category_id': NotRequired[list[str]],
+    'state': NotRequired[list[str]],
+    'accredited': NotRequired[bool],
+    'get_quote': NotRequired[bool],
+    'service_area': NotRequired[bool],
+}, total=False)
+
+BbbSearchFiltersResponse = ModelBbbSearchFiltersResponseDoc
+BbbSearchFiltersParams = TypedDict('BbbSearchFiltersParams', {
+    '_response_type': NotRequired[ResponseType],
+    '_timeout': NotRequired[float],
+    '_headers': NotRequired[Mapping[str, str]],
+    'query': NotRequired[str],
+    'location': NotRequired[str],
+    'category_url': NotRequired[str],
+    'country': NotRequired[Literal['USA', 'CAN']],
+    'page': NotRequired[int],
+    'sort': NotRequired[Literal['Relevance', 'Distance', 'Rating', 'AToZ', 'ZToA']],
+    'distance': NotRequired[Literal['5', '10', '25', '50', '100']],
+    'rating': NotRequired[list[Literal['A', 'B', 'C', 'D', 'F']]],
+    'category_id': NotRequired[list[str]],
+    'state': NotRequired[list[str]],
+    'accredited': NotRequired[bool],
+    'get_quote': NotRequired[bool],
+    'service_area': NotRequired[bool],
 }, total=False)
 
 class BbbGroup:
+    @overload
+    def article(self, **params: Unpack[BbbArticleStreamParams]) -> BinaryIO: ...
+    @overload
+    def article(self, **params: Unpack[BbbArticleTextResponseParams]) -> str: ...
+    @overload
+    def article(self, **params: Unpack[BbbArticleDefaultParams]) -> BbbArticleResponse: ...
     @overload
     def business(self, **params: Unpack[BbbBusinessStreamParams]) -> BinaryIO: ...
     @overload
@@ -414,6 +696,36 @@ class BbbGroup:
     @overload
     def category(self, **params: Unpack[BbbCategoryDefaultParams]) -> BbbCategoryResponse: ...
     @overload
+    def local_bbb(self, **params: Unpack[BbbLocalBbbStreamParams]) -> BinaryIO: ...
+    @overload
+    def local_bbb(self, **params: Unpack[BbbLocalBbbTextResponseParams]) -> str: ...
+    @overload
+    def local_bbb(self, **params: Unpack[BbbLocalBbbDefaultParams]) -> BbbLocalBbbResponse: ...
+    @overload
+    def local_bbbs(self, **params: Unpack[BbbLocalBbbsStreamParams]) -> BinaryIO: ...
+    @overload
+    def local_bbbs(self, **params: Unpack[BbbLocalBbbsTextResponseParams]) -> str: ...
+    @overload
+    def local_bbbs(self, **params: Unpack[BbbLocalBbbsDefaultParams]) -> BbbLocalBbbsResponse: ...
+    @overload
+    def news(self, **params: Unpack[BbbNewsStreamParams]) -> BinaryIO: ...
+    @overload
+    def news(self, **params: Unpack[BbbNewsTextResponseParams]) -> str: ...
+    @overload
+    def news(self, **params: Unpack[BbbNewsDefaultParams]) -> BbbNewsResponse: ...
+    @overload
+    def news_topics(self, **params: Unpack[BbbNewsTopicsStreamParams]) -> BinaryIO: ...
+    @overload
+    def news_topics(self, **params: Unpack[BbbNewsTopicsTextResponseParams]) -> str: ...
+    @overload
+    def news_topics(self, **params: Unpack[BbbNewsTopicsDefaultParams]) -> BbbNewsTopicsResponse: ...
+    @overload
+    def regions(self, **params: Unpack[BbbRegionsStreamParams]) -> BinaryIO: ...
+    @overload
+    def regions(self, **params: Unpack[BbbRegionsTextResponseParams]) -> str: ...
+    @overload
+    def regions(self, **params: Unpack[BbbRegionsDefaultParams]) -> BbbRegionsResponse: ...
+    @overload
     def scamtracker_search(self, **params: Unpack[BbbScamtrackerSearchStreamParams]) -> BinaryIO: ...
     @overload
     def scamtracker_search(self, **params: Unpack[BbbScamtrackerSearchTextResponseParams]) -> str: ...
@@ -437,17 +749,30 @@ class BbbGroup:
     def search(self, **params: Unpack[BbbSearchTextResponseParams]) -> str: ...
     @overload
     def search(self, **params: Unpack[BbbSearchDefaultParams]) -> BbbSearchResponse: ...
+    @overload
+    def search_filters(self, **params: Unpack[BbbSearchFiltersStreamParams]) -> BinaryIO: ...
+    @overload
+    def search_filters(self, **params: Unpack[BbbSearchFiltersTextResponseParams]) -> str: ...
+    @overload
+    def search_filters(self, **params: Unpack[BbbSearchFiltersDefaultParams]) -> BbbSearchFiltersResponse: ...
 
 OperationId = Literal[
+    'bbb-article',
     'bbb-business',
     'bbb-business-complaints',
     'bbb-business-more-info',
     'bbb-business-reviews',
     'bbb-category',
+    'bbb-local-bbb',
+    'bbb-local-bbbs',
+    'bbb-news',
+    'bbb-news-topics',
+    'bbb-regions',
     'bbb-scamtracker-search',
     'bbb-scamtracker-state-stats',
     'bbb-scamtracker-detail',
     'bbb-search',
+    'bbb-search-filters',
 ]
 
 class CrawloraClient:
@@ -535,6 +860,18 @@ class CrawloraClient:
     @overload
     def operation(
         self,
+        operation_id: Literal['bbb-article'],
+        params: BbbArticleParams,
+        *,
+        response_type: ResponseType = ...,
+        timeout: float | None = ...,
+        headers: Mapping[str, str] | None = ...,
+        retries: int | None = ...,
+        retry_predicate: Callable[[int, BaseException | None], bool] | None = ...,
+    ) -> BbbArticleResponse: ...
+    @overload
+    def operation(
+        self,
         operation_id: Literal['bbb-business'],
         params: BbbBusinessParams,
         *,
@@ -595,6 +932,66 @@ class CrawloraClient:
     @overload
     def operation(
         self,
+        operation_id: Literal['bbb-local-bbb'],
+        params: BbbLocalBbbParams,
+        *,
+        response_type: ResponseType = ...,
+        timeout: float | None = ...,
+        headers: Mapping[str, str] | None = ...,
+        retries: int | None = ...,
+        retry_predicate: Callable[[int, BaseException | None], bool] | None = ...,
+    ) -> BbbLocalBbbResponse: ...
+    @overload
+    def operation(
+        self,
+        operation_id: Literal['bbb-local-bbbs'],
+        params: BbbLocalBbbsParams,
+        *,
+        response_type: ResponseType = ...,
+        timeout: float | None = ...,
+        headers: Mapping[str, str] | None = ...,
+        retries: int | None = ...,
+        retry_predicate: Callable[[int, BaseException | None], bool] | None = ...,
+    ) -> BbbLocalBbbsResponse: ...
+    @overload
+    def operation(
+        self,
+        operation_id: Literal['bbb-news'],
+        params: BbbNewsParams,
+        *,
+        response_type: ResponseType = ...,
+        timeout: float | None = ...,
+        headers: Mapping[str, str] | None = ...,
+        retries: int | None = ...,
+        retry_predicate: Callable[[int, BaseException | None], bool] | None = ...,
+    ) -> BbbNewsResponse: ...
+    @overload
+    def operation(
+        self,
+        operation_id: Literal['bbb-news-topics'],
+        params: BbbNewsTopicsParams,
+        *,
+        response_type: ResponseType = ...,
+        timeout: float | None = ...,
+        headers: Mapping[str, str] | None = ...,
+        retries: int | None = ...,
+        retry_predicate: Callable[[int, BaseException | None], bool] | None = ...,
+    ) -> BbbNewsTopicsResponse: ...
+    @overload
+    def operation(
+        self,
+        operation_id: Literal['bbb-regions'],
+        params: BbbRegionsParams = ...,
+        *,
+        response_type: ResponseType = ...,
+        timeout: float | None = ...,
+        headers: Mapping[str, str] | None = ...,
+        retries: int | None = ...,
+        retry_predicate: Callable[[int, BaseException | None], bool] | None = ...,
+    ) -> BbbRegionsResponse: ...
+    @overload
+    def operation(
+        self,
         operation_id: Literal['bbb-scamtracker-search'],
         params: BbbScamtrackerSearchParams = ...,
         *,
@@ -640,6 +1037,18 @@ class CrawloraClient:
         retries: int | None = ...,
         retry_predicate: Callable[[int, BaseException | None], bool] | None = ...,
     ) -> BbbSearchResponse: ...
+    @overload
+    def operation(
+        self,
+        operation_id: Literal['bbb-search-filters'],
+        params: BbbSearchFiltersParams = ...,
+        *,
+        response_type: ResponseType = ...,
+        timeout: float | None = ...,
+        headers: Mapping[str, str] | None = ...,
+        retries: int | None = ...,
+        retry_predicate: Callable[[int, BaseException | None], bool] | None = ...,
+    ) -> BbbSearchFiltersResponse: ...
     @overload
     def operation(
         self,
@@ -655,6 +1064,18 @@ class CrawloraClient:
     @overload
     def request(
         self,
+        operation_id: Literal['bbb-article'],
+        params: BbbArticleParams,
+        *,
+        response_type: ResponseType = ...,
+        timeout: float | None = ...,
+        headers: Mapping[str, str] | None = ...,
+        retries: int | None = ...,
+        retry_predicate: Callable[[int, BaseException | None], bool] | None = ...,
+    ) -> BbbArticleResponse: ...
+    @overload
+    def request(
+        self,
         operation_id: Literal['bbb-business'],
         params: BbbBusinessParams,
         *,
@@ -715,6 +1136,66 @@ class CrawloraClient:
     @overload
     def request(
         self,
+        operation_id: Literal['bbb-local-bbb'],
+        params: BbbLocalBbbParams,
+        *,
+        response_type: ResponseType = ...,
+        timeout: float | None = ...,
+        headers: Mapping[str, str] | None = ...,
+        retries: int | None = ...,
+        retry_predicate: Callable[[int, BaseException | None], bool] | None = ...,
+    ) -> BbbLocalBbbResponse: ...
+    @overload
+    def request(
+        self,
+        operation_id: Literal['bbb-local-bbbs'],
+        params: BbbLocalBbbsParams,
+        *,
+        response_type: ResponseType = ...,
+        timeout: float | None = ...,
+        headers: Mapping[str, str] | None = ...,
+        retries: int | None = ...,
+        retry_predicate: Callable[[int, BaseException | None], bool] | None = ...,
+    ) -> BbbLocalBbbsResponse: ...
+    @overload
+    def request(
+        self,
+        operation_id: Literal['bbb-news'],
+        params: BbbNewsParams,
+        *,
+        response_type: ResponseType = ...,
+        timeout: float | None = ...,
+        headers: Mapping[str, str] | None = ...,
+        retries: int | None = ...,
+        retry_predicate: Callable[[int, BaseException | None], bool] | None = ...,
+    ) -> BbbNewsResponse: ...
+    @overload
+    def request(
+        self,
+        operation_id: Literal['bbb-news-topics'],
+        params: BbbNewsTopicsParams,
+        *,
+        response_type: ResponseType = ...,
+        timeout: float | None = ...,
+        headers: Mapping[str, str] | None = ...,
+        retries: int | None = ...,
+        retry_predicate: Callable[[int, BaseException | None], bool] | None = ...,
+    ) -> BbbNewsTopicsResponse: ...
+    @overload
+    def request(
+        self,
+        operation_id: Literal['bbb-regions'],
+        params: BbbRegionsParams = ...,
+        *,
+        response_type: ResponseType = ...,
+        timeout: float | None = ...,
+        headers: Mapping[str, str] | None = ...,
+        retries: int | None = ...,
+        retry_predicate: Callable[[int, BaseException | None], bool] | None = ...,
+    ) -> BbbRegionsResponse: ...
+    @overload
+    def request(
+        self,
         operation_id: Literal['bbb-scamtracker-search'],
         params: BbbScamtrackerSearchParams = ...,
         *,
@@ -760,6 +1241,18 @@ class CrawloraClient:
         retries: int | None = ...,
         retry_predicate: Callable[[int, BaseException | None], bool] | None = ...,
     ) -> BbbSearchResponse: ...
+    @overload
+    def request(
+        self,
+        operation_id: Literal['bbb-search-filters'],
+        params: BbbSearchFiltersParams = ...,
+        *,
+        response_type: ResponseType = ...,
+        timeout: float | None = ...,
+        headers: Mapping[str, str] | None = ...,
+        retries: int | None = ...,
+        retry_predicate: Callable[[int, BaseException | None], bool] | None = ...,
+    ) -> BbbSearchFiltersResponse: ...
     @overload
     def request(
         self,
@@ -800,6 +1293,12 @@ class AsyncCrawloraClient:
 class BBBClient(CrawloraClient):
     def __enter__(self) -> BBBClient: ...
     @overload
+    def article(self, **params: Unpack[BbbArticleStreamParams]) -> BinaryIO: ...
+    @overload
+    def article(self, **params: Unpack[BbbArticleTextResponseParams]) -> str: ...
+    @overload
+    def article(self, **params: Unpack[BbbArticleDefaultParams]) -> BbbArticleResponse: ...
+    @overload
     def business(self, **params: Unpack[BbbBusinessStreamParams]) -> BinaryIO: ...
     @overload
     def business(self, **params: Unpack[BbbBusinessTextResponseParams]) -> str: ...
@@ -830,6 +1329,36 @@ class BBBClient(CrawloraClient):
     @overload
     def category(self, **params: Unpack[BbbCategoryDefaultParams]) -> BbbCategoryResponse: ...
     @overload
+    def local_bbb(self, **params: Unpack[BbbLocalBbbStreamParams]) -> BinaryIO: ...
+    @overload
+    def local_bbb(self, **params: Unpack[BbbLocalBbbTextResponseParams]) -> str: ...
+    @overload
+    def local_bbb(self, **params: Unpack[BbbLocalBbbDefaultParams]) -> BbbLocalBbbResponse: ...
+    @overload
+    def local_bbbs(self, **params: Unpack[BbbLocalBbbsStreamParams]) -> BinaryIO: ...
+    @overload
+    def local_bbbs(self, **params: Unpack[BbbLocalBbbsTextResponseParams]) -> str: ...
+    @overload
+    def local_bbbs(self, **params: Unpack[BbbLocalBbbsDefaultParams]) -> BbbLocalBbbsResponse: ...
+    @overload
+    def news(self, **params: Unpack[BbbNewsStreamParams]) -> BinaryIO: ...
+    @overload
+    def news(self, **params: Unpack[BbbNewsTextResponseParams]) -> str: ...
+    @overload
+    def news(self, **params: Unpack[BbbNewsDefaultParams]) -> BbbNewsResponse: ...
+    @overload
+    def news_topics(self, **params: Unpack[BbbNewsTopicsStreamParams]) -> BinaryIO: ...
+    @overload
+    def news_topics(self, **params: Unpack[BbbNewsTopicsTextResponseParams]) -> str: ...
+    @overload
+    def news_topics(self, **params: Unpack[BbbNewsTopicsDefaultParams]) -> BbbNewsTopicsResponse: ...
+    @overload
+    def regions(self, **params: Unpack[BbbRegionsStreamParams]) -> BinaryIO: ...
+    @overload
+    def regions(self, **params: Unpack[BbbRegionsTextResponseParams]) -> str: ...
+    @overload
+    def regions(self, **params: Unpack[BbbRegionsDefaultParams]) -> BbbRegionsResponse: ...
+    @overload
     def scamtracker_search(self, **params: Unpack[BbbScamtrackerSearchStreamParams]) -> BinaryIO: ...
     @overload
     def scamtracker_search(self, **params: Unpack[BbbScamtrackerSearchTextResponseParams]) -> str: ...
@@ -853,11 +1382,23 @@ class BBBClient(CrawloraClient):
     def search(self, **params: Unpack[BbbSearchTextResponseParams]) -> str: ...
     @overload
     def search(self, **params: Unpack[BbbSearchDefaultParams]) -> BbbSearchResponse: ...
+    @overload
+    def search_filters(self, **params: Unpack[BbbSearchFiltersStreamParams]) -> BinaryIO: ...
+    @overload
+    def search_filters(self, **params: Unpack[BbbSearchFiltersTextResponseParams]) -> str: ...
+    @overload
+    def search_filters(self, **params: Unpack[BbbSearchFiltersDefaultParams]) -> BbbSearchFiltersResponse: ...
 
 class AsyncBBBClient(AsyncCrawloraClient):
     async def __aenter__(self) -> AsyncBBBClient: ...
     bbb: _AsyncBbbGroup
     @overload
+    async def article(self, **params: Unpack[BbbArticleStreamParams]) -> BinaryIO: ...
+    @overload
+    async def article(self, **params: Unpack[BbbArticleTextResponseParams]) -> str: ...
+    @overload
+    async def article(self, **params: Unpack[BbbArticleDefaultParams]) -> BbbArticleResponse: ...
+    @overload
     async def business(self, **params: Unpack[BbbBusinessStreamParams]) -> BinaryIO: ...
     @overload
     async def business(self, **params: Unpack[BbbBusinessTextResponseParams]) -> str: ...
@@ -888,6 +1429,36 @@ class AsyncBBBClient(AsyncCrawloraClient):
     @overload
     async def category(self, **params: Unpack[BbbCategoryDefaultParams]) -> BbbCategoryResponse: ...
     @overload
+    async def local_bbb(self, **params: Unpack[BbbLocalBbbStreamParams]) -> BinaryIO: ...
+    @overload
+    async def local_bbb(self, **params: Unpack[BbbLocalBbbTextResponseParams]) -> str: ...
+    @overload
+    async def local_bbb(self, **params: Unpack[BbbLocalBbbDefaultParams]) -> BbbLocalBbbResponse: ...
+    @overload
+    async def local_bbbs(self, **params: Unpack[BbbLocalBbbsStreamParams]) -> BinaryIO: ...
+    @overload
+    async def local_bbbs(self, **params: Unpack[BbbLocalBbbsTextResponseParams]) -> str: ...
+    @overload
+    async def local_bbbs(self, **params: Unpack[BbbLocalBbbsDefaultParams]) -> BbbLocalBbbsResponse: ...
+    @overload
+    async def news(self, **params: Unpack[BbbNewsStreamParams]) -> BinaryIO: ...
+    @overload
+    async def news(self, **params: Unpack[BbbNewsTextResponseParams]) -> str: ...
+    @overload
+    async def news(self, **params: Unpack[BbbNewsDefaultParams]) -> BbbNewsResponse: ...
+    @overload
+    async def news_topics(self, **params: Unpack[BbbNewsTopicsStreamParams]) -> BinaryIO: ...
+    @overload
+    async def news_topics(self, **params: Unpack[BbbNewsTopicsTextResponseParams]) -> str: ...
+    @overload
+    async def news_topics(self, **params: Unpack[BbbNewsTopicsDefaultParams]) -> BbbNewsTopicsResponse: ...
+    @overload
+    async def regions(self, **params: Unpack[BbbRegionsStreamParams]) -> BinaryIO: ...
+    @overload
+    async def regions(self, **params: Unpack[BbbRegionsTextResponseParams]) -> str: ...
+    @overload
+    async def regions(self, **params: Unpack[BbbRegionsDefaultParams]) -> BbbRegionsResponse: ...
+    @overload
     async def scamtracker_search(self, **params: Unpack[BbbScamtrackerSearchStreamParams]) -> BinaryIO: ...
     @overload
     async def scamtracker_search(self, **params: Unpack[BbbScamtrackerSearchTextResponseParams]) -> str: ...
@@ -911,9 +1482,21 @@ class AsyncBBBClient(AsyncCrawloraClient):
     async def search(self, **params: Unpack[BbbSearchTextResponseParams]) -> str: ...
     @overload
     async def search(self, **params: Unpack[BbbSearchDefaultParams]) -> BbbSearchResponse: ...
+    @overload
+    async def search_filters(self, **params: Unpack[BbbSearchFiltersStreamParams]) -> BinaryIO: ...
+    @overload
+    async def search_filters(self, **params: Unpack[BbbSearchFiltersTextResponseParams]) -> str: ...
+    @overload
+    async def search_filters(self, **params: Unpack[BbbSearchFiltersDefaultParams]) -> BbbSearchFiltersResponse: ...
 
 class _AsyncBbbGroup:
     @overload
+    async def article(self, **params: Unpack[BbbArticleStreamParams]) -> BinaryIO: ...
+    @overload
+    async def article(self, **params: Unpack[BbbArticleTextResponseParams]) -> str: ...
+    @overload
+    async def article(self, **params: Unpack[BbbArticleDefaultParams]) -> BbbArticleResponse: ...
+    @overload
     async def business(self, **params: Unpack[BbbBusinessStreamParams]) -> BinaryIO: ...
     @overload
     async def business(self, **params: Unpack[BbbBusinessTextResponseParams]) -> str: ...
@@ -944,6 +1527,36 @@ class _AsyncBbbGroup:
     @overload
     async def category(self, **params: Unpack[BbbCategoryDefaultParams]) -> BbbCategoryResponse: ...
     @overload
+    async def local_bbb(self, **params: Unpack[BbbLocalBbbStreamParams]) -> BinaryIO: ...
+    @overload
+    async def local_bbb(self, **params: Unpack[BbbLocalBbbTextResponseParams]) -> str: ...
+    @overload
+    async def local_bbb(self, **params: Unpack[BbbLocalBbbDefaultParams]) -> BbbLocalBbbResponse: ...
+    @overload
+    async def local_bbbs(self, **params: Unpack[BbbLocalBbbsStreamParams]) -> BinaryIO: ...
+    @overload
+    async def local_bbbs(self, **params: Unpack[BbbLocalBbbsTextResponseParams]) -> str: ...
+    @overload
+    async def local_bbbs(self, **params: Unpack[BbbLocalBbbsDefaultParams]) -> BbbLocalBbbsResponse: ...
+    @overload
+    async def news(self, **params: Unpack[BbbNewsStreamParams]) -> BinaryIO: ...
+    @overload
+    async def news(self, **params: Unpack[BbbNewsTextResponseParams]) -> str: ...
+    @overload
+    async def news(self, **params: Unpack[BbbNewsDefaultParams]) -> BbbNewsResponse: ...
+    @overload
+    async def news_topics(self, **params: Unpack[BbbNewsTopicsStreamParams]) -> BinaryIO: ...
+    @overload
+    async def news_topics(self, **params: Unpack[BbbNewsTopicsTextResponseParams]) -> str: ...
+    @overload
+    async def news_topics(self, **params: Unpack[BbbNewsTopicsDefaultParams]) -> BbbNewsTopicsResponse: ...
+    @overload
+    async def regions(self, **params: Unpack[BbbRegionsStreamParams]) -> BinaryIO: ...
+    @overload
+    async def regions(self, **params: Unpack[BbbRegionsTextResponseParams]) -> str: ...
+    @overload
+    async def regions(self, **params: Unpack[BbbRegionsDefaultParams]) -> BbbRegionsResponse: ...
+    @overload
     async def scamtracker_search(self, **params: Unpack[BbbScamtrackerSearchStreamParams]) -> BinaryIO: ...
     @overload
     async def scamtracker_search(self, **params: Unpack[BbbScamtrackerSearchTextResponseParams]) -> str: ...
@@ -967,6 +1580,33 @@ class _AsyncBbbGroup:
     async def search(self, **params: Unpack[BbbSearchTextResponseParams]) -> str: ...
     @overload
     async def search(self, **params: Unpack[BbbSearchDefaultParams]) -> BbbSearchResponse: ...
+    @overload
+    async def search_filters(self, **params: Unpack[BbbSearchFiltersStreamParams]) -> BinaryIO: ...
+    @overload
+    async def search_filters(self, **params: Unpack[BbbSearchFiltersTextResponseParams]) -> str: ...
+    @overload
+    async def search_filters(self, **params: Unpack[BbbSearchFiltersDefaultParams]) -> BbbSearchFiltersResponse: ...
+
+BbbArticleDefaultParams = TypedDict('BbbArticleDefaultParams', {
+    '_timeout': NotRequired[float],
+    '_headers': NotRequired[Mapping[str, str]],
+    '_response_type': NotRequired[Literal["auto", "json"]],
+    'url': Required[str],
+}, total=False)
+
+BbbArticleTextResponseParams = TypedDict('BbbArticleTextResponseParams', {
+    '_timeout': NotRequired[float],
+    '_headers': NotRequired[Mapping[str, str]],
+    '_response_type': Required[Literal["text"]],
+    'url': Required[str],
+}, total=False)
+
+BbbArticleStreamParams = TypedDict('BbbArticleStreamParams', {
+    '_timeout': NotRequired[float],
+    '_headers': NotRequired[Mapping[str, str]],
+    '_response_type': Required[Literal["stream"]],
+    'url': Required[str],
+}, total=False)
 
 BbbBusinessDefaultParams = TypedDict('BbbBusinessDefaultParams', {
     '_timeout': NotRequired[float],
@@ -1061,6 +1701,14 @@ BbbCategoryDefaultParams = TypedDict('BbbCategoryDefaultParams', {
     '_response_type': NotRequired[Literal["auto", "json"]],
     'url': Required[str],
     'page': NotRequired[int],
+    'sort': NotRequired[Literal['Relevance', 'Distance', 'Rating', 'AToZ', 'ZToA']],
+    'distance': NotRequired[Literal['5', '10', '25', '50', '100']],
+    'rating': NotRequired[list[Literal['A', 'B', 'C', 'D', 'F']]],
+    'category_id': NotRequired[list[str]],
+    'state': NotRequired[list[str]],
+    'accredited': NotRequired[bool],
+    'get_quote': NotRequired[bool],
+    'service_area': NotRequired[bool],
 }, total=False)
 
 BbbCategoryTextResponseParams = TypedDict('BbbCategoryTextResponseParams', {
@@ -1069,6 +1717,14 @@ BbbCategoryTextResponseParams = TypedDict('BbbCategoryTextResponseParams', {
     '_response_type': Required[Literal["text"]],
     'url': Required[str],
     'page': NotRequired[int],
+    'sort': NotRequired[Literal['Relevance', 'Distance', 'Rating', 'AToZ', 'ZToA']],
+    'distance': NotRequired[Literal['5', '10', '25', '50', '100']],
+    'rating': NotRequired[list[Literal['A', 'B', 'C', 'D', 'F']]],
+    'category_id': NotRequired[list[str]],
+    'state': NotRequired[list[str]],
+    'accredited': NotRequired[bool],
+    'get_quote': NotRequired[bool],
+    'service_area': NotRequired[bool],
 }, total=False)
 
 BbbCategoryStreamParams = TypedDict('BbbCategoryStreamParams', {
@@ -1077,6 +1733,119 @@ BbbCategoryStreamParams = TypedDict('BbbCategoryStreamParams', {
     '_response_type': Required[Literal["stream"]],
     'url': Required[str],
     'page': NotRequired[int],
+    'sort': NotRequired[Literal['Relevance', 'Distance', 'Rating', 'AToZ', 'ZToA']],
+    'distance': NotRequired[Literal['5', '10', '25', '50', '100']],
+    'rating': NotRequired[list[Literal['A', 'B', 'C', 'D', 'F']]],
+    'category_id': NotRequired[list[str]],
+    'state': NotRequired[list[str]],
+    'accredited': NotRequired[bool],
+    'get_quote': NotRequired[bool],
+    'service_area': NotRequired[bool],
+}, total=False)
+
+BbbLocalBbbDefaultParams = TypedDict('BbbLocalBbbDefaultParams', {
+    '_timeout': NotRequired[float],
+    '_headers': NotRequired[Mapping[str, str]],
+    '_response_type': NotRequired[Literal["auto", "json"]],
+    'url': Required[str],
+}, total=False)
+
+BbbLocalBbbTextResponseParams = TypedDict('BbbLocalBbbTextResponseParams', {
+    '_timeout': NotRequired[float],
+    '_headers': NotRequired[Mapping[str, str]],
+    '_response_type': Required[Literal["text"]],
+    'url': Required[str],
+}, total=False)
+
+BbbLocalBbbStreamParams = TypedDict('BbbLocalBbbStreamParams', {
+    '_timeout': NotRequired[float],
+    '_headers': NotRequired[Mapping[str, str]],
+    '_response_type': Required[Literal["stream"]],
+    'url': Required[str],
+}, total=False)
+
+BbbLocalBbbsDefaultParams = TypedDict('BbbLocalBbbsDefaultParams', {
+    '_timeout': NotRequired[float],
+    '_headers': NotRequired[Mapping[str, str]],
+    '_response_type': NotRequired[Literal["auto", "json"]],
+    'country': Required[Literal['us', 'ca']],
+    'region': Required[str],
+}, total=False)
+
+BbbLocalBbbsTextResponseParams = TypedDict('BbbLocalBbbsTextResponseParams', {
+    '_timeout': NotRequired[float],
+    '_headers': NotRequired[Mapping[str, str]],
+    '_response_type': Required[Literal["text"]],
+    'country': Required[Literal['us', 'ca']],
+    'region': Required[str],
+}, total=False)
+
+BbbLocalBbbsStreamParams = TypedDict('BbbLocalBbbsStreamParams', {
+    '_timeout': NotRequired[float],
+    '_headers': NotRequired[Mapping[str, str]],
+    '_response_type': Required[Literal["stream"]],
+    'country': Required[Literal['us', 'ca']],
+    'region': Required[str],
+}, total=False)
+
+BbbNewsDefaultParams = TypedDict('BbbNewsDefaultParams', {
+    '_timeout': NotRequired[float],
+    '_headers': NotRequired[Mapping[str, str]],
+    '_response_type': NotRequired[Literal["auto", "json"]],
+    'url': Required[str],
+}, total=False)
+
+BbbNewsTextResponseParams = TypedDict('BbbNewsTextResponseParams', {
+    '_timeout': NotRequired[float],
+    '_headers': NotRequired[Mapping[str, str]],
+    '_response_type': Required[Literal["text"]],
+    'url': Required[str],
+}, total=False)
+
+BbbNewsStreamParams = TypedDict('BbbNewsStreamParams', {
+    '_timeout': NotRequired[float],
+    '_headers': NotRequired[Mapping[str, str]],
+    '_response_type': Required[Literal["stream"]],
+    'url': Required[str],
+}, total=False)
+
+BbbNewsTopicsDefaultParams = TypedDict('BbbNewsTopicsDefaultParams', {
+    '_timeout': NotRequired[float],
+    '_headers': NotRequired[Mapping[str, str]],
+    '_response_type': NotRequired[Literal["auto", "json"]],
+    'url': Required[str],
+}, total=False)
+
+BbbNewsTopicsTextResponseParams = TypedDict('BbbNewsTopicsTextResponseParams', {
+    '_timeout': NotRequired[float],
+    '_headers': NotRequired[Mapping[str, str]],
+    '_response_type': Required[Literal["text"]],
+    'url': Required[str],
+}, total=False)
+
+BbbNewsTopicsStreamParams = TypedDict('BbbNewsTopicsStreamParams', {
+    '_timeout': NotRequired[float],
+    '_headers': NotRequired[Mapping[str, str]],
+    '_response_type': Required[Literal["stream"]],
+    'url': Required[str],
+}, total=False)
+
+BbbRegionsDefaultParams = TypedDict('BbbRegionsDefaultParams', {
+    '_timeout': NotRequired[float],
+    '_headers': NotRequired[Mapping[str, str]],
+    '_response_type': NotRequired[Literal["auto", "json"]],
+}, total=False)
+
+BbbRegionsTextResponseParams = TypedDict('BbbRegionsTextResponseParams', {
+    '_timeout': NotRequired[float],
+    '_headers': NotRequired[Mapping[str, str]],
+    '_response_type': Required[Literal["text"]],
+}, total=False)
+
+BbbRegionsStreamParams = TypedDict('BbbRegionsStreamParams', {
+    '_timeout': NotRequired[float],
+    '_headers': NotRequired[Mapping[str, str]],
+    '_response_type': Required[Literal["stream"]],
 }, total=False)
 
 BbbScamtrackerSearchDefaultParams = TypedDict('BbbScamtrackerSearchDefaultParams', {
@@ -1173,6 +1942,15 @@ BbbSearchDefaultParams = TypedDict('BbbSearchDefaultParams', {
     'query': Required[str],
     'location': Required[str],
     'page': NotRequired[int],
+    'country': NotRequired[Literal['USA', 'CAN']],
+    'sort': NotRequired[Literal['Relevance', 'Distance', 'Rating', 'AToZ', 'ZToA']],
+    'distance': NotRequired[Literal['5', '10', '25', '50', '100']],
+    'rating': NotRequired[list[Literal['A', 'B', 'C', 'D', 'F']]],
+    'category_id': NotRequired[list[str]],
+    'state': NotRequired[list[str]],
+    'accredited': NotRequired[bool],
+    'get_quote': NotRequired[bool],
+    'service_area': NotRequired[bool],
 }, total=False)
 
 BbbSearchTextResponseParams = TypedDict('BbbSearchTextResponseParams', {
@@ -1182,6 +1960,15 @@ BbbSearchTextResponseParams = TypedDict('BbbSearchTextResponseParams', {
     'query': Required[str],
     'location': Required[str],
     'page': NotRequired[int],
+    'country': NotRequired[Literal['USA', 'CAN']],
+    'sort': NotRequired[Literal['Relevance', 'Distance', 'Rating', 'AToZ', 'ZToA']],
+    'distance': NotRequired[Literal['5', '10', '25', '50', '100']],
+    'rating': NotRequired[list[Literal['A', 'B', 'C', 'D', 'F']]],
+    'category_id': NotRequired[list[str]],
+    'state': NotRequired[list[str]],
+    'accredited': NotRequired[bool],
+    'get_quote': NotRequired[bool],
+    'service_area': NotRequired[bool],
 }, total=False)
 
 BbbSearchStreamParams = TypedDict('BbbSearchStreamParams', {
@@ -1191,4 +1978,70 @@ BbbSearchStreamParams = TypedDict('BbbSearchStreamParams', {
     'query': Required[str],
     'location': Required[str],
     'page': NotRequired[int],
+    'country': NotRequired[Literal['USA', 'CAN']],
+    'sort': NotRequired[Literal['Relevance', 'Distance', 'Rating', 'AToZ', 'ZToA']],
+    'distance': NotRequired[Literal['5', '10', '25', '50', '100']],
+    'rating': NotRequired[list[Literal['A', 'B', 'C', 'D', 'F']]],
+    'category_id': NotRequired[list[str]],
+    'state': NotRequired[list[str]],
+    'accredited': NotRequired[bool],
+    'get_quote': NotRequired[bool],
+    'service_area': NotRequired[bool],
+}, total=False)
+
+BbbSearchFiltersDefaultParams = TypedDict('BbbSearchFiltersDefaultParams', {
+    '_timeout': NotRequired[float],
+    '_headers': NotRequired[Mapping[str, str]],
+    '_response_type': NotRequired[Literal["auto", "json"]],
+    'query': NotRequired[str],
+    'location': NotRequired[str],
+    'category_url': NotRequired[str],
+    'country': NotRequired[Literal['USA', 'CAN']],
+    'page': NotRequired[int],
+    'sort': NotRequired[Literal['Relevance', 'Distance', 'Rating', 'AToZ', 'ZToA']],
+    'distance': NotRequired[Literal['5', '10', '25', '50', '100']],
+    'rating': NotRequired[list[Literal['A', 'B', 'C', 'D', 'F']]],
+    'category_id': NotRequired[list[str]],
+    'state': NotRequired[list[str]],
+    'accredited': NotRequired[bool],
+    'get_quote': NotRequired[bool],
+    'service_area': NotRequired[bool],
+}, total=False)
+
+BbbSearchFiltersTextResponseParams = TypedDict('BbbSearchFiltersTextResponseParams', {
+    '_timeout': NotRequired[float],
+    '_headers': NotRequired[Mapping[str, str]],
+    '_response_type': Required[Literal["text"]],
+    'query': NotRequired[str],
+    'location': NotRequired[str],
+    'category_url': NotRequired[str],
+    'country': NotRequired[Literal['USA', 'CAN']],
+    'page': NotRequired[int],
+    'sort': NotRequired[Literal['Relevance', 'Distance', 'Rating', 'AToZ', 'ZToA']],
+    'distance': NotRequired[Literal['5', '10', '25', '50', '100']],
+    'rating': NotRequired[list[Literal['A', 'B', 'C', 'D', 'F']]],
+    'category_id': NotRequired[list[str]],
+    'state': NotRequired[list[str]],
+    'accredited': NotRequired[bool],
+    'get_quote': NotRequired[bool],
+    'service_area': NotRequired[bool],
+}, total=False)
+
+BbbSearchFiltersStreamParams = TypedDict('BbbSearchFiltersStreamParams', {
+    '_timeout': NotRequired[float],
+    '_headers': NotRequired[Mapping[str, str]],
+    '_response_type': Required[Literal["stream"]],
+    'query': NotRequired[str],
+    'location': NotRequired[str],
+    'category_url': NotRequired[str],
+    'country': NotRequired[Literal['USA', 'CAN']],
+    'page': NotRequired[int],
+    'sort': NotRequired[Literal['Relevance', 'Distance', 'Rating', 'AToZ', 'ZToA']],
+    'distance': NotRequired[Literal['5', '10', '25', '50', '100']],
+    'rating': NotRequired[list[Literal['A', 'B', 'C', 'D', 'F']]],
+    'category_id': NotRequired[list[str]],
+    'state': NotRequired[list[str]],
+    'accredited': NotRequired[bool],
+    'get_quote': NotRequired[bool],
+    'service_area': NotRequired[bool],
 }, total=False)

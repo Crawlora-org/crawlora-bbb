@@ -47,7 +47,7 @@ func TestGeneratedClientRequestAndAllowlist(t *testing.T) {
 	if got.(map[string]any)["ok"] != true {
 		t.Fatalf("JSON result = %#v", got)
 	}
-	if OperationCount != 9 || len(OperationIDs()) != OperationCount {
+	if OperationCount != 16 || len(OperationIDs()) != OperationCount {
 		t.Fatalf("operation count = %d IDs=%d", OperationCount, len(OperationIDs()))
 	}
 	if _, err := client.Call(context.Background(), "unselected-operation", nil); err == nil || !strings.Contains(err.Error(), "unknown") {
@@ -122,7 +122,7 @@ func ExampleClient_Call() {
 	client := NewClient("your-crawlora-api-key")
 	client.BaseURL = server.URL + "/api/v1"
 	client.HTTPClient = server.Client()
-	result, err := client.Call(context.Background(), "bbb-business", Params{"url": "sample"})
+	result, err := client.Call(context.Background(), "bbb-article", Params{"url": "sample"})
 	if err != nil {
 		panic(err)
 	}

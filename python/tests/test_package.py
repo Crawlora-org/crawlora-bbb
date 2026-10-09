@@ -6,11 +6,11 @@ import crawlora_bbb as client_package
 from crawlora_bbb.client import _Response
 
 
-TEST_OPERATION_ID = 'bbb-search'
-TEST_METHOD_NAME = 'search'
+TEST_OPERATION_ID = 'bbb-search-filters'
+TEST_METHOD_NAME = 'search_filters'
 TEST_GROUP_NAME = 'bbb'
-TEST_PARAMS = {'location': 'test value', 'page': 7, 'query': 'test value'}
-TEST_URL = 'https://api.example.test/bbb/search?query=test+value&location=test+value&page=7'
+TEST_PARAMS = {'query': 'test value'}
+TEST_URL = 'https://api.example.test/bbb/search/filters?query=test+value'
 TEST_HAS_API_KEY = True
 
 
@@ -28,7 +28,7 @@ class MockTransport:
 class PackageTests(unittest.TestCase):
     def test_platform_metadata_and_aliases(self):
         self.assertEqual(client_package.PLATFORM, "bbb")
-        self.assertEqual(client_package.__version__, "0.1.4")
+        self.assertEqual(client_package.__version__, "0.2.0")
         self.assertIs(client_package.Client, client_package.BBBClient)
         self.assertIs(client_package.AsyncClient, client_package.AsyncBBBClient)
         self.assertEqual(client_package.OPERATION_COUNT, len(client_package.OPERATION_IDS))

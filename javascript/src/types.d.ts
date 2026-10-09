@@ -9,6 +9,34 @@ export interface ModelAppResponse {
   "msg"?: unknown;
 }
 
+export interface ModelBbbSearchFiltersResponseDoc {
+  "code"?: number;
+  "data"?: ModelBbbSearchFiltersResponse;
+  "msg"?: string;
+}
+
+export interface ModelBbbSearchFiltersResponse {
+  "categories"?: Array<ModelBbbSearchFilterValue>;
+  "country"?: "USA" | "CAN";
+  "location"?: string;
+  "page"?: number;
+  "query"?: string;
+  "sorts"?: Array<ModelBbbSearchSortOption>;
+  "states"?: Array<ModelBbbSearchFilterValue>;
+  "total_results"?: number;
+}
+
+export interface ModelBbbSearchFilterValue {
+  "label"?: string;
+  "value"?: string;
+}
+
+export interface ModelBbbSearchSortOption {
+  "is_active"?: boolean;
+  "label"?: string;
+  "value"?: "Relevance" | "Distance" | "Rating" | "AToZ" | "ZToA";
+}
+
 export interface ModelBbbSearchResponseDoc {
   "code"?: number;
   "data"?: ModelBbbSearchResponse;
@@ -131,6 +159,144 @@ export interface ModelBbbscamtrackerScamResult {
   "id"?: string;
   "url"?: string;
   "victim_location"?: string;
+}
+
+export interface ModelBbbdirectoryRegionsResponseDoc {
+  "code"?: number;
+  "data"?: ModelBbbdirectoryRegionsResponse;
+  "msg"?: string;
+}
+
+export interface ModelBbbdirectoryRegionsResponse {
+  "countries"?: Array<ModelBbbdirectoryCountryRegions>;
+}
+
+export interface ModelBbbdirectoryCountryRegions {
+  "code"?: string;
+  "name"?: string;
+  "regions"?: Array<ModelBbbdirectoryRegionOption>;
+}
+
+export interface ModelBbbdirectoryRegionOption {
+  "code"?: string;
+  "name"?: string;
+  "url"?: string;
+}
+
+export interface ModelBbbnewsTopicsResponse {
+  "country"?: string;
+  "source_url"?: string;
+  "topics"?: Array<ModelBbbnewsTopic>;
+}
+
+export interface ModelBbbnewsTopic {
+  "name"?: string;
+  "slug"?: string;
+  "url"?: string;
+}
+
+export interface ModelBbbnewsNewsResponse {
+  "country"?: string;
+  "items"?: Array<ModelBbbnewsNewsItem>;
+  "page"?: number;
+  "page_size"?: number;
+  "source_url"?: string;
+  "topic"?: string;
+  "total"?: number;
+}
+
+export interface ModelBbbnewsNewsItem {
+  "event_start_date"?: string;
+  "event_url"?: string;
+  "id"?: string;
+  "image"?: ModelBbbnewsImage;
+  "modified_date"?: string;
+  "summary"?: string;
+  "title"?: string;
+  "type"?: string;
+  "url"?: string;
+}
+
+export interface ModelBbbnewsImage {
+  "alt_text"?: string;
+  "caption"?: string;
+  "credit"?: string;
+  "url"?: string;
+}
+
+export interface ModelBbbdirectoryLocalBbbsResponseDoc {
+  "code"?: number;
+  "data"?: ModelBbbdirectoryLocalBbbsResponse;
+  "msg"?: string;
+}
+
+export interface ModelBbbdirectoryLocalBbbsResponse {
+  "chapters"?: Array<ModelBbbdirectoryLocalBbbchapter>;
+  "country"?: string;
+  "region"?: ModelBbbdirectoryRegionOption;
+}
+
+export interface ModelBbbdirectoryLocalBbbchapter {
+  "id"?: string;
+  "name"?: string;
+  "offices"?: Array<ModelBbbdirectoryOffice>;
+  "open_to_public"?: boolean;
+  "url"?: string;
+}
+
+export interface ModelBbbdirectoryOffice {
+  "address"?: ModelBbbdirectoryOfficeAddress;
+  "contact"?: ModelBbbdirectoryOfficeContact;
+  "formatted_address"?: string;
+  "is_primary"?: boolean;
+  "jurisdictions"?: Array<string>;
+  "office_hours"?: Array<string>;
+  "phone_hours"?: Array<string>;
+  "type"?: string;
+}
+
+export interface ModelBbbdirectoryOfficeContact {
+  "email"?: string;
+  "fax_number"?: string;
+  "phone_number"?: string;
+}
+
+export interface ModelBbbdirectoryOfficeAddress {
+  "city"?: string;
+  "country"?: string;
+  "county"?: string;
+  "line1"?: string;
+  "line2"?: string;
+  "location_name"?: string;
+  "postal_code"?: string;
+  "state_province"?: string;
+}
+
+export interface ModelBbbdirectoryLocalBbbresponseDoc {
+  "code"?: number;
+  "data"?: ModelBbbdirectoryLocalBbbresponse;
+  "msg"?: string;
+}
+
+export interface ModelBbbdirectoryLocalBbbresponse {
+  "about"?: string;
+  "events"?: Array<ModelBbbdirectoryBbbevent>;
+  "id"?: string;
+  "languages"?: Array<string>;
+  "name"?: string;
+  "offices"?: Array<ModelBbbdirectoryOffice>;
+  "open_to_public"?: boolean;
+  "service_territory"?: Array<string>;
+  "tagline"?: string;
+  "url"?: string;
+}
+
+export interface ModelBbbdirectoryBbbevent {
+  "ends_at"?: string;
+  "starts_at"?: string;
+  "summary"?: string;
+  "title"?: string;
+  "url"?: string;
 }
 
 export interface ModelBbbCategoryResponseDoc {
@@ -273,6 +439,36 @@ export interface ModelBbbBusinessHoursDay {
   "hours"?: string;
 }
 
+export interface ModelBbbnewsArticleResponse {
+  "authors"?: Array<ModelBbbnewsAuthor>;
+  "body"?: string;
+  "id"?: string;
+  "image"?: ModelBbbnewsImage;
+  "links"?: Array<ModelBbbnewsLink>;
+  "modified_at"?: string;
+  "published_at"?: string;
+  "source_url"?: string;
+  "summary"?: string;
+  "title"?: string;
+  "topics"?: Array<string>;
+  "type"?: string;
+}
+
+export interface ModelBbbnewsLink {
+  "text"?: string;
+  "url"?: string;
+}
+
+export interface ModelBbbnewsAuthor {
+  "name"?: string;
+  "url"?: string;
+}
+
+export type BbbArticleResponse = CrawloraResponse<ModelAppResponse & { "data"?: ModelBbbnewsArticleResponse }>;
+export interface BbbArticleParams {
+  "url": string;
+}
+
 export type BbbBusinessResponse = CrawloraResponse<ModelBbbBusinessResponseDoc>;
 export interface BbbBusinessParams {
   "url": string;
@@ -298,6 +494,39 @@ export type BbbCategoryResponse = CrawloraResponse<ModelBbbCategoryResponseDoc>;
 export interface BbbCategoryParams {
   "url": string;
   "page"?: number;
+  "sort"?: "Relevance" | "Distance" | "Rating" | "AToZ" | "ZToA";
+  "distance"?: "5" | "10" | "25" | "50" | "100";
+  "rating"?: Array<"A" | "B" | "C" | "D" | "F">;
+  "category_id"?: Array<string>;
+  "state"?: Array<string>;
+  "accredited"?: boolean;
+  "get_quote"?: boolean;
+  "service_area"?: boolean;
+}
+
+export type BbbLocalBbbResponse = CrawloraResponse<ModelBbbdirectoryLocalBbbresponseDoc>;
+export interface BbbLocalBbbParams {
+  "url": string;
+}
+
+export type BbbLocalBbbsResponse = CrawloraResponse<ModelBbbdirectoryLocalBbbsResponseDoc>;
+export interface BbbLocalBbbsParams {
+  "country": "us" | "ca";
+  "region": string;
+}
+
+export type BbbNewsResponse = CrawloraResponse<ModelAppResponse & { "data"?: ModelBbbnewsNewsResponse }>;
+export interface BbbNewsParams {
+  "url": string;
+}
+
+export type BbbNewsTopicsResponse = CrawloraResponse<ModelAppResponse & { "data"?: ModelBbbnewsTopicsResponse }>;
+export interface BbbNewsTopicsParams {
+  "url": string;
+}
+
+export type BbbRegionsResponse = CrawloraResponse<ModelBbbdirectoryRegionsResponseDoc>;
+export interface BbbRegionsParams {
 }
 
 export type BbbScamtrackerSearchResponse = CrawloraResponse<ModelBbbscamtrackerSearchResponseDoc>;
@@ -328,18 +557,51 @@ export interface BbbSearchParams {
   "query": string;
   "location": string;
   "page"?: number;
+  "country"?: "USA" | "CAN";
+  "sort"?: "Relevance" | "Distance" | "Rating" | "AToZ" | "ZToA";
+  "distance"?: "5" | "10" | "25" | "50" | "100";
+  "rating"?: Array<"A" | "B" | "C" | "D" | "F">;
+  "category_id"?: Array<string>;
+  "state"?: Array<string>;
+  "accredited"?: boolean;
+  "get_quote"?: boolean;
+  "service_area"?: boolean;
+}
+
+export type BbbSearchFiltersResponse = CrawloraResponse<ModelBbbSearchFiltersResponseDoc>;
+export interface BbbSearchFiltersParams {
+  "query"?: string;
+  "location"?: string;
+  "category_url"?: string;
+  "country"?: "USA" | "CAN";
+  "page"?: number;
+  "sort"?: "Relevance" | "Distance" | "Rating" | "AToZ" | "ZToA";
+  "distance"?: "5" | "10" | "25" | "50" | "100";
+  "rating"?: Array<"A" | "B" | "C" | "D" | "F">;
+  "category_id"?: Array<string>;
+  "state"?: Array<string>;
+  "accredited"?: boolean;
+  "get_quote"?: boolean;
+  "service_area"?: boolean;
 }
 
 export interface BbbService {
+  article<T = BbbArticleResponse>(params: BbbArticleParams, options?: import('./index.js').CrawloraRequestOptions): Promise<T>;
   business<T = BbbBusinessResponse>(params: BbbBusinessParams, options?: import('./index.js').CrawloraRequestOptions): Promise<T>;
   businessComplaints<T = BbbBusinessComplaintsResponse>(params: BbbBusinessComplaintsParams, options?: import('./index.js').CrawloraRequestOptions): Promise<T>;
   businessMoreInfo<T = BbbBusinessMoreInfoResponse>(params: BbbBusinessMoreInfoParams, options?: import('./index.js').CrawloraRequestOptions): Promise<T>;
   businessReviews<T = BbbBusinessReviewsResponse>(params: BbbBusinessReviewsParams, options?: import('./index.js').CrawloraRequestOptions): Promise<T>;
   category<T = BbbCategoryResponse>(params: BbbCategoryParams, options?: import('./index.js').CrawloraRequestOptions): Promise<T>;
+  localBbb<T = BbbLocalBbbResponse>(params: BbbLocalBbbParams, options?: import('./index.js').CrawloraRequestOptions): Promise<T>;
+  localBbbs<T = BbbLocalBbbsResponse>(params: BbbLocalBbbsParams, options?: import('./index.js').CrawloraRequestOptions): Promise<T>;
+  news<T = BbbNewsResponse>(params: BbbNewsParams, options?: import('./index.js').CrawloraRequestOptions): Promise<T>;
+  newsTopics<T = BbbNewsTopicsResponse>(params: BbbNewsTopicsParams, options?: import('./index.js').CrawloraRequestOptions): Promise<T>;
+  regions<T = BbbRegionsResponse>(params?: BbbRegionsParams, options?: import('./index.js').CrawloraRequestOptions): Promise<T>;
   scamtrackerSearch<T = BbbScamtrackerSearchResponse>(params?: BbbScamtrackerSearchParams, options?: import('./index.js').CrawloraRequestOptions): Promise<T>;
   scamtrackerStateStats<T = BbbScamtrackerStateStatsResponse>(params?: BbbScamtrackerStateStatsParams, options?: import('./index.js').CrawloraRequestOptions): Promise<T>;
   scamtrackerDetail<T = BbbScamtrackerDetailResponse>(params: BbbScamtrackerDetailParams, options?: import('./index.js').CrawloraRequestOptions): Promise<T>;
   search<T = BbbSearchResponse>(params: BbbSearchParams, options?: import('./index.js').CrawloraRequestOptions): Promise<T>;
+  searchFilters<T = BbbSearchFiltersResponse>(params?: BbbSearchFiltersParams, options?: import('./index.js').CrawloraRequestOptions): Promise<T>;
 }
 
 export interface CrawloraGeneratedGroups {
@@ -347,39 +609,60 @@ export interface CrawloraGeneratedGroups {
 }
 
 export interface OperationParamsMap {
+  "bbb-article": BbbArticleParams;
   "bbb-business": BbbBusinessParams;
   "bbb-business-complaints": BbbBusinessComplaintsParams;
   "bbb-business-more-info": BbbBusinessMoreInfoParams;
   "bbb-business-reviews": BbbBusinessReviewsParams;
   "bbb-category": BbbCategoryParams;
+  "bbb-local-bbb": BbbLocalBbbParams;
+  "bbb-local-bbbs": BbbLocalBbbsParams;
+  "bbb-news": BbbNewsParams;
+  "bbb-news-topics": BbbNewsTopicsParams;
+  "bbb-regions": BbbRegionsParams;
   "bbb-scamtracker-search": BbbScamtrackerSearchParams;
   "bbb-scamtracker-state-stats": BbbScamtrackerStateStatsParams;
   "bbb-scamtracker-detail": BbbScamtrackerDetailParams;
   "bbb-search": BbbSearchParams;
+  "bbb-search-filters": BbbSearchFiltersParams;
 }
 
 export interface OperationResponseMap {
+  "bbb-article": BbbArticleResponse;
   "bbb-business": BbbBusinessResponse;
   "bbb-business-complaints": BbbBusinessComplaintsResponse;
   "bbb-business-more-info": BbbBusinessMoreInfoResponse;
   "bbb-business-reviews": BbbBusinessReviewsResponse;
   "bbb-category": BbbCategoryResponse;
+  "bbb-local-bbb": BbbLocalBbbResponse;
+  "bbb-local-bbbs": BbbLocalBbbsResponse;
+  "bbb-news": BbbNewsResponse;
+  "bbb-news-topics": BbbNewsTopicsResponse;
+  "bbb-regions": BbbRegionsResponse;
   "bbb-scamtracker-search": BbbScamtrackerSearchResponse;
   "bbb-scamtracker-state-stats": BbbScamtrackerStateStatsResponse;
   "bbb-scamtracker-detail": BbbScamtrackerDetailResponse;
   "bbb-search": BbbSearchResponse;
+  "bbb-search-filters": BbbSearchFiltersResponse;
 }
 
 export interface OperationRequiredParamsMap {
+  "bbb-article": true;
   "bbb-business": true;
   "bbb-business-complaints": true;
   "bbb-business-more-info": true;
   "bbb-business-reviews": true;
   "bbb-category": true;
+  "bbb-local-bbb": true;
+  "bbb-local-bbbs": true;
+  "bbb-news": true;
+  "bbb-news-topics": true;
+  "bbb-regions": false;
   "bbb-scamtracker-search": false;
   "bbb-scamtracker-state-stats": false;
   "bbb-scamtracker-detail": true;
   "bbb-search": true;
+  "bbb-search-filters": false;
 }
 
 export type OperationId = keyof OperationParamsMap;
@@ -390,24 +673,38 @@ export type OperationRequestArgs<I extends OperationId> =
     : [params?: OperationParamsMap[I], options?: import('./index.js').CrawloraRequestOptions];
 
 export type OperationIdLiteral =
+  | "bbb-article"
   | "bbb-business"
   | "bbb-business-complaints"
   | "bbb-business-more-info"
   | "bbb-business-reviews"
   | "bbb-category"
+  | "bbb-local-bbb"
+  | "bbb-local-bbbs"
+  | "bbb-news"
+  | "bbb-news-topics"
+  | "bbb-regions"
   | "bbb-scamtracker-search"
   | "bbb-scamtracker-state-stats"
   | "bbb-scamtracker-detail"
-  | "bbb-search";
+  | "bbb-search"
+  | "bbb-search-filters";
 
 export declare const OperationIds: Readonly<{
+  BbbArticle: "bbb-article";
   BbbBusiness: "bbb-business";
   BbbBusinessComplaints: "bbb-business-complaints";
   BbbBusinessMoreInfo: "bbb-business-more-info";
   BbbBusinessReviews: "bbb-business-reviews";
   BbbCategory: "bbb-category";
+  BbbLocalBbb: "bbb-local-bbb";
+  BbbLocalBbbs: "bbb-local-bbbs";
+  BbbNews: "bbb-news";
+  BbbNewsTopics: "bbb-news-topics";
+  BbbRegions: "bbb-regions";
   BbbScamtrackerDetail: "bbb-scamtracker-detail";
   BbbScamtrackerSearch: "bbb-scamtracker-search";
   BbbScamtrackerStateStats: "bbb-scamtracker-state-stats";
   BbbSearch: "bbb-search";
+  BbbSearchFilters: "bbb-search-filters";
 }>;

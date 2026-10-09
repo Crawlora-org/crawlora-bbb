@@ -11,38 +11,38 @@ import crawlora_bbb as client_package
 TYPECHECK_SOURCE = '''
 from typing_extensions import assert_type
 from crawlora_bbb import AsyncClient, AsyncBBBClient, Client, BBBClient
-from crawlora_bbb.platform import BbbSearchResponse
+from crawlora_bbb.platform import BbbSearchFiltersResponse
 
 def check_sync() -> None:
     named: BBBClient = Client(api_key="key")
     with Client(api_key="key") as client:
-        assert_type(client.search(location='test value', page=7, query='test value'), BbbSearchResponse)
-        assert_type(client.search(_response_type='text', location='test value', page=7, query='test value'), str)
-        assert_type(client.search(_response_type='stream', location='test value', page=7, query='test value').read(), bytes)
-        assert_type(client.request('bbb-search', {'location': 'test value', 'page': 7, 'query': 'test value'}), BbbSearchResponse)
-        assert_type(client.bbb.search(location='test value', page=7, query='test value'), BbbSearchResponse)
-        assert_type(client.bbb.search(_response_type='text', location='test value', page=7, query='test value'), str)
-        assert_type(client.bbb.search(_response_type='stream', location='test value', page=7, query='test value').read(), bytes)
+        assert_type(client.search_filters(query='test value'), BbbSearchFiltersResponse)
+        assert_type(client.search_filters(_response_type='text', query='test value'), str)
+        assert_type(client.search_filters(_response_type='stream', query='test value').read(), bytes)
+        assert_type(client.request('bbb-search-filters', {'query': 'test value'}), BbbSearchFiltersResponse)
+        assert_type(client.bbb.search_filters(query='test value'), BbbSearchFiltersResponse)
+        assert_type(client.bbb.search_filters(_response_type='text', query='test value'), str)
+        assert_type(client.bbb.search_filters(_response_type='stream', query='test value').read(), bytes)
 
 
 
 async def check_async() -> None:
     named: AsyncBBBClient = AsyncClient(api_key="key")
     async with AsyncClient(api_key="key") as client:
-        assert_type(await client.search(location='test value', page=7, query='test value'), BbbSearchResponse)
-        assert_type(await client.search(_response_type='text', location='test value', page=7, query='test value'), str)
-        assert_type((await client.search(_response_type='stream', location='test value', page=7, query='test value')).read(), bytes)
-        assert_type(await client.bbb.search(location='test value', page=7, query='test value'), BbbSearchResponse)
-        assert_type(await client.bbb.search(_response_type='text', location='test value', page=7, query='test value'), str)
-        assert_type((await client.bbb.search(_response_type='stream', location='test value', page=7, query='test value')).read(), bytes)
+        assert_type(await client.search_filters(query='test value'), BbbSearchFiltersResponse)
+        assert_type(await client.search_filters(_response_type='text', query='test value'), str)
+        assert_type((await client.search_filters(_response_type='stream', query='test value')).read(), bytes)
+        assert_type(await client.bbb.search_filters(query='test value'), BbbSearchFiltersResponse)
+        assert_type(await client.bbb.search_filters(_response_type='text', query='test value'), str)
+        assert_type((await client.bbb.search_filters(_response_type='stream', query='test value')).read(), bytes)
 
 
 '''
 
 NEGATIVE_SOURCE = '''
 from crawlora_bbb import Client
-Client().search(location='test value', page=7, query=123)
-Client().search()
+Client().search_filters(query=123)
+Client().search_filters()
 '''
 
 

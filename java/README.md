@@ -8,7 +8,7 @@ The official Java client for Crawlora's hosted Better Business Bureau API. It ca
 <dependency>
   <groupId>net.crawlora</groupId>
   <artifactId>crawlora-bbb</artifactId>
-  <version>0.1.4</version>
+  <version>0.2.0</version>
 </dependency>
 ```
 
