@@ -17,7 +17,7 @@ import (
 
 const (
 	DefaultBaseURL = "https://api.crawlora.net/api/v1"
-	Version        = "0.1.3"
+	Version        = "0.1.4"
 )
 
 // Params maps the exact OpenAPI parameter names expected by this platform client.
@@ -81,7 +81,7 @@ func (c *Client) Call(ctx context.Context, operationID string, params Params) (a
 	if err != nil {
 		return nil, err
 	}
-	request.Header.Set("User-Agent", "crawlora-bbb-go/0.1.3")
+	request.Header.Set("User-Agent", "crawlora-bbb-go/0.1.4")
 	for _, security := range operation.Security {
 		if security == "ApiKeyAuth" && c.APIKey != "" {
 			request.Header.Set("x-api-key", c.APIKey)

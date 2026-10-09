@@ -5,7 +5,7 @@
   "display_name": "Better Business Bureau",
   "general_sdk_version": "1.46.0-sdk.1",
   "golang_module_name": "github.com/Crawlora-org/crawlora-bbb",
-  "golang_version": "0.1.3",
+  "golang_version": "0.1.4",
   "group_name": "bbb",
   "maven_artifact_id": "crawlora-bbb",
   "java_description": "Java client for Crawlora's hosted Better Business Bureau API, with methods for business search, profiles, complaints, reviews, categories, and ScamTracker reports. Requires a Crawlora API key.",
@@ -18,8 +18,15 @@
   "repository": "https://github.com/Crawlora-org/crawlora-bbb",
   "ruby_gem_name": "crawlora-bbb",
   "source_contract_sha256": "c4cf6f235ba96193e786f97a88b354660c07e34d9ae86429136e17dacb7efd48",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "releases": [
+    {
+      "version": "0.1.4",
+      "date": "2026-10-09",
+      "changes": [
+        "Keep the platform README as a language-package index without cross-language installation commands or code examples; pkg.go.dev now shows only its Go example."
+      ]
+    },
     {
       "version": "0.1.3",
       "date": "2026-10-09",
