@@ -1,7 +1,7 @@
 # @crawlora-org/bbb
 
 JavaScript and TypeScript client for Crawlora's hosted Better Business Bureau API.
-It calls [Crawlora](https://crawlora.net?utm_source=npm&utm_medium=referral&utm_campaign=platform-clients&utm_content=bbb-javascript-homepage); it does not run a browser or scrape Better Business Bureau locally. A Crawlora account and `CRAWLORA_API_KEY` are required, and API use is billed under your Crawlora account. Crawlora is independent from and not endorsed by Better Business Bureau or its owners.
+It calls [Crawlora](https://crawlora.net/?utm_source=npm&utm_medium=referral&utm_campaign=platform-clients&utm_content=bbb-javascript-homepage); it does not run a browser or scrape Better Business Bureau locally. A Crawlora account and `CRAWLORA_API_KEY` are required, and API use is billed under your Crawlora account. Crawlora is independent from and not endorsed by Better Business Bureau or its owners.
 
 ## Install
 

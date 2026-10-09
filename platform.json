@@ -13,7 +13,7 @@
   "module_name": "crawlora_bbb",
   "npm_name": "@crawlora-org/bbb",
   "php_package_name": "crawlora/bbb",
-  "php_repository": "https://github.com/Crawlora-org/crawlora-bbb-php",
+  "php_repository": "https://github.com/Crawlora-org/crawlora-bbb",
   "platform": "bbb",
   "python_name": "crawlora-bbb",
   "releases": [
