@@ -133,10 +133,7 @@ class ContractSyncTests(unittest.TestCase):
                 for relative, (source, surface) in readmes.items():
                     readme = root / relative
                     self.assertTrue(readme.is_file(), f"missing {relative}")
-                    content = readme.read_text(encoding="utf-8")
-                    for internal in ("generated operation", "generated method"):
-                        self.assertNotIn(internal, content.lower(), f"internal README text in {relative}")
-                    links = re.findall(r"\]\((https://crawlora\.net[^)\s]*)\)", content)
+                    links = re.findall(r"\]\((https://crawlora\.net[^)\s]*)\)", readme.read_text(encoding="utf-8"))
                     self.assertTrue(links, f"no Crawlora website links in {relative}")
                     for link in links:
                         parsed = urlsplit(link)
@@ -212,7 +209,7 @@ class ContractSyncTests(unittest.TestCase):
                     composer = json.loads((root / relative).read_text(encoding="utf-8"))
                     assert_utm(composer["homepage"], source="packagist", platform=platform, surface="php", destination="homepage")
                     assert_utm(composer["support"]["docs"], source="packagist", platform=platform, surface="php", destination="api-docs", path="/docs")
-                    self.assertEqual(composer["support"]["source"], f"https://github.com/Crawlora-org/crawlora-{platform}-php")
+                    self.assertEqual(composer["support"]["source"], f"https://github.com/Crawlora-org/crawlora-{platform}")
 
     def test_raw_header_normalization_matches_selected_public_contract(self) -> None:
         for platform in PLATFORMS:

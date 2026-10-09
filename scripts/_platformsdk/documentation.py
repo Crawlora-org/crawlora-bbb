@@ -144,6 +144,18 @@ def _example_values(platform: str, operations: list[dict[str, Any]]) -> list[tup
         add("bbb-search", {"query": "coffee", "location": "New York, NY"})
         add("bbb-business", {"url": "https://www.bbb.org/us/tx/austin/profile/plumber/calixto-plumbing-0825-1000223803"})
         add("bbb-scamtracker-search", {"query": "package delivery", "state": "NY"})
+    elif platform == "reddit":
+        add("reddit-search", {"q": "open source"})
+        add("reddit-subreddit-posts", {"subreddit": "technology"})
+    elif platform == "tiktok":
+        add("tiktok-search", {"keyword": "science"})
+        add("tiktok-trending", {})
+    elif platform == "amazon":
+        add("amazon-search", {"k": "wireless headphones"})
+        add("amazon-suggest", {"keyword": "wireless headphones"})
+    elif platform == "imdb":
+        add("imdb-search", {"query": "Inception"})
+        add("imdb-charts", {})
     return selected
 
 
@@ -271,6 +283,7 @@ def _npm_oidc_validation_values(platform: str) -> tuple[str, str]:
 """
     return dispatch_input, validation_job
 
+
 def _values(config: dict[str, Any], operations: list[dict[str, Any]]) -> dict[str, str]:
     platform = str(config["platform"])
     display = str(config["display_name"])
@@ -327,6 +340,10 @@ def _values(config: dict[str, Any], operations: list[dict[str, Any]]) -> dict[st
         "fotmob": "37 3 * * *",
         "youtube": "47 3 * * *",
         "bbb": "57 3 * * *",
+        "reddit": "07 4 * * *",
+        "tiktok": "17 4 * * *",
+        "amazon": "27 4 * * *",
+        "imdb": "37 4 * * *",
     }
     try:
         sync_cron = sync_schedules[platform]
