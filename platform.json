@@ -5,7 +5,7 @@
   "display_name": "Better Business Bureau",
   "general_sdk_version": "1.46.0-sdk.1",
   "golang_module_name": "github.com/Crawlora-org/crawlora-bbb",
-  "golang_version": "0.1.0",
+  "golang_version": "0.1.1",
   "group_name": "bbb",
   "maven_artifact_id": "crawlora-bbb",
   "maven_group_id": "net.crawlora",
@@ -17,5 +17,14 @@
   "repository": "https://github.com/Crawlora-org/crawlora-bbb",
   "ruby_gem_name": "crawlora-bbb",
   "source_contract_sha256": "c4cf6f235ba96193e786f97a88b354660c07e34d9ae86429136e17dacb7efd48",
-  "version": "0.1.0"
+  "version": "0.1.1",
+  "releases": [
+    {
+      "changes": [
+        "Add registry-specific UTM-tagged Crawlora homepage and API documentation links to package metadata."
+      ],
+      "date": "2026-10-09",
+      "version": "0.1.1"
+    }
+  ]
 }

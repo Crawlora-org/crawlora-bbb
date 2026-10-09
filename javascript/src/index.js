@@ -9,7 +9,7 @@ import {
 
 export class BBBClient extends CrawloraClient {
   constructor(options = {}) {
-    super({ ...options, userAgent: options.userAgent ?? "crawlora-bbb-js/0.1.0" });
+    super({ ...options, userAgent: options.userAgent ?? "crawlora-bbb-js/0.1.1" });
     this["business"] = (...args) => this.request("bbb-business", ...args);
     this["businessComplaints"] = (...args) => this.request("bbb-business-complaints", ...args);
     this["businessMoreInfo"] = (...args) => this.request("bbb-business-more-info", ...args);
@@ -31,5 +31,5 @@ export {
   CrawloraServerError
 };
 export { groups, operations, operationCount, OperationIds } from "./operations.js";
-export const VERSION = "0.1.0";
+export const VERSION = "0.1.1";
 export default BBBClient;
