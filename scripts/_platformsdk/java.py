@@ -137,6 +137,7 @@ def emit(root: Path, config: dict, spec: dict, assets: Path) -> None:
     values["class_name"] = "Client"
     values["default_base_url"] = "https://api.crawlora.net/api/v1"
     values["scm_url"] = config["repository"].removesuffix(".git")
+    values["scm_browse_url"] = values["scm_url"].rstrip("/") + "/blob/main/java/README.md"
     values["homepage_url"] = escape(crawlora_url(source="maven-central", platform=platform, surface="java", destination="homepage"))
     values["organization_url"] = escape(crawlora_url(source="maven-central", platform=platform, surface="java", destination="organization-homepage"))
     values["repository_name"] = values["scm_url"].rstrip("/").rsplit("/", 1)[-1]

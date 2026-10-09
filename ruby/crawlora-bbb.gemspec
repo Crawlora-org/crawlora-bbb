@@ -11,6 +11,6 @@ Gem::Specification.new do |spec|
   spec.files = Dir["lib/**/*.rb", "README.md", "CHANGELOG.md", "LICENSE"]
   spec.require_paths = ["lib"]
   spec.homepage = "https://crawlora.net/?utm_source=rubygems&utm_medium=referral&utm_campaign=platform-clients&utm_content=bbb-ruby-homepage"
-  spec.metadata = { "source_code_uri" => "https://github.com/Crawlora-org/crawlora-bbb", "documentation_uri" => "https://crawlora.net/docs?utm_source=rubygems&utm_medium=referral&utm_campaign=platform-clients&utm_content=bbb-ruby-api-docs", "rubygems_mfa_required" => "true" }
+  spec.metadata = { "source_code_uri" => "https://github.com/Crawlora-org/crawlora-bbb", "documentation_uri" => "https://github.com/Crawlora-org/crawlora-bbb/blob/main/ruby/README.md", "rubygems_mfa_required" => "true" }
 
 end
