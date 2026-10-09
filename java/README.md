@@ -14,7 +14,7 @@ The official Java client for Crawlora's hosted Better Business Bureau API. It ca
 
 ## Use
 
-Create an account at [crawlora.net](https://crawlora.net/signup), then open the [Crawlora console](https://crawlora.net/app) to get an API key.
+Create an account at [crawlora.net](https://crawlora.net/signup?utm_source=maven-central&utm_medium=referral&utm_campaign=platform-clients&utm_content=bbb-java-signup), then open the [Crawlora console](https://crawlora.net/app?utm_source=maven-central&utm_medium=referral&utm_campaign=platform-clients&utm_content=bbb-java-console) to get an API key.
 
 ```java
 import net.crawlora.bbb.Client;
@@ -33,6 +33,6 @@ For custom hosted API routing and timeouts, use `new Client(apiKey, baseUrl, Dur
 
 ## Links
 
-- [Crawlora](https://crawlora.net/)
+- [Crawlora](https://crawlora.net/?utm_source=maven-central&utm_medium=referral&utm_campaign=platform-clients&utm_content=bbb-java-homepage)
 - [Crawlora platform clients](https://github.com/Crawlora-org/crawlora-bbb)
-- [API documentation](https://crawlora.net/docs)
+- [API documentation](https://crawlora.net/docs?utm_source=maven-central&utm_medium=referral&utm_campaign=platform-clients&utm_content=bbb-java-api-docs)
