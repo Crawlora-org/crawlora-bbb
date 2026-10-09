@@ -5,9 +5,10 @@
   "display_name": "Better Business Bureau",
   "general_sdk_version": "1.46.0-sdk.1",
   "golang_module_name": "github.com/Crawlora-org/crawlora-bbb",
-  "golang_version": "0.1.1",
+  "golang_version": "0.1.2",
   "group_name": "bbb",
   "maven_artifact_id": "crawlora-bbb",
+  "java_description": "Java client for Crawlora's hosted Better Business Bureau API, with methods for business search, profiles, complaints, reviews, categories, and ScamTracker reports. Requires a Crawlora API key.",
   "maven_group_id": "net.crawlora",
   "module_name": "crawlora_bbb",
   "npm_name": "@crawlora-org/bbb",
@@ -17,8 +18,15 @@
   "repository": "https://github.com/Crawlora-org/crawlora-bbb",
   "ruby_gem_name": "crawlora-bbb",
   "source_contract_sha256": "c4cf6f235ba96193e786f97a88b354660c07e34d9ae86429136e17dacb7efd48",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "releases": [
+    {
+      "changes": [
+        "Enrich the Maven Central description with platform-specific Java client capabilities and API-key requirements."
+      ],
+      "date": "2026-10-09",
+      "version": "0.1.2"
+    },
     {
       "changes": [
         "Add registry-specific UTM-tagged Crawlora homepage and API documentation links to package metadata."
