@@ -104,6 +104,7 @@ jobs:
           npm version "${BASE_VERSION}-oidc-validation.${RUN_NUMBER}" --no-git-tag-version --ignore-scripts
           npm stage publish --access public --tag oidc-validation
 
+
   publish-npm:
     needs: [validate, verify-release-version]
     runs-on: ubuntu-latest
@@ -586,8 +587,55 @@ jobs:
                   time.sleep(min(10, remaining))
           PY
 
-  publish-packagist:
+  sync-php-package-repository:
     needs: [validate, verify-release-version]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: Crawlora-org/crawlora-bbb-php
+          ref: main
+          token: ${{ secrets.PHP_REPOSITORY_SYNC_TOKEN }}
+          path: .php-package
+      - name: Export and validate the PHP-only Composer package
+        run: python3 scripts/_platformsdk/packagist_mirror.py --source php --target .php-package
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          tools: composer:v2
+      - name: Validate and test the mirrored Composer package
+        working-directory: .php-package
+        run: composer validate --no-check-publish && composer test
+      - name: Push the PHP package snapshot and immutable release tag
+        working-directory: .php-package
+        env:
+          VERSION: ${{ needs.verify-release-version.outputs.version }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "Release Better Business Bureau PHP package v${VERSION}"
+            git push origin main
+          fi
+          if git ls-remote --exit-code --tags origin "refs/tags/v${VERSION}" >/dev/null 2>&1; then
+            git fetch origin "refs/tags/v${VERSION}:refs/tags/v${VERSION}"
+            tag_commit="$(git rev-parse "refs/tags/v${VERSION}^{commit}")"
+            head_commit="$(git rev-parse HEAD)"
+            if [ "$tag_commit" != "$head_commit" ]; then
+              echo "PHP package tag v${VERSION} already points to a different snapshot" >&2
+              exit 1
+            fi
+          else
+            git tag -a "v${VERSION}" -m "Crawlora Better Business Bureau PHP package ${VERSION}"
+            git push origin "refs/tags/v${VERSION}"
+          fi
+
+  publish-packagist:
+    needs: [validate, verify-release-version, sync-php-package-repository]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -596,7 +644,7 @@ jobs:
           python-version: "3.12"
       - name: Refresh the Packagist package from this tag
         env:
-          PACKAGE_URL: "https://github.com/Crawlora-org/crawlora-bbb"
+          PACKAGE_URL: "https://github.com/Crawlora-org/crawlora-bbb-php"
           USERNAME: ${{ secrets.PACKAGIST_USERNAME }}
           API_TOKEN: ${{ secrets.PACKAGIST_API_TOKEN }}
         run: |

@@ -6,7 +6,7 @@ Official Crawlora client packages for the hosted Better Business Bureau API. The
 - Python: [`crawlora-bbb`](python/README.md)
 - Go: [`github.com/Crawlora-org/crawlora-bbb`](go.mod)
 - Ruby: [`crawlora-bbb`](ruby/README.md)
-- Java: [`net.crawlora:crawlora-bbb:0.1.2`](java/README.md)
+- Java: [`net.crawlora:crawlora-bbb:0.1.3`](java/README.md)
 - PHP: [`crawlora/bbb`](php/README.md)
 - [API endpoint and parameter reference](docs/usage.md)
 - [Runnable examples](examples/)
@@ -24,7 +24,7 @@ gem install crawlora-bbb
 composer require crawlora/bbb
 ```
 
-For Java, add `net.crawlora:crawlora-bbb:0.1.2` to your Maven dependencies; see [java/README.md](java/README.md).
+For Java, add `net.crawlora:crawlora-bbb:0.1.3` to your Maven dependencies; see [java/README.md](java/README.md).
 
 Set your API key before running a client:
 
