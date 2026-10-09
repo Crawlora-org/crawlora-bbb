@@ -26,7 +26,7 @@ test("serializes required query/path values, adds API key and platform User-Agen
   await client.request("bbb-business", {"url": "sample"});
   assert.match(seen.url, /\/bbb\/business/);
   assert.equal(seen.headers["x-api-key"], "secret");
-  assert.equal(seen.headers["user-agent"], "crawlora-bbb-js/0.1.3");
+  assert.equal(seen.headers["user-agent"], "crawlora-bbb-js/0.1.4");
 });
 
 test("allows caller User-Agent override and response text mode", async () => {
