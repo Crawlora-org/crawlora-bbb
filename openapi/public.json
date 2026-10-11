@@ -276,6 +276,7 @@
           "type": "string"
         },
         "closed_last_12_months": {
+          "description": "ClosedLast12Months and FiledLast12Months are the two wordings BBB uses\nfor the second summary line (\"N complaints closed|filed in the last 12\nmonths.\"). A page shows one of them; the other field is omitted.",
           "example": 2,
           "type": "integer"
         },
@@ -289,6 +290,19 @@
           "description": "ComplaintsListIncomplete is true when TotalComplaints is non-zero\nbut BBB's itemized complaint list came back empty anyway. Confirmed\nlive on at least one high-volume multi-location business (770 total\ncomplaints, page rendered \"There are no matching results. Improve\nyour results by removing some applied search filters.\" with no\nfilters actually applied by this client) -- an upstream filter/\npagination quirk, not a parser failure. TotalComplaints/\nClosedLast12Months remain authoritative; Complaints will be empty\neven though real records exist upstream.",
           "type": "boolean"
         },
+        "filed_last_12_months": {
+          "example": 3,
+          "type": "integer"
+        },
+        "has_more": {
+          "example": false,
+          "type": "boolean"
+        },
+        "page": {
+          "description": "Page is the page of the complaint list this response holds. TotalPages\nis the last page BBB's own pager links to; it is omitted when BBB\nrenders no list (no complaints, or a page past the end). BBB lists\nfewer complaints than TotalComplaints counts, so TotalPages can be\nsmaller than TotalComplaints/10. HasMore is true while Page is before\nTotalPages.",
+          "example": 1,
+          "type": "integer"
+        },
         "period_text": {
           "example": "in the last 3 years.",
           "type": "string"
@@ -301,6 +315,10 @@
         },
         "total_complaints": {
           "example": 8,
+          "type": "integer"
+        },
+        "total_pages": {
+          "example": 1,
           "type": "integer"
         }
       },
@@ -316,7 +334,7 @@
           "type": "string"
         },
         "rating_reasons": {
-          "description": "RatingReasons is the full per-factor reasons list from /more-info,\nnot the shallow single-bullet list bbb-business returns.",
+          "description": "RatingReasons is the full per-factor reasons list from /more-info,\nnot the shallow single-bullet list bbb-business returns. Empty for\nbusinesses whose page renders no reasons list (seen on A+ businesses).",
           "items": {
             "type": "string"
           },
@@ -1585,7 +1603,7 @@
         "consumes": [
           "application/json"
         ],
-        "description": "Returns a business's BBB complaint history: total complaint count, complaints closed in the last 12 months, and per-complaint detail (date, type, status, narrative text, and any business response / customer answer thread). A business with no filed complaints returns total_complaints 0 and an empty complaints list -- this is a normal result, not an error. Credential-free public Better Business Bureau data.",
+        "description": "Returns a business's BBB complaint history: total complaint count, complaints closed or filed in the last 12 months, and one page of per-complaint detail (date, type, status, narrative text, and any business response / customer answer thread). Complaints are listed newest first, 10 per page; use page with the returned page, total_pages and has_more to walk the full list. A business with no filed complaints returns total_complaints 0 and an empty complaints list -- this is a normal result, not an error. Credential-free public Better Business Bureau data.",
         "operationId": "bbb-business-complaints",
         "parameters": [
           {
@@ -1595,6 +1613,15 @@
             "required": true,
             "type": "string",
             "x-example": "https://www.bbb.org/us/tx/austin/profile/plumber/calixto-plumbing-0825-1000223803"
+          },
+          {
+            "default": 1,
+            "description": "Complaint list page, 1 or greater (10 complaints per page, newest first). Defaults to 1",
+            "in": "query",
+            "minimum": 1,
+            "name": "page",
+            "type": "integer",
+            "x-example": 1
           }
         ],
         "produces": [

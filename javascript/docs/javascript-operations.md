@@ -8,7 +8,7 @@ Total operations: `16`
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | bbb | `bbb.article` | `bbb-article` | `GET /bbb/article` | `url` (query string required) | `ApiKeyAuth` | `BbbArticleResponse` |  |
 | bbb | `bbb.business` | `bbb-business` | `GET /bbb/business` | `url` (query string required) | `ApiKeyAuth` | `BbbBusinessResponse` |  |
-| bbb | `bbb.businessComplaints` | `bbb-business-complaints` | `GET /bbb/business/complaints` | `url` (query string required) | `ApiKeyAuth` | `BbbBusinessComplaintsResponse` |  |
+| bbb | `bbb.businessComplaints` | `bbb-business-complaints` | `GET /bbb/business/complaints` | `url` (query string required)<br>`page` (query number) | `ApiKeyAuth` | `BbbBusinessComplaintsResponse` |  |
 | bbb | `bbb.businessMoreInfo` | `bbb-business-more-info` | `GET /bbb/business/more-info` | `url` (query string required) | `ApiKeyAuth` | `BbbBusinessMoreInfoResponse` |  |
 | bbb | `bbb.businessReviews` | `bbb-business-reviews` | `GET /bbb/business/reviews` | `url` (query string required)<br>`page` (query number) | `ApiKeyAuth` | `BbbBusinessReviewsResponse` |  |
 | bbb | `bbb.category` | `bbb-category` | `GET /bbb/category` | `url` (query string required)<br>`page` (query number)<br>`sort` (query "Relevance" \| "Distance" \| "Rating" \| "AToZ" \| "ZToA")<br>`distance` (query "5" \| "10" \| "25" \| "50" \| "100")<br>`rating` (query Array<"A" \| "B" \| "C" \| "D" \| "F">)<br>`category_id` (query Array<string>)<br>`state` (query Array<string>)<br>`accredited` (query boolean)<br>`get_quote` (query boolean)<br>`service_area` (query boolean) | `ApiKeyAuth` | `BbbCategoryResponse` |  |

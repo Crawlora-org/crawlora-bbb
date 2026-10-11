@@ -2,7 +2,7 @@
 
 The `@crawlora-org/bbb` and `crawlora-bbb` packages call Crawlora's hosted API. Set `CRAWLORA_API_KEY` to a key for your Crawlora account before making requests. Service usage is billed under that account. These clients do not run a browser or scrape Better Business Bureau locally; Crawlora is independent from and not endorsed by Better Business Bureau or its owners.
 
-The package tracks the public API contract revision `sha256:6b65d9f9ac4320fd98477930c62f03b698e57688833a6ddb4f1207af047c9984` bundled with release `0.2.0`. Maintainers can preview daily contract updates with the repository's `Sync live API contract` workflow; unchanged contracts do not produce package releases.
+The package tracks the public API contract revision `sha256:b16d08754a3c6462631c905c1e1ee204b5f0d1aa67c456abb4640c868023a519` bundled with release `0.3.0`. Maintainers can preview daily contract updates with the repository's `Sync live API contract` workflow; unchanged contracts do not produce package releases.
 
 Both packages expose all 16 operations in the bundled API contract. JavaScript uses camelCase methods and Python uses snake_case methods. Methods also remain available through the `bbb` group and the generated `Client` alias.
 
@@ -23,7 +23,7 @@ Required and optional parameter names below come from this package's generated O
 | --- | --- | --- | --- |
 | `article` / `article` | `GET /bbb/article` | `url` (query, required) | Get a BBB article |
 | `business` / `business` | `GET /bbb/business` | `url` (query, required) | Get a Better Business Bureau business profile |
-| `businessComplaints` / `business_complaints` | `GET /bbb/business/complaints` | `url` (query, required) | Get a Better Business Bureau business's complaint history |
+| `businessComplaints` / `business_complaints` | `GET /bbb/business/complaints` | `url` (query, required), `page` (query, optional) | Get a Better Business Bureau business's complaint history |
 | `businessMoreInfo` / `business_more_info` | `GET /bbb/business/more-info` | `url` (query, required) | Get a Better Business Bureau business's full rating reasons and service area |
 | `businessReviews` / `business_reviews` | `GET /bbb/business/reviews` | `url` (query, required), `page` (query, optional) | Get a Better Business Bureau business's customer reviews |
 | `category` / `category` | `GET /bbb/category` | `url` (query, required), `page` (query, optional), `sort` (query, optional; values: `Relevance`, `Distance`, `Rating`, `AToZ`, `ZToA`), `distance` (query, optional; values: `5`, `10`, `25`, `50`, `100`), `rating` (query, optional; values: `A`, `B`, `C`, `D`, `F`), `category_id` (query, optional), `state` (query, optional), `accredited` (query, optional), `get_quote` (query, optional), `service_area` (query, optional) | Browse a Better Business Bureau category |

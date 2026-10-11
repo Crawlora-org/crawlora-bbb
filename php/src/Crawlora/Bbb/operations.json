@@ -109,6 +109,11 @@
           "in": "query",
           "type": "string",
           "required": true
+        },
+        {
+          "name": "page",
+          "in": "query",
+          "type": "integer"
         }
       ],
       "params": [
@@ -119,6 +124,15 @@
           "required": true,
           "type": "string",
           "x-example": "https://www.bbb.org/us/tx/austin/profile/plumber/calixto-plumbing-0825-1000223803"
+        },
+        {
+          "default": 1,
+          "description": "Complaint list page, 1 or greater (10 complaints per page, newest first). Defaults to 1",
+          "in": "query",
+          "minimum": 1,
+          "name": "page",
+          "type": "integer",
+          "x-example": 1
         }
       ],
       "produces": [

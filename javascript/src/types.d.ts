@@ -368,10 +368,14 @@ export interface ModelBbbComplaintsResponse {
   "closed_last_12_months"?: number;
   "complaints"?: Array<ModelBbbComplaint>;
   "complaints_list_incomplete"?: boolean;
+  "filed_last_12_months"?: number;
+  "has_more"?: boolean;
+  "page"?: number;
   "period_text"?: string;
   "source_url"?: string;
   "submit_complaint_url"?: string;
   "total_complaints"?: number;
+  "total_pages"?: number;
 }
 
 export interface ModelBbbComplaint {
@@ -477,6 +481,7 @@ export interface BbbBusinessParams {
 export type BbbBusinessComplaintsResponse = CrawloraResponse<ModelBbbComplaintsResponseDoc>;
 export interface BbbBusinessComplaintsParams {
   "url": string;
+  "page"?: number;
 }
 
 export type BbbBusinessMoreInfoResponse = CrawloraResponse<ModelBbbMoreInfoResponseDoc>;

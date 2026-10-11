@@ -1,11 +1,11 @@
 {
   "async_class_name": "AsyncBBBClient",
   "class_name": "BBBClient",
-  "contract_revision": "sha256:6b65d9f9ac4320fd98477930c62f03b698e57688833a6ddb4f1207af047c9984",
+  "contract_revision": "sha256:b16d08754a3c6462631c905c1e1ee204b5f0d1aa67c456abb4640c868023a519",
   "display_name": "Better Business Bureau",
   "general_sdk_version": "1.46.0-sdk.1",
   "golang_module_name": "github.com/Crawlora-org/crawlora-bbb",
-  "golang_version": "0.2.0",
+  "golang_version": "0.3.0",
   "group_name": "bbb",
   "java_description": "Java client for Crawlora's hosted Better Business Bureau API, with methods for business search, profiles, complaints, reviews, categories, and ScamTracker reports. Requires a Crawlora API key.",
   "maven_artifact_id": "crawlora-bbb",
@@ -17,6 +17,13 @@
   "platform": "bbb",
   "python_name": "crawlora-bbb",
   "releases": [
+    {
+      "changes": [
+        "Updated operation contracts: bbb-business-complaints, bbb-business-more-info."
+      ],
+      "date": "2026-10-11",
+      "version": "0.3.0"
+    },
     {
       "changes": [
         "Added operations: bbb-article, bbb-local-bbb, bbb-local-bbbs, bbb-news, bbb-news-topics, bbb-regions, bbb-search-filters.",
@@ -57,6 +64,6 @@
   ],
   "repository": "https://github.com/Crawlora-org/crawlora-bbb",
   "ruby_gem_name": "crawlora-bbb",
-  "source_contract_sha256": "079b4c98dbc536e05a6e71b1253dc391b456ac0085dd7617161e3b8380455701",
-  "version": "0.2.0"
+  "source_contract_sha256": "3e45c1a924bd116b70866d052482a0ebba8edd6619fa7fbcbbf0722c67133302",
+  "version": "0.3.0"
 }

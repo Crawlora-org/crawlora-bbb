@@ -59,6 +59,7 @@ export const operations = {
     "formParams": [],
     "id": "bbb-business-complaints",
     "method": "GET",
+    "paginatable": true,
     "path": "/bbb/business/complaints",
     "pathParams": [],
     "produces": [
@@ -70,6 +71,11 @@ export const operations = {
         "name": "url",
         "required": true,
         "type": "string"
+      },
+      {
+        "in": "query",
+        "name": "page",
+        "type": "integer"
       }
     ],
     "security": [

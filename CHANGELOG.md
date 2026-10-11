@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0 — 2026-10-11
+
+- Updated operation contracts: bbb-business-complaints, bbb-business-more-info.
+
 ## 0.2.0 — 2026-10-09
 
 - Added operations: bbb-article, bbb-local-bbb, bbb-local-bbbs, bbb-news, bbb-news-topics, bbb-regions, bbb-search-filters.

@@ -393,10 +393,14 @@ ModelBbbComplaintsResponse = TypedDict('ModelBbbComplaintsResponse', {
     'closed_last_12_months': NotRequired[int],
     'complaints': NotRequired[list[ModelBbbComplaint]],
     'complaints_list_incomplete': NotRequired[bool],
+    'filed_last_12_months': NotRequired[int],
+    'has_more': NotRequired[bool],
+    'page': NotRequired[int],
     'period_text': NotRequired[str],
     'source_url': NotRequired[str],
     'submit_complaint_url': NotRequired[str],
     'total_complaints': NotRequired[int],
+    'total_pages': NotRequired[int],
 }, total=False)
 
 ModelBbbComplaint = TypedDict('ModelBbbComplaint', {
@@ -511,6 +515,7 @@ BbbBusinessComplaintsParams = TypedDict('BbbBusinessComplaintsParams', {
     '_timeout': NotRequired[float],
     '_headers': NotRequired[Mapping[str, str]],
     'url': Required[str],
+    'page': NotRequired[int],
 }, total=False)
 
 BbbBusinessMoreInfoResponse = ModelBbbMoreInfoResponseDoc
@@ -1634,6 +1639,7 @@ BbbBusinessComplaintsDefaultParams = TypedDict('BbbBusinessComplaintsDefaultPara
     '_headers': NotRequired[Mapping[str, str]],
     '_response_type': NotRequired[Literal["auto", "json"]],
     'url': Required[str],
+    'page': NotRequired[int],
 }, total=False)
 
 BbbBusinessComplaintsTextResponseParams = TypedDict('BbbBusinessComplaintsTextResponseParams', {
@@ -1641,6 +1647,7 @@ BbbBusinessComplaintsTextResponseParams = TypedDict('BbbBusinessComplaintsTextRe
     '_headers': NotRequired[Mapping[str, str]],
     '_response_type': Required[Literal["text"]],
     'url': Required[str],
+    'page': NotRequired[int],
 }, total=False)
 
 BbbBusinessComplaintsStreamParams = TypedDict('BbbBusinessComplaintsStreamParams', {
@@ -1648,6 +1655,7 @@ BbbBusinessComplaintsStreamParams = TypedDict('BbbBusinessComplaintsStreamParams
     '_headers': NotRequired[Mapping[str, str]],
     '_response_type': Required[Literal["stream"]],
     'url': Required[str],
+    'page': NotRequired[int],
 }, total=False)
 
 BbbBusinessMoreInfoDefaultParams = TypedDict('BbbBusinessMoreInfoDefaultParams', {
