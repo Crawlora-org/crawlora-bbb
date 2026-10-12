@@ -4,9 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "crawlora-bbb"
-version = "0.3.0"
-description = "Typed Better Business Bureau client for the Crawlora hosted API"
+version = "0.3.1"
+description = "Crawlora Better Business Bureau API client with 16 endpoints for business search, profiles, complaints, reviews, categories, and ScamTracker reports"
 readme = "README.md"
+keywords = ["crawlora", "api-client", "sdk", "web-scraping", "scraping-api", "bbb", "better-business-bureau", "bbb-api", "better-business-bureau-api", "bbb-scraper", "better-business-bureau-scraper", "bbb-data", "better-business-bureau-data", "bbb-business-search", "bbb-profiles", "bbb-complaints", "bbb-reviews", "bbb-categories", "bbb-scamtracker-reports"]
 requires-python = ">=3.10"
 license = "MIT"
 license-files = ["LICENSE"]

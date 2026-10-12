@@ -15,7 +15,7 @@ class PlatformClientTest < Minitest::Test
       transport: transport
     )
 
-    result = client.request("bbb-scamtracker-search", JSON.parse("{\"query\": \"sample\"}"))
+    result = client.request("bbb-search", JSON.parse("{\"query\": \"sample\", \"location\": \"sample\"}"))
     assert_equal({ "ok" => true }, result)
     assert_equal 1, calls.length
     assert_includes calls.first[0], "/bbb/"

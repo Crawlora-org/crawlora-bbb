@@ -13,7 +13,7 @@ $client = new Crawlora\Bbb\Client(
     baseUrl: 'https://api.example.test/api/v1',
     transport: $transport,
 );
-$result = $client->request("bbb-scamtracker-search", ['query' => 'sample']);
+$result = $client->request("bbb-search", ['query' => 'sample', 'location' => 'sample']);
 if ($result !== ['ok' => true]) {
     throw new RuntimeException('Expected the mocked JSON response.');
 }
@@ -35,7 +35,7 @@ $defaultClient = new Crawlora\Bbb\Client(
         return ['status' => 200, 'content_type' => 'application/json', 'body' => '{"ok":true}'];
     },
 );
-$defaultClient->request("bbb-scamtracker-search", ['query' => 'sample']);
+$defaultClient->request("bbb-search", ['query' => 'sample', 'location' => 'sample']);
 try {
     $client->request('unlisted-operation');
     throw new RuntimeException('An unlisted operation was accepted.');
