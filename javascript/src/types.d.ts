@@ -44,12 +44,15 @@ export interface ModelBbbSearchResponseDoc {
 }
 
 export interface ModelBbbSearchResponse {
+  "has_more"?: boolean;
   "location"?: string;
   "page"?: number;
   "query"?: string;
   "related_categories"?: Array<ModelBbbRelatedCategory>;
   "results"?: Array<ModelBbbBusinessSearchResult>;
+  "results_capped"?: boolean;
   "source_url"?: string;
+  "total_pages"?: number;
   "total_results"?: number;
 }
 
@@ -306,9 +309,12 @@ export interface ModelBbbCategoryResponseDoc {
 }
 
 export interface ModelBbbCategoryResponse {
+  "has_more"?: boolean;
   "page"?: number;
   "results"?: Array<ModelBbbBusinessSearchResult>;
+  "results_capped"?: boolean;
   "source_url"?: string;
+  "total_pages"?: number;
   "total_results"?: number;
 }
 
@@ -370,8 +376,12 @@ export interface ModelBbbComplaintsResponse {
   "complaints_list_incomplete"?: boolean;
   "filed_last_12_months"?: number;
   "has_more"?: boolean;
+  "hidden_complaints"?: number;
+  "notice"?: string;
   "page"?: number;
   "period_text"?: string;
+  "profile_under_review"?: boolean;
+  "published_complaints"?: number;
   "source_url"?: string;
   "submit_complaint_url"?: string;
   "total_complaints"?: number;
@@ -405,13 +415,17 @@ export interface ModelBbbBusinessResponse {
   "additional_phone_numbers"?: Array<string>;
   "additional_websites"?: Array<string>;
   "address"?: string;
+  "alerts"?: Array<ModelBbbBusinessAlert>;
   "alternate_names"?: Array<string>;
+  "average_review_rating"?: number;
   "bbb_file_opened"?: string;
   "business_incorporated"?: string;
   "business_management"?: string;
   "business_started"?: string;
   "categories"?: Array<string>;
   "category"?: string;
+  "complaints_closed_last_12_months"?: number;
+  "complaints_closed_last_3_years"?: number;
   "entity_type"?: string;
   "hours"?: Array<ModelBbbBusinessHoursDay>;
   "image_url"?: string;
@@ -421,12 +435,16 @@ export interface ModelBbbBusinessResponse {
   "local_bbb_url"?: string;
   "more_info_url"?: string;
   "name"?: string;
+  "notice"?: string;
   "phone"?: string;
   "products_and_services"?: Array<string>;
+  "profile_under_review"?: boolean;
   "rating"?: string;
   "rating_reasons"?: Array<string>;
   "social_media"?: Array<string>;
   "source_url"?: string;
+  "total_complaints"?: number;
+  "total_reviews"?: number;
   "url"?: string;
   "website"?: string;
   "years_in_business"?: string;
@@ -441,6 +459,20 @@ export interface ModelBbbReviewPreview {
 export interface ModelBbbBusinessHoursDay {
   "day"?: string;
   "hours"?: string;
+}
+
+export interface ModelBbbBusinessAlert {
+  "id"?: string;
+  "links"?: Array<ModelBbbBusinessAlertLink>;
+  "text"?: string;
+  "title"?: string;
+  "type_id"?: number;
+  "url"?: string;
+}
+
+export interface ModelBbbBusinessAlertLink {
+  "text"?: string;
+  "url"?: string;
 }
 
 export interface ModelBbbnewsArticleResponse {

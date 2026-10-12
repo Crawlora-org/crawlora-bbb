@@ -1,11 +1,11 @@
 {
   "async_class_name": "AsyncBBBClient",
   "class_name": "BBBClient",
-  "contract_revision": "sha256:b16d08754a3c6462631c905c1e1ee204b5f0d1aa67c456abb4640c868023a519",
+  "contract_revision": "sha256:00cf41a77e021035bfabcab8afbb9f176fb0ec120e6e3c4d4db9b4f926b2e8db",
   "display_name": "Better Business Bureau",
   "general_sdk_version": "1.46.0-sdk.1",
   "golang_module_name": "github.com/Crawlora-org/crawlora-bbb",
-  "golang_version": "0.3.1",
+  "golang_version": "0.4.0",
   "group_name": "bbb",
   "java_description": "Java client for Crawlora's hosted Better Business Bureau API, with methods for business search, profiles, complaints, reviews, categories, and ScamTracker reports. Requires a Crawlora API key.",
   "maven_artifact_id": "crawlora-bbb",
@@ -18,12 +18,19 @@
   "python_name": "crawlora-bbb",
   "releases": [
     {
-      "version": "0.3.1",
+      "changes": [
+        "Updated operation contracts: bbb-business, bbb-business-complaints, bbb-category, bbb-search."
+      ],
       "date": "2026-10-12",
+      "version": "0.4.0"
+    },
+    {
       "changes": [
         "List every supported endpoint in the repository and package READMEs.",
         "Add platform-specific search keywords to the npm, PyPI, and Composer package metadata."
-      ]
+      ],
+      "date": "2026-10-12",
+      "version": "0.3.1"
     },
     {
       "changes": [
@@ -72,6 +79,6 @@
   ],
   "repository": "https://github.com/Crawlora-org/crawlora-bbb",
   "ruby_gem_name": "crawlora-bbb",
-  "source_contract_sha256": "3e45c1a924bd116b70866d052482a0ebba8edd6619fa7fbcbbf0722c67133302",
-  "version": "0.3.1"
+  "source_contract_sha256": "f6e50c62f29cb237bfc6f3d87f26f8b98554e951d8307b989654cae3b2846c45",
+  "version": "0.4.0"
 }

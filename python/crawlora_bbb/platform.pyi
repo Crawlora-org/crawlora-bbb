@@ -69,12 +69,15 @@ ModelBbbSearchResponseDoc = TypedDict('ModelBbbSearchResponseDoc', {
 }, total=False)
 
 ModelBbbSearchResponse = TypedDict('ModelBbbSearchResponse', {
+    'has_more': NotRequired[bool],
     'location': NotRequired[str],
     'page': NotRequired[int],
     'query': NotRequired[str],
     'related_categories': NotRequired[list[ModelBbbRelatedCategory]],
     'results': NotRequired[list[ModelBbbBusinessSearchResult]],
+    'results_capped': NotRequired[bool],
     'source_url': NotRequired[str],
+    'total_pages': NotRequired[int],
     'total_results': NotRequired[int],
 }, total=False)
 
@@ -331,9 +334,12 @@ ModelBbbCategoryResponseDoc = TypedDict('ModelBbbCategoryResponseDoc', {
 }, total=False)
 
 ModelBbbCategoryResponse = TypedDict('ModelBbbCategoryResponse', {
+    'has_more': NotRequired[bool],
     'page': NotRequired[int],
     'results': NotRequired[list[ModelBbbBusinessSearchResult]],
+    'results_capped': NotRequired[bool],
     'source_url': NotRequired[str],
+    'total_pages': NotRequired[int],
     'total_results': NotRequired[int],
 }, total=False)
 
@@ -395,8 +401,12 @@ ModelBbbComplaintsResponse = TypedDict('ModelBbbComplaintsResponse', {
     'complaints_list_incomplete': NotRequired[bool],
     'filed_last_12_months': NotRequired[int],
     'has_more': NotRequired[bool],
+    'hidden_complaints': NotRequired[int],
+    'notice': NotRequired[str],
     'page': NotRequired[int],
     'period_text': NotRequired[str],
+    'profile_under_review': NotRequired[bool],
+    'published_complaints': NotRequired[int],
     'source_url': NotRequired[str],
     'submit_complaint_url': NotRequired[str],
     'total_complaints': NotRequired[int],
@@ -430,13 +440,17 @@ ModelBbbBusinessResponse = TypedDict('ModelBbbBusinessResponse', {
     'additional_phone_numbers': NotRequired[list[str]],
     'additional_websites': NotRequired[list[str]],
     'address': NotRequired[str],
+    'alerts': NotRequired[list[ModelBbbBusinessAlert]],
     'alternate_names': NotRequired[list[str]],
+    'average_review_rating': NotRequired[float],
     'bbb_file_opened': NotRequired[str],
     'business_incorporated': NotRequired[str],
     'business_management': NotRequired[str],
     'business_started': NotRequired[str],
     'categories': NotRequired[list[str]],
     'category': NotRequired[str],
+    'complaints_closed_last_12_months': NotRequired[int],
+    'complaints_closed_last_3_years': NotRequired[int],
     'entity_type': NotRequired[str],
     'hours': NotRequired[list[ModelBbbBusinessHoursDay]],
     'image_url': NotRequired[str],
@@ -446,12 +460,16 @@ ModelBbbBusinessResponse = TypedDict('ModelBbbBusinessResponse', {
     'local_bbb_url': NotRequired[str],
     'more_info_url': NotRequired[str],
     'name': NotRequired[str],
+    'notice': NotRequired[str],
     'phone': NotRequired[str],
     'products_and_services': NotRequired[list[str]],
+    'profile_under_review': NotRequired[bool],
     'rating': NotRequired[str],
     'rating_reasons': NotRequired[list[str]],
     'social_media': NotRequired[list[str]],
     'source_url': NotRequired[str],
+    'total_complaints': NotRequired[int],
+    'total_reviews': NotRequired[int],
     'url': NotRequired[str],
     'website': NotRequired[str],
     'years_in_business': NotRequired[str],
@@ -466,6 +484,20 @@ ModelBbbReviewPreview = TypedDict('ModelBbbReviewPreview', {
 ModelBbbBusinessHoursDay = TypedDict('ModelBbbBusinessHoursDay', {
     'day': NotRequired[str],
     'hours': NotRequired[str],
+}, total=False)
+
+ModelBbbBusinessAlert = TypedDict('ModelBbbBusinessAlert', {
+    'id': NotRequired[str],
+    'links': NotRequired[list[ModelBbbBusinessAlertLink]],
+    'text': NotRequired[str],
+    'title': NotRequired[str],
+    'type_id': NotRequired[int],
+    'url': NotRequired[str],
+}, total=False)
+
+ModelBbbBusinessAlertLink = TypedDict('ModelBbbBusinessAlertLink', {
+    'text': NotRequired[str],
+    'url': NotRequired[str],
 }, total=False)
 
 ModelBbbnewsArticleResponse = TypedDict('ModelBbbnewsArticleResponse', {

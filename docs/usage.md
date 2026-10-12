@@ -2,7 +2,7 @@
 
 This reference lists all 16 public Better Business Bureau API endpoints exposed by the `@crawlora-org/bbb` and `crawlora-bbb` packages, covering business search, profiles, complaints, reviews, categories, and ScamTracker reports. The clients call Crawlora's hosted API. Set `CRAWLORA_API_KEY` to a key for your Crawlora account before making requests. Service usage is billed under that account. These clients do not run a browser or scrape Better Business Bureau locally; Crawlora is independent from and not endorsed by Better Business Bureau or its owners.
 
-The package tracks the public API contract revision `sha256:b16d08754a3c6462631c905c1e1ee204b5f0d1aa67c456abb4640c868023a519` bundled with release `0.3.1`. Maintainers can preview daily contract updates with the repository's `Sync live API contract` workflow; unchanged contracts do not produce package releases.
+The package tracks the public API contract revision `sha256:00cf41a77e021035bfabcab8afbb9f176fb0ec120e6e3c4d4db9b4f926b2e8db` bundled with release `0.4.0`. Maintainers can preview daily contract updates with the repository's `Sync live API contract` workflow; unchanged contracts do not produce package releases.
 
 Both packages expose all 16 operations in the bundled API contract. JavaScript uses camelCase methods and Python uses snake_case methods. Methods also remain available through the `bbb` group and the generated `Client` alias.
 

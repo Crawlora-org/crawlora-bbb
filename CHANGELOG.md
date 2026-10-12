@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.0 — 2026-10-12
+
+- Updated operation contracts: bbb-business, bbb-business-complaints, bbb-category, bbb-search.
+
 ## 0.3.1 — 2026-10-12
 
 - List every supported endpoint in the repository and package READMEs.

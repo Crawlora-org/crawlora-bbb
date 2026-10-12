@@ -17,6 +17,52 @@
       },
       "type": "object"
     },
+    "bbb.BusinessAlert": {
+      "properties": {
+        "id": {
+          "description": "ID is BBB's identifier for the alert on this profile, also the anchor\nin URL.",
+          "example": "0_-6",
+          "type": "string"
+        },
+        "links": {
+          "description": "Links are the hyperlinks inside the notice, in order.",
+          "items": {
+            "$ref": "#/definitions/bbb.BusinessAlertLink"
+          },
+          "type": "array"
+        },
+        "text": {
+          "description": "Text is the complete notice as plain text, one paragraph per line.",
+          "type": "string"
+        },
+        "title": {
+          "description": "Title is BBB's heading for the alert.",
+          "example": "Pattern of Complaint",
+          "type": "string"
+        },
+        "type_id": {
+          "description": "TypeID is BBB's numeric alert type. Seen so far: 8104 Pattern of\nComplaint, 8108 Alert, 8111 Licensing. It is passed through as\npublished, not validated against a fixed list.",
+          "example": 8104,
+          "type": "integer"
+        },
+        "url": {
+          "description": "URL is the alert's own anchor on the profile's more-info page.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbb.BusinessAlertLink": {
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "bbb.BusinessHoursDay": {
       "properties": {
         "day": {
@@ -54,11 +100,22 @@
         "address": {
           "type": "string"
         },
+        "alerts": {
+          "description": "Alerts lists the notices BBB attaches to the profile (pattern of\ncomplaints, investigation results, licensing findings). It is an\nempty list when the profile has none. An alert parsed without Text\nmeans only the profile's alert list could be read.",
+          "items": {
+            "$ref": "#/definitions/bbb.BusinessAlert"
+          },
+          "type": "array"
+        },
         "alternate_names": {
           "items": {
             "type": "string"
           },
           "type": "array"
+        },
+        "average_review_rating": {
+          "example": 1.7,
+          "type": "number"
         },
         "bbb_file_opened": {
           "type": "string"
@@ -81,6 +138,14 @@
         "category": {
           "example": "Plumber",
           "type": "string"
+        },
+        "complaints_closed_last_12_months": {
+          "example": 701,
+          "type": "integer"
+        },
+        "complaints_closed_last_3_years": {
+          "example": 943,
+          "type": "integer"
         },
         "entity_type": {
           "example": "Limited Liability Company (LLC)",
@@ -117,6 +182,10 @@
         "name": {
           "type": "string"
         },
+        "notice": {
+          "example": "This business profile is under review.",
+          "type": "string"
+        },
         "phone": {
           "type": "string"
         },
@@ -125,6 +194,10 @@
             "type": "string"
           },
           "type": "array"
+        },
+        "profile_under_review": {
+          "description": "ProfileUnderReview is true when BBB is updating the profile. The page\nthen shows \"This business profile is under review.\" (Notice) in place\nof the rating and accreditation, so Rating is \"NR\", RatingReasons holds\nBBB's sentence saying why, and \"accredited\" is left out of the JSON:\nthe page does not say, and false would be a claim BBB is not making.\nSeen live 2026-10-12. The state is BBB's and lasts until the review\nends, so asking again returns the same answer.",
+          "type": "boolean"
         },
         "rating": {
           "example": "A+",
@@ -144,6 +217,15 @@
         },
         "source_url": {
           "type": "string"
+        },
+        "total_complaints": {
+          "description": "TotalComplaints, the two closed-complaint counts, TotalReviews and\nAverageReviewRating are the counts BBB embeds in the profile page. A\ncount is left out when BBB did not publish it, so 0 is a real zero.\nTotalComplaints is the figure the complaints page shows for the last\nthree years; use bbb-business-complaints for the list.",
+          "example": 943,
+          "type": "integer"
+        },
+        "total_reviews": {
+          "example": 195,
+          "type": "integer"
         },
         "url": {
           "type": "string"
@@ -205,6 +287,10 @@
     },
     "bbb.CategoryResponse": {
       "properties": {
+        "has_more": {
+          "example": true,
+          "type": "boolean"
+        },
         "page": {
           "example": 1,
           "type": "integer"
@@ -215,8 +301,17 @@
           },
           "type": "array"
         },
+        "results_capped": {
+          "example": true,
+          "type": "boolean"
+        },
         "source_url": {
           "type": "string"
+        },
+        "total_pages": {
+          "description": "TotalPages, HasMore and ResultsCapped follow SearchResponse.",
+          "example": 15,
+          "type": "integer"
         },
         "total_results": {
           "type": "integer"
@@ -287,7 +382,7 @@
           "type": "array"
         },
         "complaints_list_incomplete": {
-          "description": "ComplaintsListIncomplete is true when TotalComplaints is non-zero\nbut BBB's itemized complaint list came back empty anyway. Confirmed\nlive on at least one high-volume multi-location business (770 total\ncomplaints, page rendered \"There are no matching results. Improve\nyour results by removing some applied search filters.\" with no\nfilters actually applied by this client) -- an upstream filter/\npagination quirk, not a parser failure. TotalComplaints/\nClosedLast12Months remain authoritative; Complaints will be empty\neven though real records exist upstream.",
+          "description": "ComplaintsListIncomplete is true when TotalComplaints is non-zero\nbut BBB's itemized complaint list came back empty anyway. Confirmed\nlive on at least one high-volume multi-location business (770 total\ncomplaints, page rendered \"There are no matching results. Improve\nyour results by removing some applied search filters.\" with no\nfilters actually applied by this client) -- an upstream filter/\npagination quirk, not a parser failure. It is also set for any first\npage that counts complaints but lists none, whatever BBB renders in\nplace of the list. TotalComplaints/ClosedLast12Months remain\nauthoritative; Complaints will be empty even though real records\nexist upstream. A page past the end of the list is not incomplete.",
           "type": "boolean"
         },
         "filed_last_12_months": {
@@ -298,6 +393,14 @@
           "example": false,
           "type": "boolean"
         },
+        "hidden_complaints": {
+          "example": 408,
+          "type": "integer"
+        },
+        "notice": {
+          "example": "This profile is currently being updated. You will not be able to read any existing complaints at this time, but you may file a complaint.",
+          "type": "string"
+        },
         "page": {
           "description": "Page is the page of the complaint list this response holds. TotalPages\nis the last page BBB's own pager links to; it is omitted when BBB\nrenders no list (no complaints, or a page past the end). BBB lists\nfewer complaints than TotalComplaints counts, so TotalPages can be\nsmaller than TotalComplaints/10. HasMore is true while Page is before\nTotalPages.",
           "example": 1,
@@ -306,6 +409,15 @@
         "period_text": {
           "example": "in the last 3 years.",
           "type": "string"
+        },
+        "profile_under_review": {
+          "description": "ProfileUnderReview is true when BBB is updating the profile and has\ntaken the complaint summary and list off the page for the duration.\nNotice is BBB's own sentence saying so. TotalComplaints and\nClosedLast12Months then come from the counts BBB still embeds in the\npage and stay zero when it embeds none; Complaints is empty and\nComplaintsListIncomplete is true. Seen live 2026-10-12; the state is\nBBB's, so asking again returns the same answer until the review ends.",
+          "type": "boolean"
+        },
+        "published_complaints": {
+          "description": "PublishedComplaints is how many complaints BBB publishes details for,\nthe ones the pages list. HiddenComplaints is how many it counts in\nTotalComplaints without publishing them. Both come from the page's\nembedded state and are left out when it does not carry them.",
+          "example": 3778,
+          "type": "integer"
         },
         "source_url": {
           "type": "string"
@@ -518,6 +630,10 @@
     },
     "bbb.SearchResponse": {
       "properties": {
+        "has_more": {
+          "example": true,
+          "type": "boolean"
+        },
         "location": {
           "example": "Austin, TX",
           "type": "string"
@@ -542,8 +658,17 @@
           },
           "type": "array"
         },
+        "results_capped": {
+          "example": true,
+          "type": "boolean"
+        },
         "source_url": {
           "type": "string"
+        },
+        "total_pages": {
+          "description": "TotalPages is the last page BBB serves for this query and HasMore is\ntrue while Page is before it. BBB stops a listing at 15 pages of 15, so\nResultsCapped marks a query whose TotalResults cannot all be reached by\npaging; narrow it with filters to reach the rest. All three are left\nout when BBB's listing data did not carry the page count.",
+          "example": 15,
+          "type": "integer"
         },
         "total_results": {
           "example": 2514,
