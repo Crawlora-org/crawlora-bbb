@@ -1,7 +1,6 @@
-# crawlora-bbb
+# crawlora-bbb — Better Business Bureau API client for Python
 
-Python client for Crawlora's hosted Better Business Bureau API. It calls Crawlora's
-service at [Crawlora](https://crawlora.net/?utm_source=pypi&utm_medium=referral&utm_campaign=platform-clients&utm_content=bbb-python-homepage); it does not run a browser or scrape
+Python client for Crawlora's hosted Better Business Bureau API. It exposes 16 API endpoints covering business search, profiles, complaints, reviews, categories, and ScamTracker reports. Requests go to [Crawlora](https://crawlora.net/?utm_source=pypi&utm_medium=referral&utm_campaign=platform-clients&utm_content=bbb-python-homepage); the package does not run a browser or scrape
 Better Business Bureau locally. A Crawlora account and `CRAWLORA_API_KEY` are required,
 and API use is billed under your Crawlora account. Crawlora is independent from and not endorsed by
 Better Business Bureau or its owners.
@@ -69,6 +68,29 @@ asyncio.run(main())
 ```
 
 See the [runnable example](https://github.com/Crawlora-org/crawlora-bbb/blob/main/examples/python.py) for a complete usage example.
+
+## Supported Better Business Bureau API endpoints
+
+This package exposes every route below through direct snake_case methods and the `bbb` group. See the [endpoint and parameter reference](https://github.com/Crawlora-org/crawlora-bbb/blob/main/docs/usage.md) for complete input details.
+
+| Method | Endpoint | API operation | Description |
+| --- | --- | --- | --- |
+| `GET` | `/bbb/article` | `bbb-article` | Get a BBB article |
+| `GET` | `/bbb/business` | `bbb-business` | Get a Better Business Bureau business profile |
+| `GET` | `/bbb/business/complaints` | `bbb-business-complaints` | Get a Better Business Bureau business's complaint history |
+| `GET` | `/bbb/business/more-info` | `bbb-business-more-info` | Get a Better Business Bureau business's full rating reasons and service area |
+| `GET` | `/bbb/business/reviews` | `bbb-business-reviews` | Get a Better Business Bureau business's customer reviews |
+| `GET` | `/bbb/category` | `bbb-category` | Browse a Better Business Bureau category |
+| `GET` | `/bbb/local-bbb` | `bbb-local-bbb` | Get a local BBB chapter profile |
+| `GET` | `/bbb/local-bbbs` | `bbb-local-bbbs` | List local BBB chapters serving a region |
+| `GET` | `/bbb/news` | `bbb-news` | Get BBB newsroom stories |
+| `GET` | `/bbb/news/topics` | `bbb-news-topics` | List BBB newsroom topics |
+| `GET` | `/bbb/regions` | `bbb-regions` | List Better Business Bureau directory regions |
+| `GET` | `/bbb/scamtracker/search` | `bbb-scamtracker-search` | Search Better Business Bureau Scam Tracker reports |
+| `GET` | `/bbb/scamtracker/state-stats` | `bbb-scamtracker-state-stats` | Get Better Business Bureau Scam Tracker state/province aggregate stats |
+| `GET` | `/bbb/scamtracker/{id}` | `bbb-scamtracker-detail` | Get a Better Business Bureau Scam Tracker report |
+| `GET` | `/bbb/search` | `bbb-search` | Search Better Business Bureau businesses |
+| `GET` | `/bbb/search/filters` | `bbb-search-filters` | Discover Better Business Bureau search filters |
 
 ## Configuration
 

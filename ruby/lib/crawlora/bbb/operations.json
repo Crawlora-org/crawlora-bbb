@@ -51,6 +51,8 @@
           "required": true
         }
       ],
+      "bodyParam": null,
+      "bodyRequired": false,
       "params": [
         {
           "description": "Canonical BBB article URL",
@@ -81,6 +83,8 @@
           "required": true
         }
       ],
+      "bodyParam": null,
+      "bodyRequired": false,
       "params": [
         {
           "description": "BBB business profile URL, from a bbb-search result's url or hq_profile_url",
@@ -116,6 +120,8 @@
           "type": "integer"
         }
       ],
+      "bodyParam": null,
+      "bodyRequired": false,
       "params": [
         {
           "description": "BBB business profile URL, from a bbb-search result's url or hq_profile_url",
@@ -155,6 +161,8 @@
           "required": true
         }
       ],
+      "bodyParam": null,
+      "bodyRequired": false,
       "params": [
         {
           "description": "BBB business profile URL, from a bbb-search result's url or hq_profile_url",
@@ -190,6 +198,8 @@
           "type": "integer"
         }
       ],
+      "bodyParam": null,
+      "bodyRequired": false,
       "params": [
         {
           "description": "BBB business profile URL, from a bbb-search result's url or hq_profile_url",
@@ -295,6 +305,8 @@
           "type": "boolean"
         }
       ],
+      "bodyParam": null,
+      "bodyRequired": false,
       "params": [
         {
           "description": "BBB category browse URL, from a bbb-search result's related_categories",
@@ -412,6 +424,8 @@
           "required": true
         }
       ],
+      "bodyParam": null,
+      "bodyRequired": false,
       "params": [
         {
           "description": "Canonical BBB chapter URL from bbb-local-bbbs or a business record's local_bbb_url",
@@ -452,6 +466,8 @@
           "required": true
         }
       ],
+      "bodyParam": null,
+      "bodyRequired": false,
       "params": [
         {
           "description": "Country code from bbb-regions",
@@ -494,6 +510,8 @@
           "required": true
         }
       ],
+      "bodyParam": null,
+      "bodyRequired": false,
       "params": [
         {
           "description": "Canonical BBB newsroom or topic page URL; include page=N for pagination",
@@ -524,6 +542,8 @@
           "required": true
         }
       ],
+      "bodyParam": null,
+      "bodyRequired": false,
       "params": [
         {
           "description": "Canonical BBB newsroom page URL",
@@ -547,6 +567,8 @@
       "path": "/bbb/regions",
       "pathParams": [],
       "queryParams": [],
+      "bodyParam": null,
+      "bodyRequired": false,
       "params": [],
       "produces": [
         "application/json"
@@ -646,6 +668,8 @@
           "type": "integer"
         }
       ],
+      "bodyParam": null,
+      "bodyRequired": false,
       "params": [
         {
           "description": "Free-text search (phone number, website, email, business name, scam ID, description). Omit to browse the most-recent feed",
@@ -773,6 +797,8 @@
           ]
         }
       ],
+      "bodyParam": null,
+      "bodyRequired": false,
       "params": [
         {
           "description": "Aggregation window, default 90",
@@ -802,6 +828,8 @@
         "id"
       ],
       "queryParams": [],
+      "bodyParam": null,
+      "bodyRequired": false,
       "params": [
         {
           "description": "BBB Scam Tracker report id, from a bbb-scamtracker-search result's id or url",
@@ -916,6 +944,8 @@
           "type": "boolean"
         }
       ],
+      "bodyParam": null,
+      "bodyRequired": false,
       "params": [
         {
           "description": "Business name or category/service keyword",
@@ -1139,6 +1169,8 @@
           "type": "boolean"
         }
       ],
+      "bodyParam": null,
+      "bodyRequired": false,
       "params": [
         {
           "description": "Business name or category/service keyword; use with location when category_url is omitted",
