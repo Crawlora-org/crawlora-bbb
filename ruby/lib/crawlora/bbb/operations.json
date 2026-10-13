@@ -1,6 +1,6 @@
 {
   "platform": "bbb",
-  "operationCount": 16,
+  "operationCount": 17,
   "operationIds": [
     "bbb-article",
     "bbb-business",
@@ -12,6 +12,7 @@
     "bbb-local-bbbs",
     "bbb-news",
     "bbb-news-topics",
+    "bbb-page",
     "bbb-regions",
     "bbb-scamtracker-detail",
     "bbb-scamtracker-search",
@@ -30,6 +31,7 @@
     "local_bbbs": "bbb-local-bbbs",
     "news": "bbb-news",
     "news_topics": "bbb-news-topics",
+    "page": "bbb-page",
     "regions": "bbb-regions",
     "scamtracker_search": "bbb-scamtracker-search",
     "scamtracker_state_stats": "bbb-scamtracker-state-stats",
@@ -124,7 +126,7 @@
       "bodyRequired": false,
       "params": [
         {
-          "description": "BBB business profile URL, from a bbb-search result's url or hq_profile_url",
+          "description": "BBB business profile URL, from a bbb-search result's url or hq_profile_url. A location URL ending in /addressId/<number> is accepted and read from the business profile",
           "in": "query",
           "name": "url",
           "required": true,
@@ -165,7 +167,7 @@
       "bodyRequired": false,
       "params": [
         {
-          "description": "BBB business profile URL, from a bbb-search result's url or hq_profile_url",
+          "description": "BBB business profile URL, from a bbb-search result's url or hq_profile_url. A location URL ending in /addressId/<number> is accepted and read from the business profile",
           "in": "query",
           "name": "url",
           "required": true,
@@ -202,7 +204,7 @@
       "bodyRequired": false,
       "params": [
         {
-          "description": "BBB business profile URL, from a bbb-search result's url or hq_profile_url",
+          "description": "BBB business profile URL, from a bbb-search result's url or hq_profile_url. A location URL ending in /addressId/<number> is accepted and read from the business profile",
           "in": "query",
           "name": "url",
           "required": true,
@@ -514,7 +516,7 @@
       "bodyRequired": false,
       "params": [
         {
-          "description": "Canonical BBB newsroom or topic page URL; include page=N for pagination",
+          "description": "Canonical https://www.bbb.org newsroom URL: /us/news or /ca/news; /<country>/<state>/news or /<country>/<state>/<city>/news with country us or ca, the two-letter region code from bbb-regions and the city slug from a business profile URL; or a chapter's news_url from bbb-local-bbbs. Append a topic segment from bbb-news-topics to narrow it and ?page=N (1 to 1000) to page; no other query key is accepted",
           "in": "query",
           "name": "url",
           "required": true,
@@ -546,12 +548,44 @@
       "bodyRequired": false,
       "params": [
         {
-          "description": "Canonical BBB newsroom page URL",
+          "description": "Canonical https://www.bbb.org newsroom URL, optionally with a topic segment: /us/news or /ca/news; /<country>/<state>/news or /<country>/<state>/<city>/news with country us or ca, the two-letter region code from bbb-regions and the city slug from a business profile URL; or a chapter's news_url from bbb-local-bbbs",
           "in": "query",
           "name": "url",
           "required": true,
           "type": "string",
           "x-example": "https://www.bbb.org/us/news"
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "security": [
+        "ApiKeyAuth"
+      ]
+    },
+    "bbb-page": {
+      "id": "bbb-page",
+      "method": "GET",
+      "path": "/bbb/page",
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "url",
+          "in": "query",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "bodyParam": null,
+      "bodyRequired": false,
+      "params": [
+        {
+          "description": "Canonical https://www.bbb.org URL of an evergreen page (/all/<path>, no query string) or of an article (/article/<type>/<id>-<slug>) that BBB has moved to one",
+          "in": "query",
+          "name": "url",
+          "required": true,
+          "type": "string",
+          "x-example": "https://www.bbb.org/all/consumer/tip/what-to-know-before-purchasing-a-gift-card"
         }
       ],
       "produces": [

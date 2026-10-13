@@ -346,6 +346,30 @@ export const operations = {
       "ApiKeyAuth"
     ]
   },
+  "bbb-page": {
+    "bodyParam": null,
+    "bodyRequired": false,
+    "consumes": [],
+    "formParams": [],
+    "id": "bbb-page",
+    "method": "GET",
+    "path": "/bbb/page",
+    "pathParams": [],
+    "produces": [
+      "application/json"
+    ],
+    "queryParams": [
+      {
+        "in": "query",
+        "name": "url",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "security": [
+      "ApiKeyAuth"
+    ]
+  },
   "bbb-regions": {
     "bodyParam": null,
     "bodyRequired": false,
@@ -761,6 +785,7 @@ export const groups = {
     "localBbbs": "bbb-local-bbbs",
     "news": "bbb-news",
     "newsTopics": "bbb-news-topics",
+    "page": "bbb-page",
     "regions": "bbb-regions",
     "scamtrackerDetail": "bbb-scamtracker-detail",
     "scamtrackerSearch": "bbb-scamtracker-search",
@@ -770,7 +795,7 @@ export const groups = {
   }
 };
 
-export const operationCount = 16;
+export const operationCount = 17;
 
 export const OperationIds = Object.freeze({
   "BbbArticle": "bbb-article",
@@ -783,6 +808,7 @@ export const OperationIds = Object.freeze({
   "BbbLocalBbbs": "bbb-local-bbbs",
   "BbbNews": "bbb-news",
   "BbbNewsTopics": "bbb-news-topics",
+  "BbbPage": "bbb-page",
   "BbbRegions": "bbb-regions",
   "BbbScamtrackerDetail": "bbb-scamtracker-detail",
   "BbbScamtrackerSearch": "bbb-scamtracker-search",

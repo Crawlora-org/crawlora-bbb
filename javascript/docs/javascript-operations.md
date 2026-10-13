@@ -2,7 +2,7 @@
 
 Generated from `openapi/public.json`. Deprecated, admin, and internal operations are excluded from this SDK contract.
 
-Total operations: `16`
+Total operations: `17`
 
 | Group | SDK method | Operation ID | HTTP | Params | Auth | Response | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -16,6 +16,7 @@ Total operations: `16`
 | bbb | `bbb.localBbbs` | `bbb-local-bbbs` | `GET /bbb/local-bbbs` | `country` (query "us" \| "ca" required)<br>`region` (query string required) | `ApiKeyAuth` | `BbbLocalBbbsResponse` |  |
 | bbb | `bbb.news` | `bbb-news` | `GET /bbb/news` | `url` (query string required) | `ApiKeyAuth` | `BbbNewsResponse` |  |
 | bbb | `bbb.newsTopics` | `bbb-news-topics` | `GET /bbb/news/topics` | `url` (query string required) | `ApiKeyAuth` | `BbbNewsTopicsResponse` |  |
+| bbb | `bbb.page` | `bbb-page` | `GET /bbb/page` | `url` (query string required) | `ApiKeyAuth` | `BbbPageResponse` |  |
 | bbb | `bbb.regions` | `bbb-regions` | `GET /bbb/regions` | none | `ApiKeyAuth` | `BbbRegionsResponse` |  |
 | bbb | `bbb.scamtrackerSearch` | `bbb-scamtracker-search` | `GET /bbb/scamtracker/search` | `query` (query string)<br>`scam_type` (query "Advance Fee Loan" \| "Bank/Credit Card Company Imposter" \| "Business Email Compromise" \| "Charity" \| "Counterfeit Product" \| "COVID-19" \| "Credit Cards" \| "Credit Repair/Debt Relief" \| "CryptoCurrency" \| "Debt Collections" \| "Employment" \| "Fake Check/Money Order" \| "Fake Invoice/Supplier Bill" \| "Family/Friend Emergency" \| "Foreign Money Exchange" \| "Government Agency Imposter" \| "Government Grant" \| "Healthcare/Medicaid/Medicare" \| "Home Improvement" \| "Identity Theft" \| "Investment" \| "Moving" \| "Online Purchase" \| "Other" \| "Phishing" \| "Rental" \| "Retail Business" \| "Romance" \| "Scholarship" \| "Sweepstakes/Lottery/Prizes" \| "Tax Collection" \| "Tech Support" \| "Travel/Vacation/Timeshare" \| "Utility" \| "Vanity Award" \| "Worthless Problem-solving Service" \| "Yellow Pages/Directories")<br>`state` (query string)<br>`scammer_state` (query string)<br>`date_from` (query string)<br>`date_to` (query string)<br>`min_dollars_lost` (query number)<br>`max_dollars_lost` (query number)<br>`page` (query number) | `ApiKeyAuth` | `BbbScamtrackerSearchResponse` |  |
 | bbb | `bbb.scamtrackerStateStats` | `bbb-scamtracker-state-stats` | `GET /bbb/scamtracker/state-stats` | `period` (query "30" \| "90" \| "365" \| "all") | `ApiKeyAuth` | `BbbScamtrackerStateStatsResponse` |  |

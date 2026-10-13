@@ -3,8 +3,8 @@ require_relative "lib/crawlora/bbb/version"
 Gem::Specification.new do |spec|
   spec.name = "crawlora-bbb"
   spec.version = Crawlora::Bbb::VERSION
-  spec.summary = "Better Business Bureau API client for Crawlora (16 endpoints)"
-  spec.description = "Ruby client for Crawlora's hosted Better Business Bureau API. Covers business search, profiles, complaints, reviews, categories, and ScamTracker reports across 16 endpoints."
+  spec.summary = "Better Business Bureau API client for Crawlora (17 endpoints)"
+  spec.description = "Ruby client for Crawlora's hosted Better Business Bureau API. Covers business search, profiles, complaints, reviews, categories, and ScamTracker reports across 17 endpoints."
   spec.authors = ["Crawlora"]
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.6"

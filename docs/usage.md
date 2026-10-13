@@ -1,10 +1,10 @@
 # Better Business Bureau API endpoint reference and client usage
 
-This reference lists all 16 public Better Business Bureau API endpoints exposed by the `@crawlora-org/bbb` and `crawlora-bbb` packages, covering business search, profiles, complaints, reviews, categories, and ScamTracker reports. The clients call Crawlora's hosted API. Set `CRAWLORA_API_KEY` to a key for your Crawlora account before making requests. Service usage is billed under that account. These clients do not run a browser or scrape Better Business Bureau locally; Crawlora is independent from and not endorsed by Better Business Bureau or its owners.
+This reference lists all 17 public Better Business Bureau API endpoints exposed by the `@crawlora-org/bbb` and `crawlora-bbb` packages, covering business search, profiles, complaints, reviews, categories, and ScamTracker reports. The clients call Crawlora's hosted API. Set `CRAWLORA_API_KEY` to a key for your Crawlora account before making requests. Service usage is billed under that account. These clients do not run a browser or scrape Better Business Bureau locally; Crawlora is independent from and not endorsed by Better Business Bureau or its owners.
 
-The package tracks the public API contract revision `sha256:00cf41a77e021035bfabcab8afbb9f176fb0ec120e6e3c4d4db9b4f926b2e8db` bundled with release `0.4.0`. Maintainers can preview daily contract updates with the repository's `Sync live API contract` workflow; unchanged contracts do not produce package releases.
+The package tracks the public API contract revision `sha256:74857e4df2d9776bfc5fb5cfe84d86326f53f87fe240204c62463f2ac4310a6a` bundled with release `0.5.0`. Maintainers can preview daily contract updates with the repository's `Sync live API contract` workflow; unchanged contracts do not produce package releases.
 
-Both packages expose all 16 operations in the bundled API contract. JavaScript uses camelCase methods and Python uses snake_case methods. Methods also remain available through the `bbb` group and the generated `Client` alias.
+Both packages expose all 17 operations in the bundled API contract. JavaScript uses camelCase methods and Python uses snake_case methods. Methods also remain available through the `bbb` group and the generated `Client` alias.
 
 ## Examples
 
@@ -31,6 +31,7 @@ Required and optional parameter names below come from this package's generated O
 | `localBbbs` / `local_bbbs` | `GET /bbb/local-bbbs` | `country` (query, required; values: `us`, `ca`), `region` (query, required) | List local BBB chapters serving a region |
 | `news` / `news` | `GET /bbb/news` | `url` (query, required) | Get BBB newsroom stories |
 | `newsTopics` / `news_topics` | `GET /bbb/news/topics` | `url` (query, required) | List BBB newsroom topics |
+| `page` / `page` | `GET /bbb/page` | `url` (query, required) | Get a BBB evergreen page |
 | `regions` / `regions` | `GET /bbb/regions` | — | List Better Business Bureau directory regions |
 | `scamtrackerDetail` / `scamtracker_detail` | `GET /bbb/scamtracker/{id}` | `id` (path, required) | Get a Better Business Bureau Scam Tracker report |
 | `scamtrackerSearch` / `scamtracker_search` | `GET /bbb/scamtracker/search` | `query` (query, optional), `scam_type` (query, optional; values: `Advance Fee Loan`, `Bank/Credit Card Company Imposter`, `Business Email Compromise`, `Charity`, `Counterfeit Product`, `COVID-19`, `Credit Cards`, `Credit Repair/Debt Relief`, `CryptoCurrency`, `Debt Collections`, `Employment`, `Fake Check/Money Order`, `Fake Invoice/Supplier Bill`, `Family/Friend Emergency`, `Foreign Money Exchange`, `Government Agency Imposter`, `Government Grant`, `Healthcare/Medicaid/Medicare`, `Home Improvement`, `Identity Theft`, `Investment`, `Moving`, `Online Purchase`, `Other`, `Phishing`, `Rental`, `Retail Business`, `Romance`, `Scholarship`, `Sweepstakes/Lottery/Prizes`, `Tax Collection`, `Tech Support`, `Travel/Vacation/Timeshare`, `Utility`, `Vanity Award`, `Worthless Problem-solving Service`, `Yellow Pages/Directories`), `state` (query, optional), `scammer_state` (query, optional), `date_from` (query, optional), `date_to` (query, optional), `min_dollars_lost` (query, optional), `max_dollars_lost` (query, optional), `page` (query, optional) | Search Better Business Bureau Scam Tracker reports |

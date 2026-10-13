@@ -42,8 +42,8 @@ class ClientTest {
     @AfterEach void stopServer() { if (server != null) server.stop(0); }
 
     @Test void platformCatalogIsAnExactAllowlistAndExposesDirectMethod() throws Exception {
-        assertEquals(16, Client.OPERATION_IDS.size());
-        assertEquals(List.of("bbb-article", "bbb-business", "bbb-business-complaints", "bbb-business-more-info", "bbb-business-reviews", "bbb-category", "bbb-local-bbb", "bbb-local-bbbs", "bbb-news", "bbb-news-topics", "bbb-regions", "bbb-scamtracker-detail", "bbb-scamtracker-search", "bbb-scamtracker-state-stats", "bbb-search", "bbb-search-filters"), Client.OPERATION_IDS);
+        assertEquals(17, Client.OPERATION_IDS.size());
+        assertEquals(List.of("bbb-article", "bbb-business", "bbb-business-complaints", "bbb-business-more-info", "bbb-business-reviews", "bbb-category", "bbb-local-bbb", "bbb-local-bbbs", "bbb-news", "bbb-news-topics", "bbb-page", "bbb-regions", "bbb-scamtracker-detail", "bbb-scamtracker-search", "bbb-scamtracker-state-stats", "bbb-search", "bbb-search-filters"), Client.OPERATION_IDS);
         assertEquals(new java.util.TreeSet<>(Client.OPERATION_IDS), new java.util.TreeSet<>(Client.operations().keySet()));
         assertEquals(Client.OPERATION_IDS.size(), new Client("key").getOperationCount());
         try (Client client = new Client("test-key", baseUrl, Duration.ofSeconds(2))) {

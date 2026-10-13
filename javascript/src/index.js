@@ -9,7 +9,7 @@ import {
 
 export class BBBClient extends CrawloraClient {
   constructor(options = {}) {
-    super({ ...options, userAgent: options.userAgent ?? "crawlora-bbb-js/0.4.0" });
+    super({ ...options, userAgent: options.userAgent ?? "crawlora-bbb-js/0.5.0" });
     this["article"] = (...args) => this.request("bbb-article", ...args);
     this["business"] = (...args) => this.request("bbb-business", ...args);
     this["businessComplaints"] = (...args) => this.request("bbb-business-complaints", ...args);
@@ -20,6 +20,7 @@ export class BBBClient extends CrawloraClient {
     this["localBbbs"] = (...args) => this.request("bbb-local-bbbs", ...args);
     this["news"] = (...args) => this.request("bbb-news", ...args);
     this["newsTopics"] = (...args) => this.request("bbb-news-topics", ...args);
+    this["page"] = (...args) => this.request("bbb-page", ...args);
     this["regions"] = (...args) => this.request("bbb-regions", ...args);
     this["scamtrackerSearch"] = (...args) => this.request("bbb-scamtracker-search", ...args);
     this["scamtrackerStateStats"] = (...args) => this.request("bbb-scamtracker-state-stats", ...args);
@@ -38,5 +39,5 @@ export {
   CrawloraServerError
 };
 export { groups, operations, operationCount, OperationIds } from "./operations.js";
-export const VERSION = "0.4.0";
+export const VERSION = "0.5.0";
 export default BBBClient;

@@ -1,7 +1,7 @@
 {
   "name": "@crawlora-org/bbb",
-  "version": "0.4.0",
-  "description": "Crawlora Better Business Bureau API client with 16 endpoints for business search, profiles, complaints, reviews, categories, and ScamTracker reports",
+  "version": "0.5.0",
+  "description": "Crawlora Better Business Bureau API client with 17 endpoints for business search, profiles, complaints, reviews, categories, and ScamTracker reports",
   "homepage": "https://crawlora.net/?utm_source=npm&utm_medium=referral&utm_campaign=platform-clients&utm_content=bbb-javascript-homepage",
   "bugs": { "url": "https://github.com/Crawlora-org/crawlora-bbb/issues" },
   "keywords": ["crawlora", "api-client", "sdk", "web-scraping", "scraping-api", "bbb", "better-business-bureau", "bbb-api", "better-business-bureau-api", "bbb-scraper", "better-business-bureau-scraper", "bbb-data", "better-business-bureau-data", "bbb-business-search", "bbb-profiles", "bbb-complaints", "bbb-reviews", "bbb-categories", "bbb-scamtracker-reports"],

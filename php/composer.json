@@ -1,6 +1,6 @@
 {
   "name": "crawlora/bbb",
-  "description": "Crawlora Better Business Bureau API client with 16 endpoints for business search, profiles, complaints, reviews, categories, and ScamTracker reports",
+  "description": "Crawlora Better Business Bureau API client with 17 endpoints for business search, profiles, complaints, reviews, categories, and ScamTracker reports",
   "keywords": [
     "crawlora",
     "api-client",

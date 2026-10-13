@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.0 — 2026-10-13
+
+- Added operations: bbb-page.
+- Updated operation contracts: bbb-article, bbb-business, bbb-business-complaints, bbb-business-more-info, bbb-business-reviews, bbb-local-bbb, bbb-local-bbbs, bbb-news, bbb-news-topics, bbb-scamtracker-search.
+
 ## 0.4.0 — 2026-10-12
 
 - Updated operation contracts: bbb-business, bbb-business-complaints, bbb-category, bbb-search.

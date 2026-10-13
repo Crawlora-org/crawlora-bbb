@@ -1,6 +1,6 @@
 # Crawlora Better Business Bureau API client for Java
 
-The official Java client for Crawlora's hosted Better Business Bureau API. It exposes 16 endpoints covering business search, profiles, complaints, reviews, categories, and ScamTracker reports. Requests use your `x-api-key`; the client does not connect to the upstream site directly.
+The official Java client for Crawlora's hosted Better Business Bureau API. It exposes 17 endpoints covering business search, profiles, complaints, reviews, categories, and ScamTracker reports. Requests use your `x-api-key`; the client does not connect to the upstream site directly.
 
 ## Install
 
@@ -8,7 +8,7 @@ The official Java client for Crawlora's hosted Better Business Bureau API. It ex
 <dependency>
   <groupId>net.crawlora</groupId>
   <artifactId>crawlora-bbb</artifactId>
-  <version>0.4.0</version>
+  <version>0.5.0</version>
 </dependency>
 ```
 
@@ -47,6 +47,7 @@ Browse every route included in this Java package. The [endpoint reference](https
 | `GET` | `/bbb/local-bbbs` | `bbb-local-bbbs` | List local BBB chapters serving a region |
 | `GET` | `/bbb/news` | `bbb-news` | Get BBB newsroom stories |
 | `GET` | `/bbb/news/topics` | `bbb-news-topics` | List BBB newsroom topics |
+| `GET` | `/bbb/page` | `bbb-page` | Get a BBB evergreen page |
 | `GET` | `/bbb/regions` | `bbb-regions` | List Better Business Bureau directory regions |
 | `GET` | `/bbb/scamtracker/search` | `bbb-scamtracker-search` | Search Better Business Bureau Scam Tracker reports |
 | `GET` | `/bbb/scamtracker/state-stats` | `bbb-scamtracker-state-stats` | Get Better Business Bureau Scam Tracker state/province aggregate stats |

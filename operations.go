@@ -39,6 +39,7 @@ var operations = map[string]operationDefinition{
 	"bbb-local-bbbs":              operationDefinition{Method: "GET", Path: "/bbb/local-bbbs", PathParams: nil, QueryParams: []parameterDefinition{parameterDefinition{Name: "country", In: "query", Type: "string", Required: true, Enum: []string{"us", "ca"}}, parameterDefinition{Name: "region", In: "query", Type: "string", Required: true}}, Produces: []string{"application/json"}, Security: []string{"ApiKeyAuth"}},
 	"bbb-news":                    operationDefinition{Method: "GET", Path: "/bbb/news", PathParams: nil, QueryParams: []parameterDefinition{parameterDefinition{Name: "url", In: "query", Type: "string", Required: true}}, Produces: []string{"application/json"}, Security: []string{"ApiKeyAuth"}},
 	"bbb-news-topics":             operationDefinition{Method: "GET", Path: "/bbb/news/topics", PathParams: nil, QueryParams: []parameterDefinition{parameterDefinition{Name: "url", In: "query", Type: "string", Required: true}}, Produces: []string{"application/json"}, Security: []string{"ApiKeyAuth"}},
+	"bbb-page":                    operationDefinition{Method: "GET", Path: "/bbb/page", PathParams: nil, QueryParams: []parameterDefinition{parameterDefinition{Name: "url", In: "query", Type: "string", Required: true}}, Produces: []string{"application/json"}, Security: []string{"ApiKeyAuth"}},
 	"bbb-regions":                 operationDefinition{Method: "GET", Path: "/bbb/regions", PathParams: nil, QueryParams: nil, Produces: []string{"application/json"}, Security: []string{"ApiKeyAuth"}},
 	"bbb-scamtracker-search":      operationDefinition{Method: "GET", Path: "/bbb/scamtracker/search", PathParams: nil, QueryParams: []parameterDefinition{parameterDefinition{Name: "query", In: "query", Type: "string"}, parameterDefinition{Name: "scam_type", In: "query", Type: "string", Enum: []string{"Advance Fee Loan", "Bank/Credit Card Company Imposter", "Business Email Compromise", "Charity", "Counterfeit Product", "COVID-19", "Credit Cards", "Credit Repair/Debt Relief", "CryptoCurrency", "Debt Collections", "Employment", "Fake Check/Money Order", "Fake Invoice/Supplier Bill", "Family/Friend Emergency", "Foreign Money Exchange", "Government Agency Imposter", "Government Grant", "Healthcare/Medicaid/Medicare", "Home Improvement", "Identity Theft", "Investment", "Moving", "Online Purchase", "Other", "Phishing", "Rental", "Retail Business", "Romance", "Scholarship", "Sweepstakes/Lottery/Prizes", "Tax Collection", "Tech Support", "Travel/Vacation/Timeshare", "Utility", "Vanity Award", "Worthless Problem-solving Service", "Yellow Pages/Directories"}}, parameterDefinition{Name: "state", In: "query", Type: "string"}, parameterDefinition{Name: "scammer_state", In: "query", Type: "string"}, parameterDefinition{Name: "date_from", In: "query", Type: "string"}, parameterDefinition{Name: "date_to", In: "query", Type: "string"}, parameterDefinition{Name: "min_dollars_lost", In: "query", Type: "integer"}, parameterDefinition{Name: "max_dollars_lost", In: "query", Type: "integer"}, parameterDefinition{Name: "page", In: "query", Type: "integer"}}, Produces: []string{"application/json"}, Security: []string{"ApiKeyAuth"}},
 	"bbb-scamtracker-state-stats": operationDefinition{Method: "GET", Path: "/bbb/scamtracker/state-stats", PathParams: nil, QueryParams: []parameterDefinition{parameterDefinition{Name: "period", In: "query", Type: "string", Enum: []string{"30", "90", "365", "all"}}}, Produces: []string{"application/json"}, Security: []string{"ApiKeyAuth"}},
@@ -48,7 +49,7 @@ var operations = map[string]operationDefinition{
 }
 
 // OperationCount reports how many selected-platform operations this module exposes.
-const OperationCount = 16
+const OperationCount = 17
 
 // OperationIDs returns the selected operation IDs in stable sorted order.
 func OperationIDs() []string {
@@ -108,6 +109,11 @@ func (c *Client) News(ctx context.Context, params Params) (any, error) {
 // NewsTopics calls the bbb-news-topics operation.
 func (c *Client) NewsTopics(ctx context.Context, params Params) (any, error) {
 	return c.Call(ctx, "bbb-news-topics", params)
+}
+
+// Page calls the bbb-page operation.
+func (c *Client) Page(ctx context.Context, params Params) (any, error) {
+	return c.Call(ctx, "bbb-page", params)
 }
 
 // Regions calls the bbb-regions operation.

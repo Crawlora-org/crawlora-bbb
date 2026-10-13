@@ -95,6 +95,7 @@ export class BBBClient extends CrawloraClient {
   localBbbs(params: OperationParamsMap["bbb-local-bbbs"], options: CrawloraRequestOptions & { responseType: "stream" }): Promise<Response>;
   news(params: OperationParamsMap["bbb-news"], options: CrawloraRequestOptions & { responseType: "stream" }): Promise<Response>;
   newsTopics(params: OperationParamsMap["bbb-news-topics"], options: CrawloraRequestOptions & { responseType: "stream" }): Promise<Response>;
+  page(params: OperationParamsMap["bbb-page"], options: CrawloraRequestOptions & { responseType: "stream" }): Promise<Response>;
   regions(params?: OperationParamsMap["bbb-regions"], options?: CrawloraRequestOptions & { responseType: "stream" }): Promise<Response>;
   scamtrackerSearch(params?: OperationParamsMap["bbb-scamtracker-search"], options?: CrawloraRequestOptions & { responseType: "stream" }): Promise<Response>;
   scamtrackerStateStats(params?: OperationParamsMap["bbb-scamtracker-state-stats"], options?: CrawloraRequestOptions & { responseType: "stream" }): Promise<Response>;
@@ -113,6 +114,7 @@ export class BBBClient extends CrawloraClient {
   localBbbs(params: OperationParamsMap["bbb-local-bbbs"], options: CrawloraRequestOptions & { responseType: "text" }): Promise<string>;
   news(params: OperationParamsMap["bbb-news"], options: CrawloraRequestOptions & { responseType: "text" }): Promise<string>;
   newsTopics(params: OperationParamsMap["bbb-news-topics"], options: CrawloraRequestOptions & { responseType: "text" }): Promise<string>;
+  page(params: OperationParamsMap["bbb-page"], options: CrawloraRequestOptions & { responseType: "text" }): Promise<string>;
   regions(params?: OperationParamsMap["bbb-regions"], options?: CrawloraRequestOptions & { responseType: "text" }): Promise<string>;
   scamtrackerSearch(params?: OperationParamsMap["bbb-scamtracker-search"], options?: CrawloraRequestOptions & { responseType: "text" }): Promise<string>;
   scamtrackerStateStats(params?: OperationParamsMap["bbb-scamtracker-state-stats"], options?: CrawloraRequestOptions & { responseType: "text" }): Promise<string>;
@@ -134,6 +136,7 @@ export class BBBClient extends CrawloraClient {
   localBbbs(...args: OperationRequestArgs<"bbb-local-bbbs">): Promise<OperationResponseMap["bbb-local-bbbs"]>;
   news(...args: OperationRequestArgs<"bbb-news">): Promise<OperationResponseMap["bbb-news"]>;
   newsTopics(...args: OperationRequestArgs<"bbb-news-topics">): Promise<OperationResponseMap["bbb-news-topics"]>;
+  page(...args: OperationRequestArgs<"bbb-page">): Promise<OperationResponseMap["bbb-page"]>;
   regions(...args: OperationRequestArgs<"bbb-regions">): Promise<OperationResponseMap["bbb-regions"]>;
   scamtrackerSearch(...args: OperationRequestArgs<"bbb-scamtracker-search">): Promise<OperationResponseMap["bbb-scamtracker-search"]>;
   scamtrackerStateStats(...args: OperationRequestArgs<"bbb-scamtracker-state-stats">): Promise<OperationResponseMap["bbb-scamtracker-state-stats"]>;

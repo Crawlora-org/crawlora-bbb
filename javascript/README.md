@@ -1,7 +1,7 @@
 # @crawlora-org/bbb — Better Business Bureau API client for JavaScript and TypeScript
 
 JavaScript and TypeScript client for Crawlora's hosted Better Business Bureau API.
-It exposes 16 API endpoints for business search, profiles, complaints, reviews, categories, and ScamTracker reports through [Crawlora](https://crawlora.net/?utm_source=npm&utm_medium=referral&utm_campaign=platform-clients&utm_content=bbb-javascript-homepage). It does not run a browser or scrape Better Business Bureau locally. A Crawlora account and `CRAWLORA_API_KEY` are required, and API use is billed under your Crawlora account. Crawlora is independent from and not endorsed by Better Business Bureau or its owners.
+It exposes 17 API endpoints for business search, profiles, complaints, reviews, categories, and ScamTracker reports through [Crawlora](https://crawlora.net/?utm_source=npm&utm_medium=referral&utm_campaign=platform-clients&utm_content=bbb-javascript-homepage). It does not run a browser or scrape Better Business Bureau locally. A Crawlora account and `CRAWLORA_API_KEY` are required, and API use is billed under your Crawlora account. Crawlora is independent from and not endorsed by Better Business Bureau or its owners.
 
 ## Install
 
@@ -58,6 +58,7 @@ This package exposes each route below as a direct method and through the `bbb` g
 | `GET` | `/bbb/local-bbbs` | `bbb-local-bbbs` | List local BBB chapters serving a region |
 | `GET` | `/bbb/news` | `bbb-news` | Get BBB newsroom stories |
 | `GET` | `/bbb/news/topics` | `bbb-news-topics` | List BBB newsroom topics |
+| `GET` | `/bbb/page` | `bbb-page` | Get a BBB evergreen page |
 | `GET` | `/bbb/regions` | `bbb-regions` | List Better Business Bureau directory regions |
 | `GET` | `/bbb/scamtracker/search` | `bbb-scamtracker-search` | Search Better Business Bureau Scam Tracker reports |
 | `GET` | `/bbb/scamtracker/state-stats` | `bbb-scamtracker-state-stats` | Get Better Business Bureau Scam Tracker state/province aggregate stats |

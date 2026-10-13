@@ -1,6 +1,6 @@
 # Crawlora Better Business Bureau API client for Ruby (`crawlora-bbb`)
 
-This Ruby gem calls Crawlora's hosted Better Business Bureau API at `https://api.crawlora.net/api/v1`. It exposes 16 endpoints covering business search, profiles, complaints, reviews, categories, and ScamTracker reports; it does not call or scrape Better Business Bureau directly. Requests require your Crawlora API key and use your account's service plan.
+This Ruby gem calls Crawlora's hosted Better Business Bureau API at `https://api.crawlora.net/api/v1`. It exposes 17 endpoints covering business search, profiles, complaints, reviews, categories, and ScamTracker reports; it does not call or scrape Better Business Bureau directly. Requests require your Crawlora API key and use your account's service plan.
 
 ## Install
 
@@ -20,7 +20,7 @@ puts result
 client.close
 ```
 
-Use an operation-specific method for normal calls. `request(operation_id, params = {}, response_type: :auto)` is available for every operation. `response_type: :text` returns raw response text. This gem includes 16 API operations.
+Use an operation-specific method for normal calls. `request(operation_id, params = {}, response_type: :auto)` is available for every operation. `response_type: :text` returns raw response text. This gem includes 17 API operations.
 
 ```ruby
 client = Crawlora::Bbb::Client.new(api_key: ENV.fetch("CRAWLORA_API_KEY"), timeout: 30)
@@ -46,6 +46,7 @@ Browse every route included in this gem. The [endpoint reference](https://github
 | `GET` | `/bbb/local-bbbs` | `bbb-local-bbbs` | List local BBB chapters serving a region |
 | `GET` | `/bbb/news` | `bbb-news` | Get BBB newsroom stories |
 | `GET` | `/bbb/news/topics` | `bbb-news-topics` | List BBB newsroom topics |
+| `GET` | `/bbb/page` | `bbb-page` | Get a BBB evergreen page |
 | `GET` | `/bbb/regions` | `bbb-regions` | List Better Business Bureau directory regions |
 | `GET` | `/bbb/scamtracker/search` | `bbb-scamtracker-search` | Search Better Business Bureau Scam Tracker reports |
 | `GET` | `/bbb/scamtracker/state-stats` | `bbb-scamtracker-state-stats` | Get Better Business Bureau Scam Tracker state/province aggregate stats |

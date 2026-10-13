@@ -129,6 +129,11 @@
         "business_started": {
           "type": "string"
         },
+        "canonical_url": {
+          "description": "BBB's own address for the profile, from the page. It differs from url when BBB has since changed the address, for example after moving the business to another local BBB: the business number at the end stays the same and the four-digit local BBB number before it changes.",
+          "example": "https://www.bbb.org/us/tx/austin/profile/plumber/calixto-plumbing-0825-1000223803",
+          "type": "string"
+        },
         "categories": {
           "items": {
             "type": "string"
@@ -862,6 +867,11 @@
           "example": "BBB Heart of Texas",
           "type": "string"
         },
+        "news_url": {
+          "description": "The chapter's own newsroom; pass it to bbb-news or bbb-news-topics.",
+          "example": "https://www.bbb.org/local-bbb/bbb-serving-the-heart-of-texas/news",
+          "type": "string"
+        },
         "offices": {
           "items": {
             "$ref": "#/definitions/bbbdirectory.Office"
@@ -906,6 +916,11 @@
         },
         "name": {
           "example": "BBB Heart of Texas",
+          "type": "string"
+        },
+        "news_url": {
+          "description": "The chapter's own newsroom; pass it to bbb-news or bbb-news-topics.",
+          "example": "https://www.bbb.org/local-bbb/bbb-serving-the-heart-of-texas/news",
           "type": "string"
         },
         "offices": {
@@ -1210,6 +1225,8 @@
           "type": "string"
         },
         "id": {
+          "description": "BBB's id of the story or event.",
+          "example": "32431",
           "type": "string"
         },
         "image": {
@@ -1225,6 +1242,8 @@
           "type": "string"
         },
         "type": {
+          "description": "BBB's content type: Article for a story, or an event type for a record that carries event_start_date.",
+          "example": "Article",
           "type": "string"
         },
         "url": {
@@ -1235,29 +1254,168 @@
     },
     "bbbnews.NewsResponse": {
       "properties": {
-        "country": {
+        "city": {
+          "description": "City slug; present for a city URL.",
+          "example": "san-francisco",
           "type": "string"
         },
+        "country": {
+          "description": "Country of the newsroom: us or ca.",
+          "enum": [
+            "us",
+            "ca"
+          ],
+          "example": "us",
+          "type": "string"
+        },
+        "has_more": {
+          "description": "True while a later page exists; request page + 1 next and stop when it is false.",
+          "example": true,
+          "type": "boolean"
+        },
         "items": {
+          "description": "The stories on this page, in BBB's order.",
           "items": {
             "$ref": "#/definitions/bbbnews.NewsItem"
           },
           "type": "array"
         },
+        "local_bbb_id": {
+          "description": "Id of the local BBB chapter; present for a chapter URL.",
+          "example": "1116",
+          "type": "string"
+        },
+        "local_bbb_name": {
+          "description": "Name of the local BBB chapter; present for a chapter URL.",
+          "type": "string"
+        },
         "page": {
+          "description": "Page number that was returned, 1-based.",
+          "example": 2,
           "type": "integer"
         },
         "page_size": {
+          "description": "BBB's page size. A page can hold fewer items than this with more pages after it.",
+          "example": 10,
           "type": "integer"
         },
         "source_url": {
+          "description": "The newsroom URL that was read, page query included.",
+          "example": "https://www.bbb.org/us/news/scams?page=2",
+          "type": "string"
+        },
+        "state": {
+          "description": "Two-letter state or province code; present for a state or city URL.",
+          "example": "ca",
           "type": "string"
         },
         "topic": {
+          "description": "Topic name; present for a topic URL.",
+          "example": "Scams",
           "type": "string"
         },
         "total": {
+          "description": "BBB's count of stories in the list. It can be slightly higher than the number of stories the pages hold.",
+          "example": 279,
           "type": "integer"
+        },
+        "total_pages": {
+          "description": "Number of pages BBB serves for the list, from its own pager; at least 1.",
+          "example": 28,
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "bbbnews.PageResponse": {
+      "properties": {
+        "article_id": {
+          "description": "The numeric ID in the requested URL when that was an article URL. The\nevergreen page does not carry it.",
+          "example": "14400",
+          "type": "string"
+        },
+        "body": {
+          "description": "The page text in reading order: one paragraph, heading, list item or\ntable cell per block, separated by blank lines.",
+          "type": "string"
+        },
+        "canonical_url": {
+          "description": "The address the page declares for itself.",
+          "example": "https://www.bbb.org/all/consumer/tip/what-to-know-before-purchasing-a-gift-card",
+          "type": "string"
+        },
+        "description": {
+          "description": "The page's search description.",
+          "type": "string"
+        },
+        "final_url": {
+          "description": "The evergreen page the content was read from.",
+          "example": "https://www.bbb.org/all/consumer/tip/what-to-know-before-purchasing-a-gift-card",
+          "type": "string"
+        },
+        "image": {
+          "$ref": "#/definitions/bbbnews.Image"
+        },
+        "links": {
+          "description": "The links in the introduction and body, each once.",
+          "items": {
+            "$ref": "#/definitions/bbbnews.Link"
+          },
+          "type": "array"
+        },
+        "modified_at": {
+          "description": "When BBB last edited the page, in UTC. Not the date of a story the\npage replaced.",
+          "example": "2025-09-16T17:40:48Z",
+          "type": "string"
+        },
+        "page_type": {
+          "description": "BBB's own name for the page template, passed through unchanged.",
+          "example": "openmicrositepage",
+          "type": "string"
+        },
+        "published_at": {
+          "description": "Always null: BBB publishes no date for these pages. A value appears\nonly if BBB starts writing one into the page.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "redirects": {
+          "description": "Every redirect between requested_url and final_url, in order. Empty\nwhen the requested URL is the evergreen page itself.",
+          "items": {
+            "$ref": "#/definitions/bbbnews.RedirectHop"
+          },
+          "type": "array"
+        },
+        "requested_url": {
+          "description": "The URL that was asked for, without any query string.",
+          "example": "https://www.bbb.org/article/news-releases/14400-dont-get-scammed-out-of-a-gift-card-this-season",
+          "type": "string"
+        },
+        "summary": {
+          "description": "The introduction shown under the title, when the page has one.",
+          "type": "string"
+        },
+        "title": {
+          "example": "What to know before purchasing a gift card",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "bbbnews.RedirectHop": {
+      "properties": {
+        "location": {
+          "description": "The address BBB redirected to.",
+          "example": "https://www.bbb.org/all/consumer/tip/what-to-know-before-purchasing-a-gift-card",
+          "type": "string"
+        },
+        "status": {
+          "description": "The HTTP status BBB answered with.",
+          "example": 301,
+          "type": "integer"
+        },
+        "url": {
+          "description": "The address that was requested.",
+          "example": "https://www.bbb.org/article/news-releases/14400-dont-get-scammed-out-of-a-gift-card-this-season",
+          "type": "string"
         }
       },
       "type": "object"
@@ -1265,12 +1423,18 @@
     "bbbnews.Topic": {
       "properties": {
         "name": {
+          "description": "Topic name as BBB shows it.",
+          "example": "Scams",
           "type": "string"
         },
         "slug": {
+          "description": "Topic path segment.",
+          "example": "scams",
           "type": "string"
         },
         "url": {
+          "description": "Newsroom URL of the topic in the requested scope; pass it to bbb-news.",
+          "example": "https://www.bbb.org/us/news/scams",
           "type": "string"
         }
       },
@@ -1278,13 +1442,41 @@
     },
     "bbbnews.TopicsResponse": {
       "properties": {
+        "city": {
+          "description": "City slug; present for a city URL.",
+          "example": "san-francisco",
+          "type": "string"
+        },
         "country": {
+          "description": "Country of the newsroom: us or ca.",
+          "enum": [
+            "us",
+            "ca"
+          ],
+          "example": "us",
+          "type": "string"
+        },
+        "local_bbb_id": {
+          "description": "Id of the local BBB chapter; present for a chapter URL.",
+          "example": "1116",
+          "type": "string"
+        },
+        "local_bbb_name": {
+          "description": "Name of the local BBB chapter; present for a chapter URL.",
           "type": "string"
         },
         "source_url": {
+          "description": "The newsroom URL that was read.",
+          "example": "https://www.bbb.org/us/news",
+          "type": "string"
+        },
+        "state": {
+          "description": "Two-letter state or province code; present for a state or city URL.",
+          "example": "ca",
           "type": "string"
         },
         "topics": {
+          "description": "Every topic the page lists, in name order, the active one included.",
           "items": {
             "$ref": "#/definitions/bbbnews.Topic"
           },
@@ -1404,6 +1596,10 @@
           "example": "2026-01-31",
           "type": "string"
         },
+        "has_more": {
+          "description": "Whether page+1 exists. When the page count is unknown, true while the\npage is full. Request the next page only while this is true.",
+          "type": "boolean"
+        },
         "max_dollars_lost": {
           "example": 1000000,
           "type": "integer"
@@ -1440,6 +1636,11 @@
         "state": {
           "example": "TX",
           "type": "string"
+        },
+        "total_pages": {
+          "description": "The last page of this search, from BBB's result count. Omitted when\nthat count is a lower bound (total_results_lower_bound) or missing.",
+          "example": 74738,
+          "type": "integer"
         },
         "total_results": {
           "example": 747374,
@@ -1596,7 +1797,7 @@
   "paths": {
     "/bbb/article": {
       "get": {
-        "description": "Returns published BBB article metadata, author names, body text, and useful links from a canonical public article URL.",
+        "description": "Returns published BBB article metadata, author names, body text, and useful links from a canonical public article URL. Returns 404 when BBB no longer has the article, including a story BBB has moved to one of its evergreen pages under /all/; the error then names the new address, and the answer is permanent.",
         "operationId": "bbb-article",
         "parameters": [
           {
@@ -1732,7 +1933,7 @@
         "operationId": "bbb-business-complaints",
         "parameters": [
           {
-            "description": "BBB business profile URL, from a bbb-search result's url or hq_profile_url",
+            "description": "BBB business profile URL, from a bbb-search result's url or hq_profile_url. A location URL ending in /addressId/<number> is accepted and read from the business profile",
             "in": "query",
             "name": "url",
             "required": true,
@@ -1804,7 +2005,7 @@
         "operationId": "bbb-business-more-info",
         "parameters": [
           {
-            "description": "BBB business profile URL, from a bbb-search result's url or hq_profile_url",
+            "description": "BBB business profile URL, from a bbb-search result's url or hq_profile_url. A location URL ending in /addressId/<number> is accepted and read from the business profile",
             "in": "query",
             "name": "url",
             "required": true,
@@ -1867,7 +2068,7 @@
         "operationId": "bbb-business-reviews",
         "parameters": [
           {
-            "description": "BBB business profile URL, from a bbb-search result's url or hq_profile_url",
+            "description": "BBB business profile URL, from a bbb-search result's url or hq_profile_url. A location URL ending in /addressId/<number> is accepted and read from the business profile",
             "in": "query",
             "name": "url",
             "required": true,
@@ -2199,11 +2400,11 @@
     },
     "/bbb/news": {
       "get": {
-        "description": "Returns one page of public BBB newsroom stories from a canonical US or Canada newsroom URL. Event dates and links are preserved when present.",
+        "description": "Returns one page of public BBB newsroom stories from a canonical BBB newsroom URL. Three scopes are accepted, each with an optional topic: the US or Canada newsroom (/us/news), a state, province or city newsroom (/us/ca/news, /us/ca/san-francisco/news), and one local BBB chapter's own newsroom (/local-bbb/<chapter>/news, the news_url returned by bbb-local-bbbs and bbb-local-bbb). The list is whatever BBB shows on that page: a city or chapter whose local BBB publishes its own stories returns those, and other cities, other chapters and the state pages checked so far return the same list as the country newsroom, so compare total and the first items with the country newsroom before treating a list as local. A chapter URL also returns local_bbb_id and local_bbb_name. Every page carries total_pages and has_more: request page + 1 while has_more is true and stop when it is false; a page past the end returns 404. Event dates and links are preserved when present.",
         "operationId": "bbb-news",
         "parameters": [
           {
-            "description": "Canonical BBB newsroom or topic page URL; include page=N for pagination",
+            "description": "Canonical https://www.bbb.org newsroom URL: /us/news or /ca/news; /<country>/<state>/news or /<country>/<state>/<city>/news with country us or ca, the two-letter region code from bbb-regions and the city slug from a business profile URL; or a chapter's news_url from bbb-local-bbbs. Append a topic segment from bbb-news-topics to narrow it and ?page=N (1 to 1000) to page; no other query key is accepted",
             "in": "query",
             "name": "url",
             "required": true,
@@ -2265,11 +2466,11 @@
     },
     "/bbb/news/topics": {
       "get": {
-        "description": "Returns the complete topic navigation shown by a US or Canada BBB newsroom page, including its active topic.",
+        "description": "Returns the complete topic navigation shown by a BBB newsroom page, including its active topic. The page can be the US or Canada newsroom, a state, province or city newsroom, or one local BBB chapter's newsroom; the returned topic URLs stay in that scope, and a chapter has its own topic set.",
         "operationId": "bbb-news-topics",
         "parameters": [
           {
-            "description": "Canonical BBB newsroom page URL",
+            "description": "Canonical https://www.bbb.org newsroom URL, optionally with a topic segment: /us/news or /ca/news; /<country>/<state>/news or /<country>/<state>/<city>/news with country us or ca, the two-letter region code from bbb-regions and the city slug from a business profile URL; or a chapter's news_url from bbb-local-bbbs",
             "in": "query",
             "name": "url",
             "required": true,
@@ -2329,6 +2530,72 @@
         ]
       }
     },
+    "/bbb/page": {
+      "get": {
+        "description": "Returns one page from the evergreen library BBB keeps under https://www.bbb.org/all/ (tips, topic hubs such as tax or holiday advice, scam studies): its title, introduction, body text, links, main image and last-modified time. BBB folds older newsroom stories into these pages and redirects the old article URL, so the url can be either the evergreen page itself or an article URL that bbb-article reports as moved; requested_url, final_url and every redirect between them are returned. published_at is always present and is null, because BBB publishes no date for these pages: modified_at is when BBB last edited the page, not when a story it replaced was published, and the page may cover a wider topic than that story did. The original article ID is not on the page; article_id repeats the one in the requested article URL. Returns 404 when the page does not exist, when an article URL has not been moved (read it with bbb-article), and when BBB redirects the URL somewhere outside /all/; the error names the destination and the answer is permanent. Content BBB loads in the browser for the visitor's local BBB is not included.",
+        "operationId": "bbb-page",
+        "parameters": [
+          {
+            "description": "Canonical https://www.bbb.org URL of an evergreen page (/all/<path>, no query string) or of an article (/article/<type>/<id>-<slug>) that BBB has moved to one",
+            "in": "query",
+            "name": "url",
+            "required": true,
+            "type": "string",
+            "x-example": "https://www.bbb.org/all/consumer/tip/what-to-know-before-purchasing-a-gift-card"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/app.Response"
+                },
+                {
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/bbbnews.PageResponse"
+                    }
+                  },
+                  "type": "object"
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Get a BBB evergreen page",
+        "tags": [
+          "bbb"
+        ]
+      }
+    },
     "/bbb/regions": {
       "get": {
         "consumes": [
@@ -2375,7 +2642,7 @@
         "consumes": [
           "application/json"
         ],
-        "description": "Searches bbb.org Scam Tracker's consumer-reported-scam database by free-text query, scam category, targeted-victim state/province, reported-scammer state/province, report-date range, and/or dollar-loss range, paginated 10 results/page. Omit every filter to browse the most-recent-first feed. Credential-free public Better Business Bureau data. This is a separate BBB dataset from the bbb-search/bbb-business/bbb-business-complaints business-rating family -- consumer-reported scam incidents, not business ratings.",
+        "description": "Searches bbb.org Scam Tracker's consumer-reported-scam database by free-text query, scam category, targeted-victim state/province, reported-scammer state/province, report-date range, and/or dollar-loss range, paginated 10 results/page. Every page returns has_more and, when BBB's result count is exact, total_pages: request the next page only while has_more is true, because a page past the end returns 404. Omit every filter to browse the most-recent-first feed. Credential-free public Better Business Bureau data. This is a separate BBB dataset from the bbb-search/bbb-business/bbb-business-complaints business-rating family -- consumer-reported scam incidents, not business ratings.",
         "operationId": "bbb-scamtracker-search",
         "parameters": [
           {
@@ -2491,6 +2758,12 @@
           },
           "400": {
             "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "404": {
+            "description": "Not Found",
             "schema": {
               "$ref": "#/definitions/app.Response"
             }

@@ -140,6 +140,7 @@ export interface ModelBbbscamtrackerSearchResponseDoc {
 export interface ModelBbbscamtrackerSearchResponse {
   "date_from"?: string;
   "date_to"?: string;
+  "has_more"?: boolean;
   "max_dollars_lost"?: number;
   "min_dollars_lost"?: number;
   "page"?: number;
@@ -149,6 +150,7 @@ export interface ModelBbbscamtrackerSearchResponse {
   "scammer_state"?: string;
   "source_url"?: string;
   "state"?: string;
+  "total_pages"?: number;
   "total_results"?: number;
   "total_results_lower_bound"?: boolean;
 }
@@ -186,9 +188,48 @@ export interface ModelBbbdirectoryRegionOption {
   "url"?: string;
 }
 
+export interface ModelBbbnewsPageResponse {
+  "article_id"?: string;
+  "body"?: string;
+  "canonical_url"?: string;
+  "description"?: string;
+  "final_url"?: string;
+  "image"?: ModelBbbnewsImage;
+  "links"?: Array<ModelBbbnewsLink>;
+  "modified_at"?: string;
+  "page_type"?: string;
+  "published_at"?: string | null;
+  "redirects"?: Array<ModelBbbnewsRedirectHop>;
+  "requested_url"?: string;
+  "summary"?: string;
+  "title"?: string;
+}
+
+export interface ModelBbbnewsRedirectHop {
+  "location"?: string;
+  "status"?: number;
+  "url"?: string;
+}
+
+export interface ModelBbbnewsLink {
+  "text"?: string;
+  "url"?: string;
+}
+
+export interface ModelBbbnewsImage {
+  "alt_text"?: string;
+  "caption"?: string;
+  "credit"?: string;
+  "url"?: string;
+}
+
 export interface ModelBbbnewsTopicsResponse {
-  "country"?: string;
+  "city"?: string;
+  "country"?: "us" | "ca";
+  "local_bbb_id"?: string;
+  "local_bbb_name"?: string;
   "source_url"?: string;
+  "state"?: string;
   "topics"?: Array<ModelBbbnewsTopic>;
 }
 
@@ -199,13 +240,19 @@ export interface ModelBbbnewsTopic {
 }
 
 export interface ModelBbbnewsNewsResponse {
-  "country"?: string;
+  "city"?: string;
+  "country"?: "us" | "ca";
+  "has_more"?: boolean;
   "items"?: Array<ModelBbbnewsNewsItem>;
+  "local_bbb_id"?: string;
+  "local_bbb_name"?: string;
   "page"?: number;
   "page_size"?: number;
   "source_url"?: string;
+  "state"?: string;
   "topic"?: string;
   "total"?: number;
+  "total_pages"?: number;
 }
 
 export interface ModelBbbnewsNewsItem {
@@ -217,13 +264,6 @@ export interface ModelBbbnewsNewsItem {
   "summary"?: string;
   "title"?: string;
   "type"?: string;
-  "url"?: string;
-}
-
-export interface ModelBbbnewsImage {
-  "alt_text"?: string;
-  "caption"?: string;
-  "credit"?: string;
   "url"?: string;
 }
 
@@ -242,6 +282,7 @@ export interface ModelBbbdirectoryLocalBbbsResponse {
 export interface ModelBbbdirectoryLocalBbbchapter {
   "id"?: string;
   "name"?: string;
+  "news_url"?: string;
   "offices"?: Array<ModelBbbdirectoryOffice>;
   "open_to_public"?: boolean;
   "url"?: string;
@@ -287,6 +328,7 @@ export interface ModelBbbdirectoryLocalBbbresponse {
   "id"?: string;
   "languages"?: Array<string>;
   "name"?: string;
+  "news_url"?: string;
   "offices"?: Array<ModelBbbdirectoryOffice>;
   "open_to_public"?: boolean;
   "service_territory"?: Array<string>;
@@ -422,6 +464,7 @@ export interface ModelBbbBusinessResponse {
   "business_incorporated"?: string;
   "business_management"?: string;
   "business_started"?: string;
+  "canonical_url"?: string;
   "categories"?: Array<string>;
   "category"?: string;
   "complaints_closed_last_12_months"?: number;
@@ -490,11 +533,6 @@ export interface ModelBbbnewsArticleResponse {
   "type"?: string;
 }
 
-export interface ModelBbbnewsLink {
-  "text"?: string;
-  "url"?: string;
-}
-
 export interface ModelBbbnewsAuthor {
   "name"?: string;
   "url"?: string;
@@ -559,6 +597,11 @@ export interface BbbNewsParams {
 
 export type BbbNewsTopicsResponse = CrawloraResponse<ModelAppResponse & { "data"?: ModelBbbnewsTopicsResponse }>;
 export interface BbbNewsTopicsParams {
+  "url": string;
+}
+
+export type BbbPageResponse = CrawloraResponse<ModelAppResponse & { "data"?: ModelBbbnewsPageResponse }>;
+export interface BbbPageParams {
   "url": string;
 }
 
@@ -633,6 +676,7 @@ export interface BbbService {
   localBbbs<T = BbbLocalBbbsResponse>(params: BbbLocalBbbsParams, options?: import('./index.js').CrawloraRequestOptions): Promise<T>;
   news<T = BbbNewsResponse>(params: BbbNewsParams, options?: import('./index.js').CrawloraRequestOptions): Promise<T>;
   newsTopics<T = BbbNewsTopicsResponse>(params: BbbNewsTopicsParams, options?: import('./index.js').CrawloraRequestOptions): Promise<T>;
+  page<T = BbbPageResponse>(params: BbbPageParams, options?: import('./index.js').CrawloraRequestOptions): Promise<T>;
   regions<T = BbbRegionsResponse>(params?: BbbRegionsParams, options?: import('./index.js').CrawloraRequestOptions): Promise<T>;
   scamtrackerSearch<T = BbbScamtrackerSearchResponse>(params?: BbbScamtrackerSearchParams, options?: import('./index.js').CrawloraRequestOptions): Promise<T>;
   scamtrackerStateStats<T = BbbScamtrackerStateStatsResponse>(params?: BbbScamtrackerStateStatsParams, options?: import('./index.js').CrawloraRequestOptions): Promise<T>;
@@ -656,6 +700,7 @@ export interface OperationParamsMap {
   "bbb-local-bbbs": BbbLocalBbbsParams;
   "bbb-news": BbbNewsParams;
   "bbb-news-topics": BbbNewsTopicsParams;
+  "bbb-page": BbbPageParams;
   "bbb-regions": BbbRegionsParams;
   "bbb-scamtracker-search": BbbScamtrackerSearchParams;
   "bbb-scamtracker-state-stats": BbbScamtrackerStateStatsParams;
@@ -675,6 +720,7 @@ export interface OperationResponseMap {
   "bbb-local-bbbs": BbbLocalBbbsResponse;
   "bbb-news": BbbNewsResponse;
   "bbb-news-topics": BbbNewsTopicsResponse;
+  "bbb-page": BbbPageResponse;
   "bbb-regions": BbbRegionsResponse;
   "bbb-scamtracker-search": BbbScamtrackerSearchResponse;
   "bbb-scamtracker-state-stats": BbbScamtrackerStateStatsResponse;
@@ -694,6 +740,7 @@ export interface OperationRequiredParamsMap {
   "bbb-local-bbbs": true;
   "bbb-news": true;
   "bbb-news-topics": true;
+  "bbb-page": true;
   "bbb-regions": false;
   "bbb-scamtracker-search": false;
   "bbb-scamtracker-state-stats": false;
@@ -720,6 +767,7 @@ export type OperationIdLiteral =
   | "bbb-local-bbbs"
   | "bbb-news"
   | "bbb-news-topics"
+  | "bbb-page"
   | "bbb-regions"
   | "bbb-scamtracker-search"
   | "bbb-scamtracker-state-stats"
@@ -738,6 +786,7 @@ export declare const OperationIds: Readonly<{
   BbbLocalBbbs: "bbb-local-bbbs";
   BbbNews: "bbb-news";
   BbbNewsTopics: "bbb-news-topics";
+  BbbPage: "bbb-page";
   BbbRegions: "bbb-regions";
   BbbScamtrackerDetail: "bbb-scamtracker-detail";
   BbbScamtrackerSearch: "bbb-scamtracker-search";

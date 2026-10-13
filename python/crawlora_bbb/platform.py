@@ -7,7 +7,7 @@ from .async_client import AsyncCrawloraClient
 class BBBClient(CrawloraClient):
     """Synchronous Better Business Bureau API client."""
     def __init__(self, *args: Any, **kwargs: Any) -> None:
-        kwargs.setdefault('user_agent', 'crawlora-bbb-python/0.4.0')
+        kwargs.setdefault('user_agent', 'crawlora-bbb-python/0.5.0')
         super().__init__(*args, **kwargs)
 
     def article(self, **params: Any) -> Any:
@@ -70,6 +70,12 @@ class BBBClient(CrawloraClient):
         headers = params.pop('_headers', None)
         return self.request('bbb-news-topics', params, response_type=response_type, timeout=timeout, headers=headers)
 
+    def page(self, **params: Any) -> Any:
+        response_type = params.pop('_response_type', 'auto')
+        timeout = params.pop('_timeout', None)
+        headers = params.pop('_headers', None)
+        return self.request('bbb-page', params, response_type=response_type, timeout=timeout, headers=headers)
+
     def regions(self, **params: Any) -> Any:
         response_type = params.pop('_response_type', 'auto')
         timeout = params.pop('_timeout', None)
@@ -109,7 +115,7 @@ class BBBClient(CrawloraClient):
 class AsyncBBBClient(AsyncCrawloraClient):
     """Asynchronous Better Business Bureau API client."""
     def __init__(self, *args: Any, **kwargs: Any) -> None:
-        kwargs.setdefault('user_agent', 'crawlora-bbb-python/0.4.0')
+        kwargs.setdefault('user_agent', 'crawlora-bbb-python/0.5.0')
         super().__init__(*args, **kwargs)
 
     async def article(self, **params: Any) -> Any:
@@ -171,6 +177,12 @@ class AsyncBBBClient(AsyncCrawloraClient):
         timeout = params.pop('_timeout', None)
         headers = params.pop('_headers', None)
         return await self.request('bbb-news-topics', params, response_type=response_type, timeout=timeout, headers=headers)
+
+    async def page(self, **params: Any) -> Any:
+        response_type = params.pop('_response_type', 'auto')
+        timeout = params.pop('_timeout', None)
+        headers = params.pop('_headers', None)
+        return await self.request('bbb-page', params, response_type=response_type, timeout=timeout, headers=headers)
 
     async def regions(self, **params: Any) -> Any:
         response_type = params.pop('_response_type', 'auto')

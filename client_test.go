@@ -47,7 +47,7 @@ func TestGeneratedClientRequestAndAllowlist(t *testing.T) {
 	if got.(map[string]any)["ok"] != true {
 		t.Fatalf("JSON result = %#v", got)
 	}
-	if OperationCount != 16 || len(OperationIDs()) != OperationCount {
+	if OperationCount != 17 || len(OperationIDs()) != OperationCount {
 		t.Fatalf("operation count = %d IDs=%d", OperationCount, len(OperationIDs()))
 	}
 	if _, err := client.Call(context.Background(), "unselected-operation", nil); err == nil || !strings.Contains(err.Error(), "unknown") {

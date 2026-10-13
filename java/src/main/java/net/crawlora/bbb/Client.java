@@ -22,7 +22,7 @@ import java.util.TreeSet;
 /** Client for the Better Business Bureau endpoints hosted by Crawlora. */
 public final class Client implements AutoCloseable {
     public static final String DEFAULT_BASE_URL = "https://api.crawlora.net/api/v1";
-    public static final int OPERATION_COUNT = 16;
+    public static final int OPERATION_COUNT = 17;
     public static final List<String> OPERATION_IDS = List.of(
             "bbb-article",
             "bbb-business",
@@ -34,6 +34,7 @@ public final class Client implements AutoCloseable {
             "bbb-local-bbbs",
             "bbb-news",
             "bbb-news-topics",
+            "bbb-page",
             "bbb-regions",
             "bbb-scamtracker-detail",
             "bbb-scamtracker-search",
@@ -55,6 +56,7 @@ public final class Client implements AutoCloseable {
         operations.put("bbb-local-bbbs", new Operation("bbb-local-bbbs", "GET", "/bbb/local-bbbs", Map.ofEntries(Map.entry("country", new Param("country", "query", true, "string", List.of("us", "ca"), "csv")), Map.entry("region", new Param("region", "query", true, "string", List.of(), "csv"))), List.of("application/json")));
         operations.put("bbb-news", new Operation("bbb-news", "GET", "/bbb/news", Map.ofEntries(Map.entry("url", new Param("url", "query", true, "string", List.of(), "csv"))), List.of("application/json")));
         operations.put("bbb-news-topics", new Operation("bbb-news-topics", "GET", "/bbb/news/topics", Map.ofEntries(Map.entry("url", new Param("url", "query", true, "string", List.of(), "csv"))), List.of("application/json")));
+        operations.put("bbb-page", new Operation("bbb-page", "GET", "/bbb/page", Map.ofEntries(Map.entry("url", new Param("url", "query", true, "string", List.of(), "csv"))), List.of("application/json")));
         operations.put("bbb-regions", new Operation("bbb-regions", "GET", "/bbb/regions", Map.of(), List.of("application/json")));
         operations.put("bbb-scamtracker-search", new Operation("bbb-scamtracker-search", "GET", "/bbb/scamtracker/search", Map.ofEntries(Map.entry("query", new Param("query", "query", false, "string", List.of(), "csv")), Map.entry("scam_type", new Param("scam_type", "query", false, "string", List.of("Advance Fee Loan", "Bank/Credit Card Company Imposter", "Business Email Compromise", "Charity", "Counterfeit Product", "COVID-19", "Credit Cards", "Credit Repair/Debt Relief", "CryptoCurrency", "Debt Collections", "Employment", "Fake Check/Money Order", "Fake Invoice/Supplier Bill", "Family/Friend Emergency", "Foreign Money Exchange", "Government Agency Imposter", "Government Grant", "Healthcare/Medicaid/Medicare", "Home Improvement", "Identity Theft", "Investment", "Moving", "Online Purchase", "Other", "Phishing", "Rental", "Retail Business", "Romance", "Scholarship", "Sweepstakes/Lottery/Prizes", "Tax Collection", "Tech Support", "Travel/Vacation/Timeshare", "Utility", "Vanity Award", "Worthless Problem-solving Service", "Yellow Pages/Directories"), "csv")), Map.entry("state", new Param("state", "query", false, "string", List.of(), "csv")), Map.entry("scammer_state", new Param("scammer_state", "query", false, "string", List.of(), "csv")), Map.entry("date_from", new Param("date_from", "query", false, "string", List.of(), "csv")), Map.entry("date_to", new Param("date_to", "query", false, "string", List.of(), "csv")), Map.entry("min_dollars_lost", new Param("min_dollars_lost", "query", false, "integer", List.of(), "csv")), Map.entry("max_dollars_lost", new Param("max_dollars_lost", "query", false, "integer", List.of(), "csv")), Map.entry("page", new Param("page", "query", false, "integer", List.of(), "csv"))), List.of("application/json")));
         operations.put("bbb-scamtracker-state-stats", new Operation("bbb-scamtracker-state-stats", "GET", "/bbb/scamtracker/state-stats", Map.ofEntries(Map.entry("period", new Param("period", "query", false, "string", List.of("30", "90", "365", "all"), "csv"))), List.of("application/json")));
@@ -177,6 +179,7 @@ public final class Client implements AutoCloseable {
     public Object localBbbs(Map<String, ?> params) { return request("bbb-local-bbbs", params); }
     public Object news(Map<String, ?> params) { return request("bbb-news", params); }
     public Object newsTopics(Map<String, ?> params) { return request("bbb-news-topics", params); }
+    public Object page(Map<String, ?> params) { return request("bbb-page", params); }
     public Object regions(Map<String, ?> params) { return request("bbb-regions", params); }
     public Object scamtrackerSearch(Map<String, ?> params) { return request("bbb-scamtracker-search", params); }
     public Object scamtrackerStateStats(Map<String, ?> params) { return request("bbb-scamtracker-state-stats", params); }
