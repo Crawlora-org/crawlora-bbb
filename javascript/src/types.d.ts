@@ -331,6 +331,8 @@ export interface ModelBbbdirectoryLocalBbbresponse {
   "news_url"?: string;
   "offices"?: Array<ModelBbbdirectoryOffice>;
   "open_to_public"?: boolean;
+  "published_news_title"?: string;
+  "published_news_url"?: string;
   "service_territory"?: Array<string>;
   "tagline"?: string;
   "url"?: string;

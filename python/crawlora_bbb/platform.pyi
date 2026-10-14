@@ -356,6 +356,8 @@ ModelBbbdirectoryLocalBbbresponse = TypedDict('ModelBbbdirectoryLocalBbbresponse
     'news_url': NotRequired[str],
     'offices': NotRequired[list[ModelBbbdirectoryOffice]],
     'open_to_public': NotRequired[bool],
+    'published_news_title': NotRequired[str],
+    'published_news_url': NotRequired[str],
     'service_territory': NotRequired[list[str]],
     'tagline': NotRequired[str],
     'url': NotRequired[str],

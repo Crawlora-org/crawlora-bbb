@@ -57,7 +57,7 @@
       "bodyRequired": false,
       "params": [
         {
-          "description": "Canonical BBB article URL",
+          "description": "Canonical BBB article URL on www.bbb.org or bbb.org",
           "in": "query",
           "name": "url",
           "required": true,
