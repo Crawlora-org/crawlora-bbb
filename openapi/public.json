@@ -1165,6 +1165,9 @@
         "published_at": {
           "type": "string"
         },
+        "requested_url": {
+          "type": "string"
+        },
         "source_url": {
           "type": "string"
         },
@@ -1807,7 +1810,7 @@
   "paths": {
     "/bbb/article": {
       "get": {
-        "description": "Returns published BBB article metadata, author names, body text, and useful links from a canonical public article URL on www.bbb.org or bbb.org. Returns 404 when BBB no longer has the article, including a story BBB has moved to one of its evergreen pages under /all/; the error then names the new address, and the answer is permanent.",
+        "description": "Returns published BBB article metadata, author names, body text, and useful links from a canonical public article URL on www.bbb.org or bbb.org. If BBB merges a story into another BBB article, the response contains the target article's id and source_url plus the original requested_url. Returns a permanent 404 when BBB moves the URL to an evergreen /all/ page or outside bbb.org, or when the URL resolves to a published non-article type such as an event; safe HTTPS destinations are named in the error and are never fetched.",
         "operationId": "bbb-article",
         "parameters": [
           {
@@ -2874,7 +2877,7 @@
         "consumes": [
           "application/json"
         ],
-        "description": "Returns one BBB Scam Tracker consumer scam report: description, dollars lost, targeted person's location, scammer location/email/phone/URL (when known), scam type, business name used, and date reported.",
+        "description": "Returns one BBB Scam Tracker consumer scam report: description, dollars lost, targeted person's location, scammer location/email/phone/URL (when known), scam type, business name used, and date reported. If BBB no longer shows the report and serves its search page at that address, the endpoint returns a permanent 404; do not retry it.",
         "operationId": "bbb-scamtracker-detail",
         "parameters": [
           {

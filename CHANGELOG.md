@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.0 — 2026-10-15
+
+- Updated operation contracts: bbb-article, bbb-scamtracker-detail.
+
 ## 0.6.0 — 2026-10-14
 
 - Updated operation contracts: bbb-article, bbb-business, bbb-business-complaints, bbb-business-more-info, bbb-business-reviews, bbb-category, bbb-local-bbb, bbb-local-bbbs, bbb-news, bbb-regions, bbb-scamtracker-detail, bbb-scamtracker-search, bbb-scamtracker-state-stats, bbb-search, bbb-search-filters.

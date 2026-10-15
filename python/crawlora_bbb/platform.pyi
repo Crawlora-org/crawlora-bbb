@@ -553,6 +553,7 @@ ModelBbbnewsArticleResponse = TypedDict('ModelBbbnewsArticleResponse', {
     'links': NotRequired[list[ModelBbbnewsLink]],
     'modified_at': NotRequired[str],
     'published_at': NotRequired[str],
+    'requested_url': NotRequired[str],
     'source_url': NotRequired[str],
     'summary': NotRequired[str],
     'title': NotRequired[str],

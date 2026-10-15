@@ -7,7 +7,7 @@ from .async_client import AsyncCrawloraClient
 class BBBClient(CrawloraClient):
     """Synchronous Better Business Bureau API client."""
     def __init__(self, *args: Any, **kwargs: Any) -> None:
-        kwargs.setdefault('user_agent', 'crawlora-bbb-python/0.6.0')
+        kwargs.setdefault('user_agent', 'crawlora-bbb-python/0.7.0')
         super().__init__(*args, **kwargs)
 
     def article(self, **params: Any) -> Any:
@@ -115,7 +115,7 @@ class BBBClient(CrawloraClient):
 class AsyncBBBClient(AsyncCrawloraClient):
     """Asynchronous Better Business Bureau API client."""
     def __init__(self, *args: Any, **kwargs: Any) -> None:
-        kwargs.setdefault('user_agent', 'crawlora-bbb-python/0.6.0')
+        kwargs.setdefault('user_agent', 'crawlora-bbb-python/0.7.0')
         super().__init__(*args, **kwargs)
 
     async def article(self, **params: Any) -> Any:

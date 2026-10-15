@@ -528,6 +528,7 @@ export interface ModelBbbnewsArticleResponse {
   "links"?: Array<ModelBbbnewsLink>;
   "modified_at"?: string;
   "published_at"?: string;
+  "requested_url"?: string;
   "source_url"?: string;
   "summary"?: string;
   "title"?: string;
