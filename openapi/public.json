@@ -1810,7 +1810,7 @@
   "paths": {
     "/bbb/article": {
       "get": {
-        "description": "Returns published BBB article metadata, author names, body text, and useful links from a canonical public article URL on www.bbb.org or bbb.org. If BBB merges a story into another BBB article, the response contains the target article's id and source_url plus the original requested_url. Returns a permanent 404 when BBB moves the URL to an evergreen /all/ page or outside bbb.org, or when the URL resolves to a published non-article type such as an event; safe HTTPS destinations are named in the error and are never fetched.",
+        "description": "Returns published BBB article metadata, author names, body text, and useful links from a canonical public article URL on www.bbb.org or bbb.org. If BBB merges a story into another BBB article, the response contains the target article's id and source_url plus the original requested_url. Returns a permanent 404 when BBB moves the URL to an evergreen /all/ page or outside bbb.org, when BBB redirects the URL back to itself so it cannot be loaded, or when the URL resolves to a published non-article type such as an event; safe HTTPS destinations are named in the error and are never fetched.",
         "operationId": "bbb-article",
         "parameters": [
           {

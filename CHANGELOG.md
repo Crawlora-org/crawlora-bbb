@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.1 — 2026-10-16
+
+- Updated operation contracts: bbb-article.
+
 ## 0.7.0 — 2026-10-15
 
 - Updated operation contracts: bbb-article, bbb-scamtracker-detail.
