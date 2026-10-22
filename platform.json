@@ -108,6 +108,8 @@
   ],
   "repository": "https://github.com/Crawlora-org/crawlora-bbb",
   "ruby_gem_name": "crawlora-bbb",
+  "rust_crate_name": "crawlora-bbb",
+  "rust_module_name": "crawlora_bbb",
   "source_contract_sha256": "f34ad986ce7086a493c74231be94ebf7c5bf8b64caed9972e69a786f317f0d4f",
   "version": "0.7.1"
 }

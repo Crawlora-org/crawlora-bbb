@@ -1,0 +1,53 @@
+# Changelog
+
+## 0.7.1 — 2026-10-16
+
+- Updated operation contracts: bbb-article.
+
+## 0.7.0 — 2026-10-15
+
+- Updated operation contracts: bbb-article, bbb-scamtracker-detail.
+
+## 0.6.0 — 2026-10-14
+
+- Updated operation contracts: bbb-article, bbb-business, bbb-business-complaints, bbb-business-more-info, bbb-business-reviews, bbb-category, bbb-local-bbb, bbb-local-bbbs, bbb-news, bbb-regions, bbb-scamtracker-detail, bbb-scamtracker-search, bbb-scamtracker-state-stats, bbb-search, bbb-search-filters.
+
+## 0.5.0 — 2026-10-13
+
+- Added operations: bbb-page.
+- Updated operation contracts: bbb-article, bbb-business, bbb-business-complaints, bbb-business-more-info, bbb-business-reviews, bbb-local-bbb, bbb-local-bbbs, bbb-news, bbb-news-topics, bbb-scamtracker-search.
+
+## 0.4.0 — 2026-10-12
+
+- Updated operation contracts: bbb-business, bbb-business-complaints, bbb-category, bbb-search.
+
+## 0.3.1 — 2026-10-12
+
+- List every supported endpoint in the repository and package READMEs.
+- Add platform-specific search keywords to the npm, PyPI, and Composer package metadata.
+
+## 0.3.0 — 2026-10-11
+
+- Updated operation contracts: bbb-business-complaints, bbb-business-more-info.
+
+## 0.2.0 — 2026-10-09
+
+- Added operations: bbb-article, bbb-local-bbb, bbb-local-bbbs, bbb-news, bbb-news-topics, bbb-regions, bbb-search-filters.
+- Updated operation contracts: bbb-category, bbb-search.
+
+## 0.1.4 — 2026-10-09
+
+- Keep the platform README as a language-package index without cross-language installation commands or code examples; pkg.go.dev now shows only its Go example.
+
+## 0.1.3 — 2026-10-09
+
+- Publish the PHP Composer package from a PHP-only source repository so Packagist displays only PHP installation and usage.
+- Link RubyGems and Maven Central directly to their Ruby and Java guides, and add a tested Go package documentation example.
+
+## 0.1.2 — 2026-10-09
+
+- Enrich the Maven Central description with platform-specific Java client capabilities and API-key requirements.
+
+## 0.1.1 — 2026-10-09
+
+- Add registry-specific UTM-tagged Crawlora homepage and API documentation links to package metadata.
